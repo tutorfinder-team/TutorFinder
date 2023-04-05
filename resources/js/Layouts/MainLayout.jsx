@@ -1,6 +1,6 @@
 import { Children, useState } from "react";
 
-export default function AppLayout({ user, children }) {
+export default function MainLayout({ user, children }) {
     return (
         <>
             <p>Navbar</p>

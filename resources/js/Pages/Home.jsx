@@ -1,9 +1,9 @@
-import AppLayout from '@/Layouts/AppLayout';
+import MainLayout from '@/Layouts/MainLayout';
 import { Head } from '@inertiajs/react';
 
 export default function Home({ auth }) {
     return (
-        <AppLayout
+        <MainLayout
             user={auth.user}
         >
             <Head title="Home" />
@@ -11,6 +11,6 @@ export default function Home({ auth }) {
             <div className="">
                 hello
             </div>
-        </AppLayout>
+        </MainLayout>
     );
 }
