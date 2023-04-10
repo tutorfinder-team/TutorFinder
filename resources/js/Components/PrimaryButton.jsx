@@ -3,7 +3,7 @@ export default function PrimaryButton({ className = '', disabled, children, ...p
         <button
             {...props}
             className={
-                `btn-primary px-8 transition ease-in-out duration-150 ${
+                `btn-primary px-6 transition ease-in-out duration-150 ${
                     disabled && 'opacity-25'
                 } ` + className
             }

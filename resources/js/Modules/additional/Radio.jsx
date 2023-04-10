@@ -44,7 +44,7 @@ export default function Radio({ setType }) {
 												className={`font-medium  ${
 													checked
 														? "text-white"
-														: "text-gray-900"
+														: "text-darker"
 												}`}
 											>
 												{option.name}

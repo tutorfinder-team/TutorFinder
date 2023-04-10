@@ -28,7 +28,7 @@ const Input = ({
 				className={
 					options?.parentStyle
 						? options?.parentStyle
-						: `cursor-text rounded-lg dark:bg-gray-900 dark:text-gray-300 bg-gray-100 p-3 ${width} ${options?.height} flex items-center gap-2 mt-2 mb-5 hoverMode`
+						: `cursor-text rounded-lg dark:bg-darker dark:text-gray-300 bg-gray-100 p-3 ${width} ${options?.height} flex items-center gap-2 mt-2 mb-5 hoverMode`
 				}
 				onClick={() => input.current.focus()}
 			>

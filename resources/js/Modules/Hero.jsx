@@ -5,9 +5,9 @@ import { Link } from "@inertiajs/react";
 
 function Filter({ text, active }) {
 	let effect =
-		"bg-gray-900/30 text-white hover:bg-white hover:text-gray-900 duration-150";
+		"bg-darker/30 text-white hover:bg-white hover:text-darker duration-150";
 	if (active) {
-		effect = "font-semibold bg-white text-gray-900";
+		effect = "font-semibold bg-white text-darker";
 	}
 	return (
 		<button
@@ -29,7 +29,7 @@ export default function Hero({ isLogged }) {
 					<Filter text='Design' />
 				</Draggable>
 				{!isLogged && (
-					<h1 className='typography-hero font-semibold text-center mb-[4vh]'>
+					<h1 className='typography-hero font-bold text-center mb-[4vh]'>
 						<span>Find the best teachers and learn</span>
 						<br />
 						<span> the skill you want to acquire</span>
@@ -62,7 +62,7 @@ export default function Hero({ isLogged }) {
 					</div>
 				</div>
 			</div>
-			<div className='absolute top-0 left-0 w-full h-full bg-gray-900/60 z-0'></div>
+			<div className='absolute top-0 left-0 w-full h-full bg-darker/60 z-0'></div>
 		</div>
 	);
 }

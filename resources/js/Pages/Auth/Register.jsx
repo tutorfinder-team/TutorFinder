@@ -96,12 +96,12 @@ export default function Register() {
                 </div>
 
                 <div className="flex flex-col items-start mt-6 gap-3">
-                    <PrimaryButton disabled={processing}>
+                    <PrimaryButton className="w-full" disabled={processing}>
                         Register
                     </PrimaryButton>
                     <Link
                         href={route('login')}
-                        className="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary/0 dark:focus:ring-offset-gray-800"
+                        className="underline text-sm text-gray-600 dark:text-gray-400 hover:text-darker dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary/0 dark:focus:ring-offset-dark"
                     >
                         Already registered?
                     </Link>

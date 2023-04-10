@@ -40,7 +40,7 @@ export default function FeedSessions() {
 	  2xl:grid-cols-4 xl:grid-cols-3 lg:grid-cols-2 md:grid-cols-2`}
 			>
 				{isLoading ? (
-					<Spinner className='text-gray-900 w-20 h-20 absolute inset-x-0 mx-auto' />
+					<Spinner className='text-darker w-20 h-20 absolute inset-x-0 mx-auto' />
 				) : sessions.length > 0 ? (
 					sessions.map((session) => {
 						return (

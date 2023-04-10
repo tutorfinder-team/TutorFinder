@@ -32,7 +32,7 @@ export default function DropdownComponent({ children, onClick, links }) {
                 leaveFrom="transform opacity-100 scale-100"
                 leaveTo="transform opacity-0 scale-95"
             >
-                <Menu.Items className="menuItems absolute -left-20 py-2 w-40 mt-2 z-[1000] origin-top-left bg-white dark:bg-gray-800 dark:border dark:border-gray-700/40 rounded-md shadow-lg ring-1 ring-gray-900 ring-opacity-5 focus:outline-none">
+                <Menu.Items className="menuItems absolute -left-20 py-2 w-40 mt-2 z-[1000] origin-top-left bg-white dark:bg-dark dark:border dark:border-gray-700/40 rounded-md shadow-lg ring-1 ring-darker ring-opacity-5 focus:outline-none">
                     <div className="py-1">
                         {links.map((item, index) => {
                             let style = item.style || {

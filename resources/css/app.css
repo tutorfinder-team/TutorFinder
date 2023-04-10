@@ -80,7 +80,7 @@ select:-webkit-autofill,
 select:-webkit-autofill:hover,
 select:-webkit-autofill:focus {
   background: none;
-  @apply bg-white dark:bg-gray-900
+  @apply bg-white dark:bg-darker
 }
 
 /* For Webkit-based browsers (Chrome, Safari and Opera) */

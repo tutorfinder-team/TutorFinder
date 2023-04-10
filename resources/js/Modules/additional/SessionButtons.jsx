@@ -3,7 +3,7 @@ import { FaShare, FaInfoCircle } from "react-icons/fa";
 
 function SessionButtons() {
   return (
-      <div className="flex gap-x-5 text-gray-900 pt-5">
+      <div className="flex gap-x-5 text-darker pt-5">
         <button className="btn-secondary">Save</button>
         <button className="btn-secondary">
           <FaShare size={15} />

@@ -56,7 +56,7 @@ export default function Login({ status, canResetPassword }) {
                         {(canResetPassword && errors.password) && (
                             <Link
                                 href={route('password.request')}
-                                className="font-medium text-[0.85rem] text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary/0 dark:focus:ring-offset-gray-800"
+                                className="font-medium text-[0.85rem] text-gray-600 dark:text-gray-300 hover:text-darker dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary/0 dark:focus:ring-offset-dark"
                             >
                                 Forgot your password?
                             </Link>
@@ -88,14 +88,14 @@ export default function Login({ status, canResetPassword }) {
                     </label>
                 </div>
 
-                <div className="flex flex-col items-start mt-6 gap-3">
-                    <PrimaryButton disabled={processing}>
+                <div className="flex flex-col items-start mt-5 gap-3">
+                    <PrimaryButton className="w-full" disabled={processing}>
                         Log in
                     </PrimaryButton>
                     {canResetPassword && (
                         <Link
                             href={route('register')}
-                            className="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary/0 dark:focus:ring-offset-gray-800"
+                            className="underline text-sm text-gray-600 dark:text-gray-400 hover:text-darker dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary/0 dark:focus:ring-offset-dark"
                         >
                             Don't have an account? Register
                         </Link>

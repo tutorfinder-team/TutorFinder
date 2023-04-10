@@ -3,7 +3,7 @@ import Draggable from "./Draggable";
 
 function Tag({ title }) {
 	return (
-		<button className='flex gap-2 items-center justify-center rounded-full bg-gray-900 text-white px-4 py-1 whitespace-nowrap'>
+		<button className='flex gap-2 items-center justify-center rounded-full bg-darker text-white px-4 py-1 whitespace-nowrap'>
 			{title.toLowerCase()}
 		</button>
 	);

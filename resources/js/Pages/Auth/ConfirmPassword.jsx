@@ -49,7 +49,7 @@ export default function ConfirmPassword() {
                 </div>
 
                 <div className="flex items-center justify-end mt-6">
-                    <PrimaryButton disabled={processing}>
+                    <PrimaryButton className="w-full" disabled={processing}>
                         Confirm
                     </PrimaryButton>
                 </div>

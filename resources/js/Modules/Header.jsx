@@ -4,6 +4,7 @@ import Spinner from "./parts/Spinner";
 import { CgProfile, CgLogOut } from "react-icons/cg";
 import Avatar from "./parts/Avatar";
 import { Link } from "@inertiajs/react";
+import PrimaryButton from "@/Components/PrimaryButton";
 
 export default function Header({ user }) {
     const dropdownMenu = [
@@ -26,7 +27,7 @@ export default function Header({ user }) {
 
     return (
         <>
-            <div className="container bg-gray-200/30 dark:bg-gray-800 h-20 flexible justify-between">
+            <div className="container bg-gray-100/20 dark:bg-dark h-20 flexible justify-between">
                 <Logo />
                 <div className="redirect flexible gap-4 text-[0.95rem]">
                     {!user ? (
@@ -37,13 +38,11 @@ export default function Header({ user }) {
                                 </span>
                             </Link>
                             <Link href="/register">
-                                <span className="text-white btn-primary px-4 py-[0.6rem]">
-                                    Sign up
-                                </span>
+                                <PrimaryButton className="">Sign up</PrimaryButton>
                             </Link>
                         </div>
                     ) : !user ? (
-                        <Spinner className="text-gray-900 w-8 h-8" />
+                        <Spinner className="text-darker w-8 h-8" />
                     ) : (
                         <>
                             <Dropdown links={dropdownMenu}>
