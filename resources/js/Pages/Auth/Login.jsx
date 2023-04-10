@@ -6,6 +6,7 @@ import InputLabel from '@/Components/InputLabel';
 import PrimaryButton from '@/Components/PrimaryButton';
 import TextInput from '@/Components/TextInput';
 import { Head, Link, useForm } from '@inertiajs/react';
+import { BiError } from 'react-icons/bi';
 
 export default function Login({ status, canResetPassword }) {
     const { data, setData, post, processing, errors, reset } = useForm({
@@ -34,7 +35,7 @@ export default function Login({ status, canResetPassword }) {
 
             <form onSubmit={submit}>
                 <div>
-                    <InputLabel htmlFor="email" value="Email" />
+                    <InputLabel Icon={errors.email && BiError} htmlFor="email" value="Email" />
 
                     <TextInput
                         id="email"
@@ -43,15 +44,24 @@ export default function Login({ status, canResetPassword }) {
                         value={data.email}
                         className="mt-1 block w-full"
                         autoComplete="username"
-                        isFocused={true}
                         onChange={(e) => setData('email', e.target.value)}
                     />
-
                     <InputError message={errors.email} className="mt-2" />
+
                 </div>
 
-                <div className="mt-4">
-                    <InputLabel htmlFor="password" value="Password" />
+                <div className="mt-4 relative">
+                    <div className="flexible justify-between">
+                        <InputLabel Icon={errors.password && BiError} htmlFor="password" value="Password" />
+                        {(canResetPassword && errors.password) && (
+                            <Link
+                                href={route('password.request')}
+                                className="font-medium text-[0.85rem] text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary/0 dark:focus:ring-offset-gray-800"
+                            >
+                                Forgot your password?
+                            </Link>
+                        )}
+                    </div>
 
                     <TextInput
                         id="password"
@@ -64,10 +74,11 @@ export default function Login({ status, canResetPassword }) {
                     />
 
                     <InputError message={errors.password} className="mt-2" />
+
                 </div>
 
-                <div className="block mt-4">
-                    <label className="flex items-center">
+                <div className="mt-4">
+                    <label className="flexible">
                         <Checkbox
                             name="remember"
                             checked={data.remember}
@@ -77,19 +88,18 @@ export default function Login({ status, canResetPassword }) {
                     </label>
                 </div>
 
-                <div className="flex items-center justify-end mt-4">
-                    {canResetPassword && (
-                        <Link
-                            href={route('password.request')}
-                            className="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary dark:focus:ring-offset-gray-800"
-                        >
-                            Forgot your password?
-                        </Link>
-                    )}
-
-                    <PrimaryButton className="ml-4" disabled={processing}>
+                <div className="flex flex-col items-start mt-6 gap-3">
+                    <PrimaryButton disabled={processing}>
                         Log in
                     </PrimaryButton>
+                    {canResetPassword && (
+                        <Link
+                            href={route('register')}
+                            className="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary/0 dark:focus:ring-offset-gray-800"
+                        >
+                            Don't have an account? Register
+                        </Link>
+                    )}
                 </div>
             </form>
         </GuestLayout>
