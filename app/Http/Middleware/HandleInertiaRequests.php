@@ -34,6 +34,10 @@ class HandleInertiaRequests extends Middleware
             'auth' => [
                 'user' => $request->user(),
             ],
+            'images' => [
+                'gdDark' => url('imgs/gddark.png'),
+                'gdLight' => url('imgs/gdlight.png'),
+            ],
             'ziggy' => function () use ($request) {
                 return array_merge((new Ziggy)->toArray(), [
                     'location' => $request->url(),

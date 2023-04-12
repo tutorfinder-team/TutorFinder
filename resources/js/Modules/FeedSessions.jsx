@@ -1,68 +1,38 @@
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { reset } from "../features/session/sessionSlice";
-import { getSessions } from "../features/session/sessionSlice";
-import Filter from "./parts/Filter";
-import SessionMd from "./parts/SessionMd";
-import Spinner from "./parts/Spinner";
-import { toast } from "react-toastify";
-// import { useSearchParams } from "react-router-dom";
+import PrimaryButton from "@/Components/PrimaryButton";
+import TextInput from "@/Components/TextInput";
+import { BiSearch } from "react-icons/bi";
 
 export default function FeedSessions() {
-	/*
-	TODO:
-	const [searchParams, setSearchParams] = useSearchParams();
-	console.log(searchParams);
-	*/
-	const dispatch = useDispatch();
-	const { sessions, isError, message, isLoading } = useSelector(
-		(state) => state.session
-	);
-
-	useEffect(() => {
-		dispatch(getSessions());
-		if (isError) {
-			toast.error(message);
-		}
-		return () => {
-			dispatch(reset());
-		};
-	}, [isError, message, dispatch]);
-
-	return (
-		<div className='container my-6'>
-			<Filter />
-			<h1 className='font-bold text-lg text-center mb-8'>
-				Check out some of today's sessions
-			</h1>
-			<div
-				className={`sessionsList relative grid place-items-center gap-8
-	  2xl:grid-cols-4 xl:grid-cols-3 lg:grid-cols-2 md:grid-cols-2`}
-			>
-				{isLoading ? (
-					<Spinner className='text-darker w-20 h-20 absolute inset-x-0 mx-auto' />
-				) : sessions.length > 0 ? (
-					sessions.map((session) => {
-						return (
-							<SessionMd
-								key={session._id}
-								id={session._id}
-								title={session.title}
-								tutor={session.tutor}
-								date={session.date.split("T")[0]}
-								location={session.location}
-								placesLeft={
-									session.maxSubscribers -
-									session.subscribers.length
-								}
-								tags={session.tags}
-							/>
-						);
-					})
-				) : (
-					<h1>No sessions found</h1>
-				)}
-			</div>
-		</div>
-	);
+    return (
+        <div>
+            <header className="py-16 sm:text-center">
+                <h1 className="mb-4 text-3xl sm:text-4xl tracking-tight text-slate-900 font-extrabold dark:text-slate-200">
+                    Latest Sessions
+                </h1>
+                <p className="text-lg text-slate-700 dark:text-slate-400">
+                 Find Available Sessions with Expert Tutors Now!
+                </p>
+                <section className="mt-3 max-w-sm sm:mx-auto sm:px-4">
+                    <h2 className="sr-only">Search for available sessions</h2>
+                    <form
+                        action="https://app.convertkit.com/forms/3181837/subscriptions"
+                        method="post"
+                        className="flex flex-wrap -mx-2"
+                    >
+                        <div className="px-2 grow-[9999] basis-64 mt-3">
+                            <div className="group relative">
+                                <TextInput
+                                    icon={BiSearch}
+                                    placeholder="Search"
+                                />
+                            </div>
+                        </div>
+                        <div className="px-2 grow flex mt-3">
+                            <PrimaryButton><BiSearch size={20}/></PrimaryButton>
+                        </div>
+                    </form>
+                </section>
+            </header>
+        </div>
+    );
 }

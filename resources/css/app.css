@@ -10,7 +10,15 @@
 .container {
   @apply mx-auto max-w-[1300px] px-6 sm:px-20 2xl:max-w-[1600px];
 }
-
+.border-apply {
+    @apply border-gray-300/30 dark:border-slate-50/[0.06];
+}
+.hoverEffect {
+    @apply duration-100 hover:text-primary;
+}
+.activeRoute{
+    @apply text-primary bg-primary/5 rounded-lg;
+}
 .btn-primary {
   @apply bg-primary text-white font-semibold py-2 rounded-lg hover:bg-primary/80 dark:hover:bg-primary duration-150 hoverMode;
 }
