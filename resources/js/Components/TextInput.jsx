@@ -20,7 +20,7 @@ export default forwardRef(function TextInput({ type = 'text', className = '', is
                 {...props}
                 type={type}
                 className={
-                    'py-2 w-full text-darker border-gray-300 dark:border-gray-700 dark:bg-darker dark:text-gray-300 focus:border-primary dark:focus:border-primary focus:ring-primary/40 dark:focus:ring-primary/20 rounded-lg shadow-sm ' +
+                    'py-2 w-full text-darker border border-apply dark:bg-darker dark:text-gray-300 focus:border-primary focus:ring-primary/10 focus:ring-4 rounded-lg shadow-sm ' +
                     (Icon ? 'pl-10' : '') +
                     ' ' + className
                 }

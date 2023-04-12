@@ -2,7 +2,7 @@ import Logo from "../Components/Logo";
 import Dropdown from "./parts/Dropdown";
 import Spinner from "./parts/Spinner";
 import { CgProfile, CgLogOut } from "react-icons/cg";
-import Avatar from "./parts/Avatar";
+import Avatar from "../Components/Avatar";
 import { Link } from "@inertiajs/react";
 import PrimaryButton from "@/Components/PrimaryButton";
 import { useDarkMode } from "@/Hooks";
@@ -10,6 +10,7 @@ import { RiMoonClearLine } from "react-icons/ri";
 import { BiSun } from "react-icons/bi";
 import Gradient from "@/Components/Gradient";
 import Pipe from "@/Components/Pipe";
+import { FiSettings } from "react-icons/fi";
 
 export default function Navbar({ user }) {
     const [isDark, setDarkMode] = useDarkMode();
@@ -18,6 +19,11 @@ export default function Navbar({ user }) {
             to: "profile.edit",
             label: "Profile",
             Icon: CgProfile,
+        },
+        {
+            to: "profile.edit",
+            label: "Settings",
+            Icon: FiSettings,
         },
         {
             to: "logout",
@@ -73,7 +79,6 @@ export default function Navbar({ user }) {
                                         </Dropdown>
                                     </>
                                 )}
-                                {/* <Pipe /> */}
                                 <button onClick={() => setDarkMode(!isDark)} className="bg-transparent duration-300 hover:bg-primary/10 rounded-full box-border p-2">
                                     {isDark ? (
                                         <BiSun

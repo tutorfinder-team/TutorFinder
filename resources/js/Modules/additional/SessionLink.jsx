@@ -1,5 +1,5 @@
 import React from "react";
-import Avatar from "../parts/Avatar";
+import Avatar from "../../Components/Avatar";
 // import { Link } from "react-router-dom";
 
 function SessionLink() {
