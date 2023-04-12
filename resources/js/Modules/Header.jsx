@@ -27,7 +27,7 @@ export default function Header({ user }) {
 
     return (
         <>
-            <div className="container bg-gray-100/20 dark:bg-dark h-20 flexible justify-between">
+            <div className="container bg-white dark:bg-dark h-20 flexible justify-between">
                 <Logo />
                 <div className="redirect flexible gap-4 text-[0.95rem]">
                     {!user ? (
@@ -50,7 +50,7 @@ export default function Header({ user }) {
                                     img={user.avatar}
                                     name={user.name}
                                     options={{
-                                        className: `cursor-pointer w-10 rounded-full hoverMode`,
+                                        className: `cursor-pointer w-12 rounded-full hoverMode`,
                                     }}
                                 />
                             </Dropdown>

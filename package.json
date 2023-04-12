@@ -1,7 +1,8 @@
 {
     "private": true,
     "scripts": {
-        "start": "vite",
+        "start": "concurrently \"php artisan serve\" \"npm run dev\"",
+        "dev": "vite",
         "build": "vite build && vite build --ssr"
     },
     "devDependencies": {
@@ -22,6 +23,7 @@
         "vite": "^4.0.0"
     },
     "dependencies": {
+        "concurrently": "^8.0.1",
         "react-router-dom": "^6.10.0",
         "react-toastify": "^9.1.2"
     }

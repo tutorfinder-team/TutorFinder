@@ -13,10 +13,10 @@ module.exports = {
         extend: {
             colors: {
                 primary: "#1aaedb",
-                dark: "#1d1d1d",
-                darker: "#0d0d0d",
-                // dark: "#161C23",
-                // darker: "#0D1116",
+                // dark: "#26282A",
+                // darker: "#202021",
+                dark: "#161C23",
+                darker: "#0D1116",
             },
             fontFamily: {
                 sans: ["Figtree", ...defaultTheme.fontFamily.sans],
