@@ -9,7 +9,7 @@ export default function Filter({ heading, fields, icon: Icon }) {
                 <Icon className="text-primary" />
                 {heading}
             </h3>
-            <div className="fields flex flex-col gap-2">
+            <div className="fields flex flex-col">
                 {values.map((field) => (
                     <Radio
                         name={fields.name}
