@@ -20,14 +20,14 @@ const SessionCard = ({ session }) => {
             <div className="flex items-center gap-5">
                 <Avatar
                     name={session.tutor}
-                    className="w-16 h-16 rounded-full"
+                    className="w-20 h-20 rounded-xl"
                 />
                 <div className="flex-1">
                     <span className="flexible gap-3">
                         <h3 className="opacity-[0.6] text-sm font-bold uppercase">{session.tutor}</h3>
                         <Stars rating={4.7}/>
                     </span>
-                    <h1 className="text-xl font-semibold py-2">{session.title}</h1>
+                    <h1 className="text-xl font-semibold py-0.5">{session.title}</h1>
                     <div className="badges my-2">
                         <Badge
                             icon={BiTime}
@@ -81,7 +81,7 @@ const SessionCard = ({ session }) => {
                         </a>
                     </div>
                 </div>
-                <PrimaryButton>Subscribe now</PrimaryButton>
+                <PrimaryButton className="text-sm">Subscribe now</PrimaryButton>
             </div>
         </Card>
     );

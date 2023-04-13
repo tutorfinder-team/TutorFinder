@@ -59,7 +59,7 @@ export default function Navbar({ user }) {
                                             </span>
                                         </Link>
                                         <Link href="/register">
-                                            <PrimaryButton className="">
+                                            <PrimaryButton className="text-md">
                                                 Sign up
                                             </PrimaryButton>
                                         </Link>
