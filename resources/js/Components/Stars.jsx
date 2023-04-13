@@ -3,6 +3,7 @@ export default function Stars({ rating }) {
         <div className="flex items-center">
             {Array.from({ length: parseInt(rating) }).map(() => (
                 <svg
+                    key={Math.random()}
                     aria-hidden="true"
                     className="w-5 h-5 text-yellow-300"
                     fill="currentColor"
@@ -14,6 +15,7 @@ export default function Stars({ rating }) {
             ))}
             {Array.from({ length: parseInt(5 - Math.floor(rating)) }).map(() => (
                 <svg
+                    key={Math.random()}
                     aria-hidden="true"
                     className="w-5 h-5 text-gray-500"
                     fill="currentColor"

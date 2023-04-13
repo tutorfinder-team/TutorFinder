@@ -3,7 +3,7 @@ import Logo from "@/Components/Logo";
 
 export default function Guest({ children }) {
     return (
-            <div className="min-h-screen bg-grid-slate-900 flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gray-100/40 dark:bg-darker">
+        <div className="min-h-screen bg-grid-slate-900 flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gray-100/40 dark:bg-darker">
                 <Gradient />
                 <div>
                     <Logo />

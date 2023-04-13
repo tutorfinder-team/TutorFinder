@@ -25,7 +25,7 @@ const SessionCard = ({ session }) => {
                 <div className="flex-1">
                     <span className="flexible gap-3">
                         <h3 className="opacity-[0.6] text-sm font-bold uppercase">{session.tutor}</h3>
-                        <Stars rating={4.7}/>
+                        <Stars rating={3.7}/>
                     </span>
                     <h1 className="text-xl font-semibold py-0.5">{session.title}</h1>
                     <div className="badges my-2">

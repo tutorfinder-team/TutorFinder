@@ -4,7 +4,7 @@ import React from "react";
 export default function Logo({ className  }) {
     return (
         <Link href="/">
-            <div className="Logo cursor-pointer">
+            <div className="Logo cursor-pointer relative z-50">
                 <svg
                     width="188"
                     height="27"

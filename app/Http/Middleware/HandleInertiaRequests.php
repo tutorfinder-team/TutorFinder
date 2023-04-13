@@ -36,7 +36,11 @@ class HandleInertiaRequests extends Middleware
             ],
             'images' => [
                 'gdDark' => url('imgs/gddark.png'),
-                'gdLight' => url('imgs/gdlight.png'),
+                'gdLight' => url('imgs/gdlight1.png'),
+                'gdBlue' => url('imgs/gdblue.png'),
+                'gdPink' => url('imgs/gdpink.png'),
+                'gdBluePink' => url('imgs/gdbluepink.png'),
+                'gdPurple' => url('imgs/gdpurple0.png'),
             ],
             'ziggy' => function () use ($request) {
                 return array_merge((new Ziggy)->toArray(), [
