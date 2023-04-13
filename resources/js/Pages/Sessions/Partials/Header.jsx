@@ -2,7 +2,7 @@ import PrimaryButton from "@/Components/PrimaryButton";
 import TextInput from "@/Components/TextInput";
 import { BiSearch } from "react-icons/bi";
 
-export function Header() {
+export default function Header() {
     return (
         <header className="py-16 sm:text-center">
             <h1 className="mb-4 text-3xl sm:text-4xl tracking-tight text-slate-900 font-extrabold dark:text-slate-200">
@@ -14,8 +14,8 @@ export function Header() {
             <section className="mt-3 max-w-sm sm:mx-auto sm:px-4">
                 <h2 className="sr-only">Search for available sessions</h2>
                 <form
-                    action="https://app.convertkit.com/forms/3181837/subscriptions"
-                    method="post"
+                    action=""
+                    method="get"
                     className="flex flex-wrap -mx-2"
                 >
                     <div className="px-2 grow-[9999] basis-64 mt-3">
@@ -32,10 +32,4 @@ export function Header() {
             </section>
         </header>
     );
-}
-
-export default function FeedSessions() {
-    return <div className="sessions">
-        <Header />
-    </div>;
 }
