@@ -36,9 +36,9 @@ class HandleInertiaRequests extends Middleware
             ],
             'images' => [
                 'gdDark' => url('imgs/gddark.png'),
-                'gdLight' => url('imgs/gdlight1.png'),
                 'gdBlue' => url('imgs/gdblue.png'),
                 'gdPink' => url('imgs/gdpink.png'),
+                'gdLight' => url('imgs/gdlight.png'),
                 'gdBluePink' => url('imgs/gdbluepink.png'),
                 'gdPurple' => url('imgs/gdpurple0.png'),
             ],
