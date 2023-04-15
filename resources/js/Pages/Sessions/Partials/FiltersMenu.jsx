@@ -5,7 +5,7 @@ import { HiLocationMarker } from "react-icons/hi";
 export default function FiltersMenu() {
     return (
         <>
-            <h1 className="mb-4 text-xl sm:text-3xl tracking-tight text-slate-900 font-extrabold dark:text-slate-200">
+            <h1 className="mb-4 text-xl sm:text-3xl tracking-tight font-extrabold">
                 Filters
             </h1>
             <Filter

@@ -35,16 +35,9 @@ const Sessions = () => {
         },
     ];
 
-    // Handle subscribe button click
-    const handleSubscribe = (sessionId) => {
-        // Add logic to subscribe to the session
-        console.log(`Subscribed to Session ID: ${sessionId}`);
-    };
-
     return (
         <>
             <Header />
-
             <div className="flex items-baseline">
                 <div className="w-1/5 sticky top-20">
                     <FiltersMenu />
