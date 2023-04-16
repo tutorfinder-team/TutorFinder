@@ -1,0 +1,37 @@
+created:
+    - database/factories/UserFactory.php
+    - database/factories/CertificationFactory.php
+    - database/factories/EducationFactory.php
+    - database/factories/ExperienceFactory.php
+    - database/factories/SessionFactory.php
+    - database/factories/EnrollmentFactory.php
+    - database/factories/FeedbackFactory.php
+    - database/migrations/2023_04_16_142928_create_users_table.php
+    - database/migrations/2023_04_16_142929_create_certifications_table.php
+    - database/migrations/2023_04_16_142930_create_education_table.php
+    - database/migrations/2023_04_16_142931_create_experiences_table.php
+    - database/migrations/2023_04_16_142932_create_sessions_table.php
+    - database/migrations/2023_04_16_142933_create_enrollments_table.php
+    - database/migrations/2023_04_16_142934_create_feedback_table.php
+    - app/Models/User.php
+    - app/Models/Certification.php
+    - app/Models/Education.php
+    - app/Models/Experience.php
+    - app/Models/Session.php
+    - app/Models/Enrollment.php
+    - app/Models/Feedback.php
+    - database/seeders/UserSeeder.php
+    - database/seeders/CertificationSeeder.php
+    - database/seeders/EducationSeeder.php
+    - database/seeders/ExperienceSeeder.php
+    - database/seeders/SessionSeeder.php
+    - database/seeders/EnrollmentSeeder.php
+    - database/seeders/FeedbackSeeder.php
+models:
+    User: { id: 'integer primary autoIncrement', username: 'string unique', full_name: string, email: 'string unique', password: string, ROLE: string, birthdate: 'date nullable', phone_number: 'string nullable', address: 'string nullable', skills: 'json nullable', rating: 'float nullable', resume: 'text nullable', picture: 'string nullable', timestamps: timestamps }
+    Certification: { id: 'integer primary autoIncrement', user_id: 'integer foreign:users.id', name: string, issuing_organization: string, issue_date: date, expiration_date: date, link: 'text nullable', timestamps: timestamps, relationships: { belongsTo: User } }
+    Education: { id: 'integer primary autoIncrement', user_id: 'integer foreign:users.id', institution: string, degree: string, field_of_study: string, start_year: integer, end_year: integer, timestamps: timestamps, relationships: { belongsTo: User } }
+    Experience: { id: 'integer primary autoIncrement', user_id: 'integer foreign:users.id', position: string, company: string, start_date: date, end_date: date, description: text, timestamps: timestamps, relationships: { belongsTo: User } }
+    Session: { id: 'integer primary autoIncrement', user_id: 'integer foreign:users.id', title: string, scheduled_time: dateTime, description: text, skills_taught: json, location: string, price: decimal, places_limit: integer, timestamps: timestamps, relationships: { belongsTo: User, hasMany: Enrollment } }
+    Enrollment: { id: 'integer primary autoIncrement', session_id: 'integer foreign:sessions.id', user_id: 'integer foreign:users.id', enrollment_date: date, timestamps: timestamps, relationships: { belongsTo: Session } }
+    Feedback: { id: 'integer primary autoIncrement', session_id: 'integer foreign:sessions.id', user_id: 'integer foreign:users.id', rating: 'float,', review: 'string,', timestamps: timestamps, relationships: { belongsTo: Session } }

@@ -1,42 +1,23 @@
 models:
   User:
     id: integer primary autoIncrement
-    username: string
+    username: string unique
     full_name: string
-    email: string
+    email: string unique
     password: string
+    ROLE: string
     birthdate: date nullable
-    address: string nullable
     phone_number: string nullable
-    ROLE: string nullable
+    address: string nullable
+    skills: json nullable
+    rating: float nullable
+    resume: text nullable
     picture: string nullable
     timestamps
 
-  Student:
-    id: integer primary
-    user_id: integer foreign:users.id
-    timestamps
-    relationships:
-     belongsTo: User
-     hasMany: Enrollment
-
-  Teacher:
-    id: integer primary
-    user_id: integer foreign:users.id
-    rating: float
-    resume: text nullable
-    skills: text nullable
-    timestamps
-    relationships:
-      belongsTo: User
-      hasMany: Certification
-      hasMany: Session
-      hasMany: Education
-      hasMany: Experience
-
   Certification:
     id: integer primary autoIncrement
-    teacher_id: integer foreign:teachers.id
+    user_id: integer foreign:users.id
     name: string
     issuing_organization: string
     issue_date: date
@@ -44,11 +25,35 @@ models:
     link: text nullable
     timestamps
     relationships:
-      belongsTo: Teacher
+      belongsTo: User
+
+  Education:
+    id: integer primary autoIncrement
+    user_id: integer foreign:users.id
+    institution: string
+    degree: string
+    field_of_study: string
+    start_year: integer
+    end_year: integer
+    timestamps
+    relationships:
+      belongsTo: User
+
+  Experience:
+    id: integer primary autoIncrement
+    user_id: integer foreign:users.id
+    position: string
+    company: string
+    start_date: date
+    end_date: date
+    description: text
+    timestamps
+    relationships:
+      belongsTo: User
 
   Session:
     id: integer primary autoIncrement
-    teacher_id: integer foreign:teachers.id
+    user_id: integer foreign:users.id
     title: string
     scheduled_time: dateTime
     description: text
@@ -58,39 +63,26 @@ models:
     places_limit: integer
     timestamps
     relationships:
-      belongsTo: Teacher
+      belongsTo: User
       hasMany: Enrollment
-
-  Education:
-    id: integer primary autoIncrement
-    teacher_id: integer foreign:teachers.id
-    institution: string
-    degree: string
-    field_of_study: string
-    start_year: integer
-    end_year: integer
-    timestamps
-    relationships:
-      belongsTo: Teacher
-
-  Experience:
-    id: integer primary autoIncrement
-    teacher_id: integer foreign:teachers.id
-    position: string
-    company: string
-    start_date: date
-    end_date: date
-    description: text
-    timestamps
-    relationships:
-      belongsTo: Teacher
 
   Enrollment:
     id: integer primary autoIncrement
     session_id: integer foreign:sessions.id
-    student_id: integer foreign:students.id
+    user_id: integer foreign:users.id
     enrollment_date: date
     timestamps
     relationships:
       belongsTo: Session
-      belongsTo: Student
+
+  Feedback:
+    id: integer primary autoIncrement
+    session_id: integer foreign:sessions.id
+    user_id: integer foreign:users.id
+    rating: float,
+    review: string,
+    timestamps
+    relationships:
+      belongsTo: Session
+
+seeders: User, Certification, Education, Experience, Session, Enrollment, Feedback
