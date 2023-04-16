@@ -4,7 +4,17 @@ import Badge from "@/Components/Badge";
 import Card from "@/Components/Card";
 import PrimaryButton from "@/Components/PrimaryButton";
 import Stars from "@/Components/Stars";
-import { BiDollar, BiLocationPlus, BiTime } from "react-icons/bi";
+import { BiTime } from "react-icons/bi";
+import { HiLocationMarker } from "react-icons/hi";
+import { MdPeople } from "react-icons/md";
+
+const randColor = () => {
+    const randomColor = "#" + Math.floor(Math.random() * 16777215).toString(16);
+
+    const colorWithOpacity = randomColor + "40";
+
+    return colorWithOpacity;
+};
 
 const SessionCard = ({ session }) => {
     console.log(session);
@@ -26,14 +36,24 @@ const SessionCard = ({ session }) => {
                     <h1 className="text-xl font-semibold py-0.5">
                         {session.title}
                     </h1>
-                    <div className="badges my-2">
+                    <div className="badges flexible my-2">
                         <Badge
                             icon={BiTime}
                             text={session.scheduled_time}
                             className="bg-primary/30"
                         />
-                        <Badge icon={BiDollar} text={session.price} />
-                        <Badge icon={BiLocationPlus} text="Online" />
+                        <Badge
+                            icon={HiLocationMarker}
+                            size={14}
+                            text="Online"
+                        />
+                        <Badge
+                            icon={MdPeople}
+                            size={16}
+                            text={
+                                "Limited to " + session.placesLimit + " places"
+                            }
+                        />
                     </div>
                 </div>
             </div>
@@ -47,7 +67,8 @@ const SessionCard = ({ session }) => {
                     return (
                         <Badge
                             text={skill}
-                            className={`bg-yellow-300/30 px-3`}
+                            className={`px-3`}
+                            style={{ backgroundColor: randColor() }}
                         />
                     );
                 })}
@@ -55,8 +76,9 @@ const SessionCard = ({ session }) => {
             <div className="px-4 mt-8 footer flexible justify-between">
                 <div className="subscribers flexible gap-2">
                     <h4 className="text-sm font-semibold leading-relaxed">
-                        {session.enrollments.length >= 1 ? "People enrolled" : "No one enrolled"}
-                        {" "}
+                        {session.enrollments.length >= 1
+                            ? "People enrolled :"
+                            : "No one enrolled"}{" "}
                     </h4>
                     <div className="flex -space-x-2.5">
                         <Avatars users={session.enrollments} />

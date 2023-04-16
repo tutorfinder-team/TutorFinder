@@ -48,7 +48,7 @@ export default function Navbar({ user }) {
                             <div className="redirect flexible gap-4 text-[0.95rem]">
                                 <div className="nav-links">
                                     <Link href="/" className={`ml-4 p-2 font-semibold hoverEffect`}>Home</Link>
-                                    <Link href="/sessions" className={`ml-4 p-2 font-semibold hoverEffect`}>Sessions</Link>
+                                    <Link href="/sessions" className={`ml-4 p-2 font-semibold hoverEffect`}>My Sessions</Link>
                                 </div>
                                 <Pipe />
                                 {!user ? (
@@ -72,9 +72,7 @@ export default function Navbar({ user }) {
                                             <Avatar
                                                 img={user.avatar}
                                                 name={user.name}
-                                                options={{
-                                                    className: `cursor-pointer w-10 rounded-full hoverMode`,
-                                                }}
+                                                className="cursor-pointer w-10 rounded-full hoverMode"
                                             />
                                         </Dropdown>
                                     </>

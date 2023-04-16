@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function Avatar({ img, name, className, options }) {
+export default function Avatar({ img, name, className, ...options }) {
 	return (
 		<img
 			src={
