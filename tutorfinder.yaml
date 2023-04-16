@@ -1,88 +1,158 @@
-models:
-  User:
-    id: integer primary autoIncrement
-    username: string unique
-    full_name: string
-    email: string unique
-    password: string
-    ROLE: string
-    birthdate: date nullable
-    phone_number: string nullable
-    address: string nullable
-    skills: json nullable
-    rating: float nullable
-    resume: text nullable
-    picture: string nullable
-    timestamps
+# models:
+#   User:
+#     id: integer primary autoIncrement
+#     username: string unique
+#     full_name: string
+#     email: string unique
+#     password: string
+#     ROLE: string
+#     birthdate: date nullable
+#     phone_number: string nullable
+#     address: string nullable
+#     skills: json nullable
+#     rating: float nullable
+#     resume: text nullable
+#     picture: string nullable
+#     timestamps
 
-  Certification:
-    id: integer primary autoIncrement
-    user_id: integer foreign:users.id
-    name: string
-    issuing_organization: string
-    issue_date: date
-    expiration_date: date
-    link: text nullable
-    timestamps
-    relationships:
-      belongsTo: User
+#   Certification:
+#     id: integer primary autoIncrement
+#     user_id: integer foreign:users.id
+#     name: string
+#     issuing_organization: string
+#     issue_date: date
+#     expiration_date: date
+#     link: text nullable
+#     timestamps
+#     relationships:
+#       belongsTo: User
 
-  Education:
-    id: integer primary autoIncrement
-    user_id: integer foreign:users.id
-    institution: string
-    degree: string
-    field_of_study: string
-    start_year: integer
-    end_year: integer
-    timestamps
-    relationships:
-      belongsTo: User
+#   Education:
+#     id: integer primary autoIncrement
+#     user_id: integer foreign:users.id
+#     institution: string
+#     degree: string
+#     field_of_study: string
+#     start_year: integer
+#     end_year: integer
+#     timestamps
+#     relationships:
+#       belongsTo: User
 
-  Experience:
-    id: integer primary autoIncrement
-    user_id: integer foreign:users.id
-    position: string
-    company: string
-    start_date: date
-    end_date: date
-    description: text
-    timestamps
-    relationships:
-      belongsTo: User
+#   Experience:
+#     id: integer primary autoIncrement
+#     user_id: integer foreign:users.id
+#     position: string
+#     company: string
+#     start_date: date
+#     end_date: date
+#     description: text
+#     timestamps
+#     relationships:
+#       belongsTo: User
 
+#   Session:
+#     id: integer primary autoIncrement
+#     user_id: integer foreign:users.id
+#     title: string
+#     scheduled_time: dateTime
+#     description: text
+#     skills_taught: json
+#     location: string
+#     price: decimal
+#     places_limit: integer
+#     timestamps
+#     relationships:
+#       belongsTo: User
+#       hasMany: Enrollment
+
+#   Enrollment:
+#     id: integer primary autoIncrement
+#     session_id: integer foreign:sessions.id
+#     user_id: integer foreign:users.id
+#     enrollment_date: date
+#     timestamps
+#     relationships:
+#       belongsTo: Session
+
+#   Feedback:
+#     id: integer primary autoIncrement
+#     session_id: integer foreign:sessions.id
+#     user_id: integer foreign:users.id
+#     rating: float,
+#     review: string,
+#     timestamps
+#     relationships:
+#       belongsTo: Session
+
+# seeders: User, Certification, Education, Experience, Session, Enrollment, Feedback
+
+controllers:
+  # User:
+  #   index:
+  #     query: all
+  #     render: user.index with:users
+  #   create:
+  #     render: user.create
+  #   store:
+  #     validate: username, full_name, email, password, ROLE
+  #     save: user
+  #     redirect: user.index
   Session:
-    id: integer primary autoIncrement
-    user_id: integer foreign:users.id
-    title: string
-    scheduled_time: dateTime
-    description: text
-    skills_taught: json
-    location: string
-    price: decimal
-    places_limit: integer
-    timestamps
-    relationships:
-      belongsTo: User
-      hasMany: Enrollment
-
-  Enrollment:
-    id: integer primary autoIncrement
-    session_id: integer foreign:sessions.id
-    user_id: integer foreign:users.id
-    enrollment_date: date
-    timestamps
-    relationships:
-      belongsTo: Session
-
-  Feedback:
-    id: integer primary autoIncrement
-    session_id: integer foreign:sessions.id
-    user_id: integer foreign:users.id
-    rating: float,
-    review: string,
-    timestamps
-    relationships:
-      belongsTo: Session
-
-seeders: User, Certification, Education, Experience, Session, Enrollment, Feedback
+    resource
+    # download:
+    #   find: session.id
+    #   respond: session
+    # show:
+    #   query: feedbacks where:session.id
+    #   render: session.show with:session,feedbacks
+  # Certification:
+  #   index:
+  #     query: all
+  #     render: certification.index with:certifications
+  #   create:
+  #     render: certification.create
+  #   store:
+  #     validate: user_id, name, issuing_organization, issue_date, expiration_date
+  #     save: certification
+  #     redirect: certification.index
+  # Education:
+  #   index:
+  #     query: all
+  #     render: education.index with:educations
+  #   create:
+  #     render: education.create
+  #   store:
+  #     validate: user_id, institution, degree, field_of_study, start_year, end_year
+  #     save: education
+  #     redirect: education.index
+  # Experience:
+  #   index:
+  #     query: all
+  #     render: experience.index with:experiences
+  #   create:
+  #     render: experience.create
+  #   store:
+  #     validate: user_id, position, company, start_date, end_date, description
+  #     save: experience
+  #     redirect: experience.index
+  # Enrollment:
+  #   index:
+  #     query: all
+  #     render: enrollment.index with:enrollments
+  #   create:
+  #     render: enrollment.create
+  #   store:
+  #     validate: session_id, user_id, enrollment_date
+  #     save: enrollment
+  #     redirect: enrollment.index
+  # Feedback:
+  #   index:
+  #     query: all
+  #     render: feedback.index with:feedbacks
+  #   create:
+  #     render: feedback.create
+  #   store:
+  #     validate: session_id, user_id, rating, review
+  #     save: feedback
+  #     redirect: feedback.index

@@ -47,4 +47,9 @@ class Session extends Model
     {
         return $this->hasMany(Enrollment::class);
     }
+
+    public function feedbacks(): HasMany
+    {
+        return $this->hasMany(Feedback::class);
+    }
 }

@@ -25,14 +25,14 @@ class UserFactory extends Factory
             'name' => $this->faker->word,
             'email' => $this->faker->safeEmail,
             'password' => $this->faker->password,
-            'ROLE' => $this->faker->word,
+            'ROLE' => "STUDENT",
             'birthdate' => $this->faker->date(),
             'phone_number' => $this->faker->phoneNumber,
             'address' => $this->faker->word,
             'skills' => '{}',
-            // 'rating' => $this->faker->randomFloat(0, 5),
+            'rating' => $this->faker->randomFloat(2, 0, 5),
             'resume' => $this->faker->text,
-            'picture' => $this->faker->word,
+            // 'picture' => $this->faker->word,
         ];
     }
 }

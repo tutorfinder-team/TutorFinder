@@ -1,4 +1,5 @@
 import Avatar from "@/Components/Avatar";
+import Avatars from "@/Components/Avatars";
 import Badge from "@/Components/Badge";
 import Card from "@/Components/Card";
 import PrimaryButton from "@/Components/PrimaryButton";
@@ -6,82 +7,62 @@ import Stars from "@/Components/Stars";
 import { BiDollar, BiLocationPlus, BiTime } from "react-icons/bi";
 
 const SessionCard = ({ session }) => {
-    const dummy = `
-    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-    Quis sit a et ab corporis ad labore ipsam esse
-    reprehenderit. Ipsum quos inventore repudiandae possimus,
-    maxime corporis quidem earum, perferendis natus, temporibus
-    libero? Quidem illo fugiat at corrupti doloribus veritatis
-    deleniti. Nemo excepturi quidem ex nostrum animi veritatis
-    sapiente cum fugit!`;
-
+    console.log(session);
     return (
         <Card className="p-5">
             <div className="flex items-center gap-5">
                 <Avatar
-                    name={session.tutor}
+                    name={session.user.name}
+                    img={session.user.picture}
                     className="w-20 h-20 rounded-xl"
                 />
                 <div className="flex-1">
                     <span className="flexible gap-3">
-                        <h3 className="opacity-[0.6] text-sm font-bold uppercase">{session.tutor}</h3>
-                        <Stars rating={3.7}/>
+                        <h3 className="opacity-[0.6] text-sm font-bold uppercase">
+                            {session.user.username}
+                        </h3>
+                        <Stars rating={session.user.rating} />
                     </span>
-                    <h1 className="text-xl font-semibold py-0.5">{session.title}</h1>
+                    <h1 className="text-xl font-semibold py-0.5">
+                        {session.title}
+                    </h1>
                     <div className="badges my-2">
                         <Badge
                             icon={BiTime}
-                            text="2023-04-12"
+                            text={session.scheduled_time}
                             className="bg-primary/30"
                         />
-                        <Badge icon={BiDollar} text="Discuss later" />
+                        <Badge icon={BiDollar} text={session.price} />
                         <Badge icon={BiLocationPlus} text="Online" />
                     </div>
                 </div>
             </div>
             <div className="px-4 my-4 description">
                 <p className="opacity-[0.8] font-medium text-sm leading-relaxed">
-                    {dummy.slice(0, 200)}...
+                    {session.description}...
                 </p>
             </div>
             <div className="px-4 my-4 tags">
-                <Badge text="javascript" className="bg-yellow-300/30 px-3" />
-                <Badge text="react" className="bg-blue-400/30 px-3" />
-                <Badge text="html" className="bg-red-400/30 px-3" />
+                {JSON.parse(session.tags).skills.map((skill) => {
+                    return (
+                        <Badge
+                            text={skill}
+                            className={`bg-yellow-300/30 px-3`}
+                        />
+                    );
+                })}
             </div>
             <div className="px-4 mt-8 footer flexible justify-between">
                 <div className="subscribers flexible gap-2">
                     <h4 className="text-sm font-semibold leading-relaxed">
-                        Subscribers:{" "}
+                        {session.enrollments.length >= 1 ? "People enrolled" : "No one enrolled"}
+                        {" "}
                     </h4>
-                    <div className="flex -space-x-4">
-                        <img
-                            className="w-8 h-8 border-2 border-white rounded-full dark:border-gray-800 object-cover"
-                            src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8cGVyc29ufGVufDB8fDB8fA%3D%3D&w=1000&q=80"
-                            alt=""
-                        />
-
-                        <img
-                            className="w-8 h-8 border-2 border-white rounded-full dark:border-gray-800 object-cover"
-                            src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8cGVyc29ufGVufDB8fDB8fA%3D%3D&w=1000&q=80"
-                            alt=""
-                        />
-
-                        <img
-                            className="w-8 h-8 border-2 border-white rounded-full dark:border-gray-800 object-cover"
-                            src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8cGVyc29ufGVufDB8fDB8fA%3D%3D&w=1000&q=80"
-                            alt=""
-                        />
-
-                        <a
-                            className="flex items-center justify-center w-8 h-8 text-xs font-medium text-white bg-gray-700 border-2 border-white rounded-full hover:bg-gray-600 dark:border-gray-800"
-                            href="#"
-                        >
-                            +2
-                        </a>
+                    <div className="flex -space-x-2.5">
+                        <Avatars users={session.enrollments} />
                     </div>
                 </div>
-                <PrimaryButton className="text-sm">Subscribe now</PrimaryButton>
+                <PrimaryButton className="text-sm">Enroll now</PrimaryButton>
             </div>
         </Card>
     );
