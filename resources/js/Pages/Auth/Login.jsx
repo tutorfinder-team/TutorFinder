@@ -1,40 +1,61 @@
-import { useEffect } from 'react';
-import Checkbox from '@/Components/Checkbox';
-import GuestLayout from '@/Layouts/GuestLayout';
-import InputError from '@/Components/InputError';
-import InputLabel from '@/Components/InputLabel';
-import PrimaryButton from '@/Components/PrimaryButton';
-import TextInput from '@/Components/TextInput';
-import { Head, Link, useForm } from '@inertiajs/react';
-import { BiError } from 'react-icons/bi';
+import { useEffect } from "react";
+import Checkbox from "@/Components/Checkbox";
+import GuestLayout from "@/Layouts/GuestLayout";
+import InputError from "@/Components/InputError";
+import InputLabel from "@/Components/InputLabel";
+import PrimaryButton from "@/Components/PrimaryButton";
+import TextInput from "@/Components/TextInput";
+import { Head, Link, useForm } from "@inertiajs/react";
+import { BiError } from "react-icons/bi";
+import { BsGoogle } from "react-icons/bs";
 
 export default function Login({ status, canResetPassword }) {
     const { data, setData, post, processing, errors, reset } = useForm({
-        login: '',
-        password: '',
+        login: "",
+        password: "",
         remember: false,
     });
 
     useEffect(() => {
         return () => {
-            reset('password');
+            reset("password");
         };
     }, []);
 
     const submit = (e) => {
         e.preventDefault();
 
-        post(route('login'));
+        post(route("login"));
     };
 
     return (
         <GuestLayout>
             <Head title="Log in" />
-            {status && <div className="mb-4 font-medium text-sm text-green-600">{status}</div>}
+            {status && (
+                <div className="mb-4 font-medium text-sm text-green-600">
+                    {status}
+                </div>
+            )}
 
+            <a href="/auth/google/redirect">
+                <PrimaryButton
+                    className="w-full flex justify-center items-center gap-2 mb-6"
+                    style={{backgroundColor: "#000"}}
+                >
+                    <BsGoogle/>
+                    Sign in with Google
+                </PrimaryButton>
+            </a>
+            <div className="uppercase text-gray-400 text-sm mb-6 text-center tracking-wider">
+                or use your email account
+            </div>
             <form onSubmit={submit}>
                 <div>
-                    <InputLabel Icon={errors.login && BiError} htmlFor="login" value="Username or Email" />
+                    <InputLabel
+                        Icon={errors.login && BiError}
+                        htmlFor="login"
+                        value="Username or Email"
+                    />
 
                     <TextInput
                         id="login"
@@ -43,18 +64,21 @@ export default function Login({ status, canResetPassword }) {
                         value={data.login}
                         className="mt-1 block w-full"
                         autoComplete="username"
-                        onChange={(e) => setData('login', e.target.value)}
+                        onChange={(e) => setData("login", e.target.value)}
                     />
                     <InputError message={errors.login} className="mt-2" />
-
                 </div>
 
                 <div className="mt-4 relative">
                     <div className="flexible justify-between">
-                        <InputLabel Icon={errors.password && BiError} htmlFor="password" value="Password" />
-                        {(canResetPassword && errors.password) && (
+                        <InputLabel
+                            Icon={errors.password && BiError}
+                            htmlFor="password"
+                            value="Password"
+                        />
+                        {canResetPassword && errors.password && (
                             <Link
-                                href={route('password.request')}
+                                href={route("password.request")}
                                 className="font-medium text-[0.85rem] text-gray-600 dark:text-gray-300 hover:text-darker dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary/0 dark:focus:ring-offset-dark"
                             >
                                 Forgot your password?
@@ -69,11 +93,10 @@ export default function Login({ status, canResetPassword }) {
                         value={data.password}
                         className="mt-1 block w-full"
                         autoComplete="current-password"
-                        onChange={(e) => setData('password', e.target.value)}
+                        onChange={(e) => setData("password", e.target.value)}
                     />
 
                     <InputError message={errors.password} className="mt-2" />
-
                 </div>
 
                 <div className="mt-4">
@@ -81,9 +104,13 @@ export default function Login({ status, canResetPassword }) {
                         <Checkbox
                             name="remember"
                             checked={data.remember}
-                            onChange={(e) => setData('remember', e.target.checked)}
+                            onChange={(e) =>
+                                setData("remember", e.target.checked)
+                            }
                         />
-                        <span className="ml-2 text-sm text-gray-600 dark:text-gray-400">Remember me</span>
+                        <span className="ml-2 text-sm text-gray-600 dark:text-gray-400">
+                            Remember me
+                        </span>
                     </label>
                 </div>
 
@@ -93,7 +120,7 @@ export default function Login({ status, canResetPassword }) {
                     </PrimaryButton>
                     {canResetPassword && (
                         <Link
-                            href={route('register')}
+                            href={route("register")}
                             className="underline text-sm text-gray-600 dark:text-gray-400 hover:text-darker dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary/0 dark:focus:ring-offset-dark"
                         >
                             Don't have an account? Register

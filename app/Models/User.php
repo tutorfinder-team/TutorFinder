@@ -31,6 +31,9 @@ class User extends Authenticatable
         'rating',
         'resume',
         'picture',
+        'provider',
+        'provider_id',
+        'provider_token',
     ];
 
     /**

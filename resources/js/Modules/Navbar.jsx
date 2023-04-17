@@ -70,7 +70,7 @@ export default function Navbar({ user }) {
                                     <>
                                         <Dropdown links={dropdownMenu}>
                                             <Avatar
-                                                img={user.avatar}
+                                                img={user.picture}
                                                 name={user.name}
                                                 className="cursor-pointer w-10 rounded-full hoverMode"
                                             />
