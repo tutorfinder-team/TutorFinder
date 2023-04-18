@@ -7,7 +7,7 @@ import PrimaryButton from "@/Components/PrimaryButton";
 import TextInput from "@/Components/TextInput";
 import { Head, Link, useForm } from "@inertiajs/react";
 import { BiError } from "react-icons/bi";
-import { BsGoogle } from "react-icons/bs";
+import { FcGoogle } from "react-icons/fc";
 
 export default function Login({ status, canResetPassword }) {
     const { data, setData, post, processing, errors, reset } = useForm({
@@ -39,15 +39,16 @@ export default function Login({ status, canResetPassword }) {
 
             <a href="/auth/google/redirect">
                 <PrimaryButton
-                    className="w-full flex justify-center items-center gap-2 mb-6"
-                    style={{backgroundColor: "#000"}}
+                    className="w-full flex justify-center items-center gap-2 mb-6 bg-black dark:bg-white dark:text-gray-700"
                 >
-                    <BsGoogle/>
+                    <FcGoogle size={20}/>
                     Sign in with Google
                 </PrimaryButton>
             </a>
-            <div className="uppercase text-gray-400 text-sm mb-6 text-center tracking-wider">
-                or use your email account
+            <div className="uppercase flexible-center gap-2 text-gray-400 text-xs mb-6">
+                <div className="w-full bg-gray-400 h-[1px]"/>
+                <p>or</p>
+                <div className="w-full bg-gray-400 h-[1px]"/>
             </div>
             <form onSubmit={submit}>
                 <div>
