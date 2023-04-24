@@ -21,7 +21,7 @@ export default function Navbar({ user }) {
             Icon: CgProfile,
         },
         {
-            to: "profile.edit",
+            to: "settings.edit",
             label: "Settings",
             Icon: FiSettings,
         },

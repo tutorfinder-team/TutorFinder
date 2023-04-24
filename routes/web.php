@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\ProviderController;
 use App\Http\Controllers\SessionController;
 use Illuminate\Foundation\Application;
@@ -29,9 +30,11 @@ Route::middleware('auth')->group(function () {
     Route::post('/session', [SessionController::class, 'store'])->name('session.store');
     Route::delete('/session/{id}', [SessionController::class, 'destroy'])->name('session.destroy');
 
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::get('/profile', [ProfileController::class, 'profile'])->name('profile.edit');
+
+    Route::get('/settings', [SettingsController::class, 'edit'])->name('settings.edit');
+    Route::patch('/settings', [SettingsController::class, 'update'])->name('settings.update');
+    Route::delete('/settings', [SettingsController::class, 'destroy'])->name('settings.destroy');
 });
 
 require __DIR__.'/auth.php';

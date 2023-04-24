@@ -7,6 +7,7 @@ export default function MainLayout({ user, children }) {
             <main className="relative z-40">
                 {children}
             </main>
+            {/* <Footer/> */}
         </div>
     );
 }
