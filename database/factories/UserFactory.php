@@ -35,4 +35,5 @@ class UserFactory extends Factory
             // 'picture' => $this->faker->word,
         ];
     }
+   
 }
