@@ -5,60 +5,76 @@ import { Head } from "@inertiajs/react";
 import Avatar from "../../Components/Avatar";
 import { AiFillFileAdd } from "react-icons/ai";
 import PrimaryButton from "@/Components/PrimaryButton";
+import { BiPlus, BiTrophy } from "react-icons/bi";
+import TextInput from "@/Components/TextInput";
+import SecondaryButton from "@/Components/SecondaryButton";
+import { useRef } from "react";
+import { FaPaintBrush } from "react-icons/fa";
+import { FiFile, FiFilePlus } from "react-icons/fi";
 
 export default function Profile({ auth: { user } }) {
+    const inputRef = useRef();
     return (
         <MainLayout user={user}>
             <Head title="Profile" />
-            <div className="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
-                <Card>
-                    <div className="">
-                        <div className="flexible gap-6">
-                            <hr className="w-[50%] border-slate-400" />
-                            <Avatar
-                                name="yasen"
-                                className="rounded-full h-20"
-                            />
-                            <hr className="w-[50%] border-slate-400" />
-                        </div>
-                        <div className="flexible-center flex-col gap-2 mb-6">
-                            <h2 className=" font-semibold mt-3 text-2xl ">
-                                Yasen Doukali
-                            </h2>
-                            <h2 className=" italic text-sm">
-                                yssnmed@gmail.com
-                            </h2>
-                        </div>
-                    </div>
-                </Card>
-            </div>
-
-            <div className="py-12">
-                <div className="max-w-7xl mx-auto sm:px-6 ">
-                    <Card className="flexible gap-x-40	">
-                        <div className="flexible gap-2">
-                        <AiFillFileAdd className="gap-"/> <h1>Resume</h1>  
-                        </div>
-                        <div className="flexible ">                              
-                        {/* <button className="btn-primary">+</button> */}
-                        <input
-                            type="file"
-                            class="block w-full text-xs text-slate-500
-                            file:mr-4 file:py-2 file:px-4
-                            file:rounded-full file:border-0
-                            file:text-sm file:font-semibold
-                            file:bg-gray-50 file:text-gray-700
-                            hover:file:bg-blue-100"
-                            />
-                            </div>
-                    </Card>
+            <div className="max-w-7xl mx-auto py-12 sm:px-6 lg:px-8 space-y-6">
+                <div className="flexible gap-3 flex-col">
+                    <Avatar name={user.name} className="rounded-full h-40" />
+                    <h2 className="font-semibold text-3xl">
+                        {toCapital(user.name)}
+                    </h2>
+                    <h3 className="text-lg">{toCapital(user.email)}</h3>
                 </div>
-            </div>
-
-            <div className="py-12">
-                <div className="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
-                    <Card>Hello, {toCapital(user.name)}</Card>
-                    <h1></h1>
+                <div className="py-6">
+                    {/* the card below can be put in a seperate component
+                    with different props so you can reuse it multiple
+                    time **Take the useRef above with it too (const inputRef) ** */}
+                    {/* And you can learn grid for making a great layout for example see this div below */}
+                    {/* Be creative and use chatGPT or phind.com for help */}
+                    <div className="cards grid grid-cols-2 gap-4">
+                        <Card className="p-0">
+                            <div className="header flexible justify-between py-3 px-5 border-b border-apply">
+                                <div className="flexible gap-2">
+                                    <FiFilePlus />
+                                    <h1>Resume</h1>
+                                </div>
+                                <div>
+                                    <SecondaryButton
+                                        className="py-3"
+                                        onClick={() => inputRef.current.click()}
+                                    >
+                                        <BiPlus size={21} />
+                                    </SecondaryButton>
+                                    <TextInput
+                                        type="file"
+                                        ref={inputRef}
+                                        className="hidden"
+                                    />
+                                </div>
+                            </div>
+                            <div className="content py-3 px-5">
+                                <h1>Content will be here</h1>
+                            </div>
+                        </Card>
+                        {/* So instead of duplicating the divs like this
+                        you can make one component that shares the same layout and then
+                        changes it props accordenly */}
+                        <Card className="p-0">
+                            <div className="header flexible justify-between py-3 px-5 border-b border-apply">
+                                <div className="flexible gap-2">
+                                    <BiTrophy />
+                                    <h1>Skills</h1>
+                                </div>
+                                <div>
+                                    <SecondaryButton
+                                        className="py-3"
+                                    >
+                                        <BiPlus size={21} />
+                                    </SecondaryButton>
+                                </div>
+                            </div>
+                        </Card>
+                    </div>
                 </div>
             </div>
         </MainLayout>
