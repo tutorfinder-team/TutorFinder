@@ -6,6 +6,8 @@ import Avatar from "../../Components/Avatar";
 import { AiFillFileAdd } from "react-icons/ai";
 import PrimaryButton from "@/Components/PrimaryButton";
 import { BiPlus, BiTrophy } from "react-icons/bi";
+import {MdCastForEducation} from "react-icons/md";
+import { CgPen } from "react-icons/cg";
 import TextInput from "@/Components/TextInput";
 import SecondaryButton from "@/Components/SecondaryButton";
 import { useRef } from "react";
@@ -32,30 +34,7 @@ export default function Profile({ auth: { user } }) {
                     {/* And you can learn grid for making a great layout for example see this div below */}
                     {/* Be creative and use chatGPT or phind.com for help */}
                     <div className="cards grid grid-cols-2 gap-4">
-                        <Card className="p-0">
-                            <div className="header flexible justify-between py-3 px-5 border-b border-apply">
-                                <div className="flexible gap-2">
-                                    <FiFilePlus />
-                                    <h1>Resume</h1>
-                                </div>
-                                <div>
-                                    <SecondaryButton
-                                        className="py-3"
-                                        onClick={() => inputRef.current.click()}
-                                    >
-                                        <BiPlus size={21} />
-                                    </SecondaryButton>
-                                    <TextInput
-                                        type="file"
-                                        ref={inputRef}
-                                        className="hidden"
-                                    />
-                                </div>
-                            </div>
-                            <div className="content py-3 px-5">
-                                <h1>Content will be here</h1>
-                            </div>
-                        </Card>
+                        <Resume/>
                         {/* So instead of duplicating the divs like this
                         you can make one component that shares the same layout and then
                         changes it props accordenly */}
@@ -66,12 +45,33 @@ export default function Profile({ auth: { user } }) {
                                     <h1>Skills</h1>
                                 </div>
                                 <div>
-                                    <SecondaryButton
-                                        className="py-3"
-                                    >
+                                    <SecondaryButton className="py-3">
                                         <BiPlus size={21} />
                                     </SecondaryButton>
                                 </div>
+                            </div>
+                            <div className=" py-3 px-12 ">
+                                <h1> No resume uploaded  yet.</h1>
+                            </div>
+                        </Card>
+                        {/* Education  */}
+                        <Card className="p-0">
+                            <div className="header flexible justify-between py-3 px-5 border-b border-apply">
+                                <div className="flexible gap-2">
+                                    <CgPen />
+                                    <h1>Education</h1>
+                                </div>
+                                <div>
+                                    <SecondaryButton className="py-3">
+                                        <BiPlus size={21} />
+                                    </SecondaryButton>
+                                </div>
+                                <div className="content py-3 px-12 ">
+                                    <h1> Education </h1>
+                                </div>
+                            </div>
+                            <div className=" py-3 px-12 ">
+                                <h1> Add your experiences </h1>
                             </div>
                         </Card>
                     </div>
