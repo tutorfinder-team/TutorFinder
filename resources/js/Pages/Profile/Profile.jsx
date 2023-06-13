@@ -24,15 +24,9 @@ export default function Profile({ auth: { user } }) {
                     <h3 className="text-lg">{toCapital(user.email)}</h3>
                 </div>
                 <div className="py-6">
-                    {/* the card below can be put in a seperate component
-                    with different props so you can reuse it multiple
-                    time **Take the useRef above with it too (const inputRef) ** */}
-                    {/* And you can learn grid for making a great layout for example see this div below */}
-                    {/* Be creative and use chatGPT or phind.com for help */}
+                    
                     <div className="cards grid grid-cols-2 gap-x-6 gap-y-3">
-                        {/* So instead of duplicating the divs like this
-                        you can make one component that shares the same layout and then
-                    changes it props accordenly */}
+                    
                     <Resume />
                     <Skills />
                     <Education />

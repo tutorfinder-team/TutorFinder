@@ -29,7 +29,6 @@ function Resume() {
             ) : (
                 <>
                     <h1 className="opacity-[0.5]">No resume uploaded yet.</h1>
-                    
                 </>
             )}
         </CardLayout>
