@@ -8,7 +8,7 @@ export default function Home({ auth, sessions, count }) {
         <MainLayout user={auth.user}>
             <Head title="Home" />
             <div className="container">
-                <Sessions sessions={sessions} count={count}/>
+                <Sessions sessions={sessions} count={count} />
             </div>
         </MainLayout>
     );

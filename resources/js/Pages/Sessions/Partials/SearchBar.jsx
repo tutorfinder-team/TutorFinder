@@ -3,15 +3,22 @@ import TextInput from "@/Components/TextInput";
 import { BiSearch } from "react-icons/bi";
 import { useRef } from "react";
 import { Inertia } from "@inertiajs/inertia";
-import { Link, router } from "@inertiajs/react";
+import { Link, router, usePage } from "@inertiajs/react";
 
 export default function SearchBar() {
     const inputRef = useRef("");
-
+    const {search, sort, type} = usePage().props;
+    const getQuery = (newSearch, newSort, newType) => {
+        const url = new URL(window.location.href);
+        if (search) url.searchParams.set('search', search);
+        if (sort) url.searchParams.set('sort', sort);
+        if (type) url.searchParams.set('type', type);
+        return url;
+      };
     const handleSubmit = (e) => {
         e.preventDefault();
         router.get(
-            "/",
+            getQuery(search, sort, type),
             { search: inputRef.current.value },
             { preserveState: true }
         );
@@ -37,6 +44,7 @@ export default function SearchBar() {
                             <TextInput
                                 icon={BiSearch}
                                 placeholder="Search"
+                                value={search || ''}
                                 ref={inputRef}
                             />
                         </div>
