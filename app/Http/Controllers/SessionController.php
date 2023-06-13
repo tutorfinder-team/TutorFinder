@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Resources\AllSessionsCollection;
-use App\Models\Session;
-use Illuminate\Http\Request;
 use Inertia\Inertia;
+use App\Models\Session;
+use Illuminate\Support\Str;
+use Illuminate\Http\Request;
+use App\Http\Resources\AllSessionsCollection;
 
 class SessionController extends Controller
 {
@@ -14,10 +15,41 @@ class SessionController extends Controller
      */
     public function index()
     {
-        $sessions = Session::orderBy('created_at', 'desc')->get();
-
+        $sessions = Session::query()
+            ->when(request()->input('search'), function ($query, $search) {
+                $query->where('title', 'like', '%' . $search . '%')
+                    ->orWhere('description', 'like', '%' . $search . '%')
+                    ->orWhere('skills_taught', 'like', '%' . $search . '%');
+            })
+            ->orderBy('created_at', 'desc')
+            ->paginate(5);
+            // ->map(fn ($query) => ['links' => $query->links()], fn ($session) => [
+            //     'id' => $session->id,
+            //     'price' => $session->Price,
+            //     'user' => [
+            //         'id' => $session->user->id,
+            //         'username' => $session->user->username,
+            //         'name' => $session->user->name,
+            //         'picture' => $session->user->picture,
+            //         'rating' => $session->user->rating,
+            //     ],
+            //     'title' => $session->title,
+            //     'scheduled_time' => $session->scheduled_time->format('M d, Y'),
+            //     'description' => Str::limit($session->description, 200),
+            //     'tags' => $session->skills_taught,
+            //     'location' => $session->location,
+            //     'placesLimit' => $session->places_limit,
+            //     'createdAt' => $session->created_at->format(' M D Y'),
+            //     'enrollments' => $session->enrollments->map(function ($enrollment) {
+            //         return [
+            //             'id' => $enrollment->user->id,
+            //             'username' => $enrollment->user->username,
+            //             'picture' => $enrollment->user->picture,
+            //         ];
+            //     }),
+            // ]);
         return Inertia::render('Home', [
-            'sessions' => new AllSessionsCollection($sessions),
+            'sessions' => $sessions,
         ]);
     }
 

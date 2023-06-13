@@ -7,7 +7,7 @@ export default function Home({ auth, sessions }) {
     return (
         <MainLayout user={auth.user}>
             <Head title="Home" />
-
+            {console.log(sessions)}
             <div className="container">
                 <Sessions sessions={sessions}/>
             </div>

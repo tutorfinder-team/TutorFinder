@@ -37,19 +37,6 @@ export default function Login({ status, canResetPassword }) {
                 </div>
             )}
 
-            <a href="/auth/google/redirect">
-                <PrimaryButton
-                    className="w-full flex justify-center items-center gap-2 mb-6 bg-black dark:bg-white dark:text-gray-700"
-                >
-                    <FcGoogle size={20}/>
-                    Sign in with Google
-                </PrimaryButton>
-            </a>
-            <div className="uppercase flexible-center gap-2 text-gray-400 text-xs mb-6">
-                <div className="w-full bg-gray-400 h-[1px]"/>
-                <p>or</p>
-                <div className="w-full bg-gray-400 h-[1px]"/>
-            </div>
             <form onSubmit={submit}>
                 <div>
                     <InputLabel
@@ -122,13 +109,26 @@ export default function Login({ status, canResetPassword }) {
                     {canResetPassword && (
                         <Link
                             href={route("register")}
-                            className="underline text-sm text-gray-600 dark:text-gray-400 hover:text-darker dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary/0 dark:focus:ring-offset-dark"
+                            className="underline text-xs text-gray-600 dark:text-gray-400 hover:text-darker dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary/0 dark:focus:ring-offset-dark"
                         >
                             Don't have an account? Register
                         </Link>
                     )}
                 </div>
             </form>
+            <div className="mt-6 flexible-center gap-2 text-gray-400 text-xs mb-6">
+                <div className="w-1/3 bg-gray-400 h-[1px]"/>
+                <p>Or sign in with</p>
+                <div className="w-1/3 bg-gray-400 h-[1px]"/>
+            </div>
+            <a href="/auth/google/redirect">
+                <PrimaryButton
+                    className="w-full flex justify-center items-center gap-2 mb-6 bg-black dark:bg-white dark:text-gray-700"
+                >
+                    <FcGoogle size={20}/>
+                    Sign in with Google
+                </PrimaryButton>
+            </a>
         </GuestLayout>
     );
 }

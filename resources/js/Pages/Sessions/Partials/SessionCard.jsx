@@ -17,9 +17,8 @@ const randColor = () => {
 };
 
 const SessionCard = ({ session }) => {
-    console.log(session);
     return (
-        <Card className="p-5">
+        <Card className="p-5" key={session.id}>
             <div className="flex items-center gap-5">
                 <Avatar
                     name={session.user.name}

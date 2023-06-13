@@ -1,8 +1,21 @@
 import PrimaryButton from "@/Components/PrimaryButton";
 import TextInput from "@/Components/TextInput";
 import { BiSearch } from "react-icons/bi";
+import { useRef } from "react";
+import { Inertia } from "@inertiajs/inertia";
+import { Link, router } from "@inertiajs/react";
 
 export default function Header() {
+    const inputRef = useRef("");
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        router.get(
+            "/",
+            { search: inputRef.current.value },
+            { preserveState: true }
+        );
+    };
     return (
         <header className="py-16 sm:text-center">
             <h1 className="mb-4 text-3xl sm:text-4xl tracking-tight text-slate-900 font-extrabold dark:text-slate-200">
@@ -16,11 +29,16 @@ export default function Header() {
                 <form
                     action=""
                     method="get"
+                    onSubmit={handleSubmit}
                     className="flex flex-wrap -mx-2"
                 >
                     <div className="px-2 grow-[9999] basis-64 mt-3">
                         <div className="group relative">
-                            <TextInput icon={BiSearch} placeholder="Search" />
+                            <TextInput
+                                icon={BiSearch}
+                                placeholder="Search"
+                                ref={inputRef}
+                            />
                         </div>
                     </div>
                     <div className="px-2 grow flex mt-3">

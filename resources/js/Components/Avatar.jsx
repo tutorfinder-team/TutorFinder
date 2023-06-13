@@ -1,7 +1,6 @@
 import React from "react";
 
 export default function Avatar({ img, name, className, ...options }) {
-    console.log(img ? img : "ntgs")
 	return (
 		<img
 			src={

@@ -8,8 +8,9 @@ import Card from "@/Components/Card";
 import PrimaryButton from "@/Components/PrimaryButton";
 import FiltersMenu from "./Partials/FiltersMenu";
 import SessionsFeed from "./Partials/SessionsFeed";
+import Paginator from "@/Components/Paginator";
 
-const Sessions = ({sessions : { data}}) => {
+const Sessions = ({sessions}) => {
     return (
         <>
             <Header />
@@ -19,7 +20,10 @@ const Sessions = ({sessions : { data}}) => {
                 </div>
 
                 <div className="flex-1 p-4">
-                    <SessionsFeed sessions={data}/>
+                    <SessionsFeed sessions={sessions}/>
+                    <div>
+                        <Paginator />
+                    </div>
                 </div>
             </div>
         </>
