@@ -9,6 +9,7 @@ import SecondaryButton from "@/Components/SecondaryButton";
 import Resume from "./Partials/Resume";
 import Skills from "./Partials/Skills";
 import Education from "./Partials/Education";
+import Certifications from "./Partials/Certifications";
 
 export default function Profile({ auth: { user } }) {
     return (
@@ -35,7 +36,7 @@ export default function Profile({ auth: { user } }) {
                     <Resume />
                     <Skills />
                     <Education />
-
+                    <Certifications/>
                     </div>
                 </div>
             </div>
