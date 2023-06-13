@@ -5,7 +5,7 @@ import { useRef } from "react";
 import { Inertia } from "@inertiajs/inertia";
 import { Link, router } from "@inertiajs/react";
 
-export default function Header() {
+export default function SearchBar() {
     const inputRef = useRef("");
 
     const handleSubmit = (e) => {

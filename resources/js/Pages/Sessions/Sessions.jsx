@@ -1,28 +1,22 @@
 import React from "react";
-import Header from "./Partials/Header";
-import Filters from "./Partials/Filter";
-import { BiDollarCircle, BiSort, BiSortDown } from "react-icons/bi";
-import { HiLocationMarker } from "react-icons/hi";
-import Select from "@/Components/Select";
-import Card from "@/Components/Card";
-import PrimaryButton from "@/Components/PrimaryButton";
+import SearchBar from "./Partials/SearchBar";
 import FiltersMenu from "./Partials/FiltersMenu";
 import SessionsFeed from "./Partials/SessionsFeed";
 import Paginator from "@/Components/Paginator";
 
-const Sessions = ({sessions}) => {
+const Sessions = ({ sessions, count }) => {
     return (
         <>
-            <Header />
+            <SearchBar />
             <div className="flex items-baseline">
                 <div className="w-1/5 sticky top-20">
                     <FiltersMenu />
                 </div>
 
-                <div className="flex-1 p-4">
-                    <SessionsFeed sessions={sessions}/>
-                    <div>
-                        <Paginator />
+                <div className="flex-1 p-4 mb-12">
+                    <SessionsFeed sessions={sessions.data} />
+                    <div className="my-6">
+                        <Paginator data={sessions} count={count}/>
                     </div>
                 </div>
             </div>

@@ -3,13 +3,12 @@ import MainLayout from "@/Layouts/MainLayout";
 import Sessions from "@/Pages/Sessions/Sessions";
 import { Head } from "@inertiajs/react";
 
-export default function Home({ auth, sessions }) {
+export default function Home({ auth, sessions, count }) {
     return (
         <MainLayout user={auth.user}>
             <Head title="Home" />
-            {console.log(sessions)}
             <div className="container">
-                <Sessions sessions={sessions}/>
+                <Sessions sessions={sessions} count={count}/>
             </div>
         </MainLayout>
     );

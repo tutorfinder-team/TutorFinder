@@ -23,7 +23,7 @@
   @apply text-white font-medium py-2 rounded-lg duration-150 hoverMode;
 }
 .btn-secondary {
-    @apply hoverMode font-medium py-2 rounded-lg bg-slate-100 dark:bg-darker
+    @apply hoverMode font-medium py-2 rounded-lg bg-dark text-white dark:text-dark dark:bg-slate-100;
 }
 .btn-danger {
   @apply bg-red-500 text-white font-semibold py-2 rounded-lg hover:bg-red-500/80 dark:hover:bg-red-500 duration-150 hoverMode;
