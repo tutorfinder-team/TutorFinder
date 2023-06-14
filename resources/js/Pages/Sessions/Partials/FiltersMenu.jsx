@@ -9,19 +9,24 @@ export default function FiltersMenu() {
                 Filters
             </h1>
             <Filter
+                filterType="sort"
                 icon={BiSort}
                 heading="Sort by"
                 fields={{
                     name: "sort",
                     values: [
-                        { key: "new", value: "Newest" },
-                        { key: "tr", value: "Top rated" },
-                        { key: "lp", value: "Lowest price" },
-                        { key: "hp", value: "Highest price" },
+                        { key: "new", value: "Recently Added" },
+                        { key: "upcoming", value: "Upcoming" },
+                        { key: "tr", value: "Top Rated" },
+                        { key: "lp", value: "Low Availability" },
+                        { key: "hp", value: "High Availability" },
+                        // { key: "lp", value: "Lowest price" },
+                        // { key: "hp", value: "Highest price" },
                     ],
                 }}
             />
-            <Filter
+            {/* <Filter
+                filterType="price"
                 icon={BiDollarCircle}
                 heading="Price range"
                 fields={{
@@ -33,8 +38,9 @@ export default function FiltersMenu() {
                         { key: "avg", value: "Average" },
                     ],
                 }}
-            />
+            /> */}
             <Filter
+                filterType="type"
                 icon={HiLocationMarker}
                 heading="Session type"
                 fields={{

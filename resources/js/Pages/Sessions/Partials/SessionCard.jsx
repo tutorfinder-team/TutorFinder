@@ -17,9 +17,8 @@ const randColor = () => {
 };
 
 const SessionCard = ({ session }) => {
-    console.log(session);
     return (
-        <Card className="p-5">
+        <Card className="p-5" key={session.id}>
             <div className="flex items-center gap-5">
                 <Avatar
                     name={session.user.name}
@@ -45,7 +44,7 @@ const SessionCard = ({ session }) => {
                         <Badge
                             icon={HiLocationMarker}
                             size={14}
-                            text="Online"
+                            text={session.location ? session.location : "Online"}
                         />
                         <Badge
                             icon={MdPeople}
@@ -66,6 +65,7 @@ const SessionCard = ({ session }) => {
                 {JSON.parse(session.tags).skills.map((skill) => {
                     return (
                         <Badge
+                            key={skill}
                             text={skill}
                             className={`px-3`}
                             style={{ backgroundColor: randColor() }}
@@ -84,7 +84,7 @@ const SessionCard = ({ session }) => {
                         <Avatars users={session.enrollments} />
                     </div>
                 </div>
-                <PrimaryButton className="text-sm">Enroll now</PrimaryButton>
+                <PrimaryButton className="text-sm">View Details</PrimaryButton>
             </div>
         </Card>
     );

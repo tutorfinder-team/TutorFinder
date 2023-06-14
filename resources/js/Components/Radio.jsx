@@ -6,8 +6,7 @@ export default function Radio({
     value,
     label,
     helper,
-    checked,
-    onChange,
+    selected,
 }) {
     return (
         <label
@@ -19,6 +18,7 @@ export default function Radio({
                 name={name}
                 type="radio"
                 value={value}
+                checked={selected}
                 className="w-4 h-4 text-primary bg-gray-100 border-gray-300 focus:ring-primary/0 dark:ring-offset-gray-800 dark:bg-gray-700 dark:border-gray-600"
             />
             {label}

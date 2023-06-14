@@ -24,11 +24,11 @@ class ProviderController extends Controller
             'provider' => $provider
         ], [
             'username' => ($providerUser->email) ? explode('@', $providerUser->email)[0] : $providerUser->name,
-            'name' => $providerUser->name,
-            'email' => $providerUser->email,
+            'name' => $providerUser->getName(),
+            'email' => $providerUser->getEmail(),
             'password' => bcrypt($providerUser->id),
             'ROLE' => 'STUDENT',
-            'picture' => $providerUser->avatar,
+            'picture' => $providerUser->getAvatar(),
             'provider_token' => $providerUser->token,
         ]);
 

@@ -19,9 +19,9 @@ export default function Edit({ auth, mustVerifyEmail, status }) {
                         />
                     </div>
 
-                    <div className="p-4 sm:p-8 bg-white dark:bg-dark shadow sm:rounded-lg border border-apply">
+                    {/* <div className="p-4 sm:p-8 bg-white dark:bg-dark shadow sm:rounded-lg border border-apply">
                         <UpdatePasswordForm className="max-w-xl" />
-                    </div>
+                    </div> */}
 
                     <div className="p-4 sm:p-8 bg-white dark:bg-dark shadow sm:rounded-lg border border-apply">
                         <DeleteUserForm className="max-w-xl" />
