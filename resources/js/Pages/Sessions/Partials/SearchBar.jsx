@@ -8,6 +8,7 @@ import { Link, router, usePage } from "@inertiajs/react";
 export default function SearchBar() {
     const inputRef = useRef("");
     const {search, sort, type} = usePage().props;
+    if (search) inputRef.current.value = search;
     const getQuery = (newSearch, newSort, newType) => {
         const url = new URL(window.location.href);
         if (search) url.searchParams.set('search', search);
@@ -44,7 +45,6 @@ export default function SearchBar() {
                             <TextInput
                                 icon={BiSearch}
                                 placeholder="Search"
-                                value={search || ''}
                                 ref={inputRef}
                             />
                         </div>

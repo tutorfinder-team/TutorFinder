@@ -18,7 +18,8 @@ class SessionController extends Controller
             $query->where(function ($query) use ($search) {
                 $query->where('title', 'like', '%' . $search . '%')
                     ->orWhere('description', 'like', '%' . $search . '%')
-                    ->orWhere('skills_taught', 'like', '%' . $search . '%');
+                    ->orWhere('skills_taught', 'like', '%' . $search . '%')
+                    ->orWhere('location', 'like', '%' . $search . '%');
             });
         }
 
