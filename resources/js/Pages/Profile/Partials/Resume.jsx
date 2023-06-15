@@ -1,30 +1,7 @@
 import { useRef, useState } from "react";
 import { FiFilePlus } from "react-icons/fi";
 import CardLayout from "./CardLayout";
-import SecondaryButton from "@/Components/SecondaryButton";
-import { BiPlus } from "react-icons/bi";
-import TextInput from "@/Components/TextInput";
-
-function FormResume() {
-    const inputRef = useRef();
-    return (
-        <>
-            <SecondaryButton
-                className="py-3"
-                onClick={() => inputRef.current.click()}
-            >
-                <BiPlus size={21} />
-            </SecondaryButton>
-            <TextInput
-                type="file"
-                id="name"
-                name="resume"
-                ref={inputRef}
-                className="hidden"
-            />
-        </>
-    );
-}
+import FormAddResume from "../Forms/Resume/FormAddResume";
 
 function Resume() {
     const [resumeUploaded, setResumeUploaded] = useState(false);
@@ -38,7 +15,7 @@ function Resume() {
         <CardLayout
             cardName="Resume"
             Icon={FiFilePlus}
-            FormModal={FormResume}
+            FormModal={FormAddResume}
             onClick={handleUpload}
         >
             {resumeUploaded ? (

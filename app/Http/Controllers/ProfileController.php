@@ -24,6 +24,7 @@ class ProfileController extends Controller
             'experiences' => $experiences,
             'educations' => $educations,
             'certification' => $certification,
+            'resume' => $user->resume,
         ]);
     }
 }

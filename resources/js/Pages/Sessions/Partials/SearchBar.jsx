@@ -1,29 +1,35 @@
 import PrimaryButton from "@/Components/PrimaryButton";
 import TextInput from "@/Components/TextInput";
 import { BiSearch } from "react-icons/bi";
-import { useRef } from "react";
+import { useState } from "react";
 import { Inertia } from "@inertiajs/inertia";
-import { Link, router, usePage } from "@inertiajs/react";
+import { router, usePage } from "@inertiajs/react";
 
 export default function SearchBar() {
-    const inputRef = useRef("");
-    const {search, sort, type} = usePage().props;
-    if (search) inputRef.current.value = search;
+    const { search: initialSearch, sort, type } = usePage().props;
+    const [search, setSearch] = useState(initialSearch || "");
+
     const getQuery = (newSearch, newSort, newType) => {
         const url = new URL(window.location.href);
-        if (search) url.searchParams.set('search', search);
-        if (sort) url.searchParams.set('sort', sort);
-        if (type) url.searchParams.set('type', type);
+        if (newSearch) url.searchParams.set("search", newSearch);
+        if (newSort) url.searchParams.set("sort", newSort);
+        if (newType) url.searchParams.set("type", newType);
         return url;
-      };
+    };
+
     const handleSubmit = (e) => {
         e.preventDefault();
         router.get(
             getQuery(search, sort, type),
-            { search: inputRef.current.value },
+            { search },
             { preserveState: true }
         );
     };
+
+    const handleInputChange = (e) => {
+        setSearch(e.target.value);
+    };
+
     return (
         <header className="py-16 sm:text-center">
             <h1 className="mb-4 text-3xl sm:text-4xl tracking-tight text-slate-900 font-extrabold dark:text-slate-200">
@@ -35,7 +41,6 @@ export default function SearchBar() {
             <section className="mt-3 max-w-sm sm:mx-auto sm:px-4">
                 <h2 className="sr-only">Search for available sessions</h2>
                 <form
-                    action=""
                     method="get"
                     onSubmit={handleSubmit}
                     className="flex flex-wrap -mx-2"
@@ -44,8 +49,9 @@ export default function SearchBar() {
                         <div className="group relative">
                             <TextInput
                                 icon={BiSearch}
+                                value={search}
                                 placeholder="Search"
-                                ref={inputRef}
+                                onChange={handleInputChange}
                             />
                         </div>
                     </div>

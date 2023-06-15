@@ -7,6 +7,7 @@ use App\Models\Session;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Resources\AllSessionsCollection;
+use App\Http\Resources\SessionResource;
 
 class SessionController extends Controller
 {
@@ -93,6 +94,17 @@ class SessionController extends Controller
     }
 
     /**
+     * Display the specified resource.
+     */
+    public function show($id)
+    {
+        $session = Session::find($id);
+        return Inertia::render('Sessions/Session/SessionDetails', [
+            'session' => new SessionResource($session)
+        ]);
+    }
+
+    /**
      * Show the form for creating a new resource.
      */
     public function create()
@@ -108,13 +120,6 @@ class SessionController extends Controller
         //
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Session $session)
-    {
-        //
-    }
 
     /**
      * Show the form for editing the specified resource.

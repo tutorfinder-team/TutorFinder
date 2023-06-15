@@ -6,6 +6,7 @@ use App\Http\Controllers\ExperienceController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\ProviderController;
+use App\Http\Controllers\ResumeController;
 use App\Http\Controllers\SessionController;
 use App\Models\Experience;
 use Illuminate\Foundation\Application;
@@ -38,6 +39,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/profile/experience', [ExperienceController::class, 'store'])->name('experience.add');
     Route::post('/profile/education', [EducationController::class, 'store'])->name('education.add');
     Route::post('/profile/certification', [CertificationController::class, 'store'])->name('certification.add');
+    Route::post('/profile/resume', [ResumeController::class, 'upload'])->name('resume.add');
 
     Route::get('/settings', [SettingsController::class, 'edit'])->name('settings.edit');
     Route::patch('/settings', [SettingsController::class, 'update'])->name('settings.update');

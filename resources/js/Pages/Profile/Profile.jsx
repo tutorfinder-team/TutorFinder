@@ -16,6 +16,7 @@ export default function Profile({
     experiences,
     educations,
     certification,
+    resume
 }) {
     return (
         <MainLayout user={user}>
@@ -35,7 +36,7 @@ export default function Profile({
                 <div className="py-6">
                     <div className="cards grid grid-cols-2 gap-x-6 gap-y-3">
                         <div className="self-start">
-                            <Resume />
+                            <Resume data={resume}/>
                         </div>
                         <div className="self-start">
                             <Experience data={experiences} />
