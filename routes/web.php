@@ -1,9 +1,13 @@
 <?php
 
+use App\Http\Controllers\CertificationController;
+use App\Http\Controllers\EducationController;
+use App\Http\Controllers\ExperienceController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\ProviderController;
 use App\Http\Controllers\SessionController;
+use App\Models\Experience;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -30,7 +34,10 @@ Route::middleware('auth')->group(function () {
     Route::post('/session', [SessionController::class, 'store'])->name('session.store');
     Route::delete('/session/{id}', [SessionController::class, 'destroy'])->name('session.destroy');
 
-    Route::get('/profile', [ProfileController::class, 'profile'])->name('profile.edit');
+    Route::get('/profile', [ProfileController::class, 'show'])->name('profile.edit');
+    Route::post('/profile/experience', [ExperienceController::class, 'store'])->name('experience.add');
+    Route::post('/profile/education', [EducationController::class, 'store'])->name('education.add');
+    Route::post('/profile/certification', [CertificationController::class, 'store'])->name('certification.add');
 
     Route::get('/settings', [SettingsController::class, 'edit'])->name('settings.edit');
     Route::patch('/settings', [SettingsController::class, 'update'])->name('settings.update');

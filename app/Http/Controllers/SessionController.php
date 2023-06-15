@@ -92,20 +92,6 @@ class SessionController extends Controller
         ]);
     }
 
-    /*
-    public function index()
-    {
-        $sessions = Session::query()
-            ->when(request()->input('search'), function ($query, $search) {
-                $query->where('title', 'like', '%' . $search . '%')
-                    ->orWhere('description', 'like', '%' . $search . '%')
-                    ->orWhere('skills_taught', 'like', '%' . $search . '%');
-            })
-            ->orderBy('created_at', 'desc')->get();
-        return Inertia::render('Home', [
-            'sessions' => new AllSessionsCollection($sessions),
-        ]);
-    } */
     /**
      * Show the form for creating a new resource.
      */

@@ -18,8 +18,8 @@ return new class extends Migration
             $table->string('institution');
             $table->string('degree');
             $table->string('field_of_study');
-            $table->integer('start_year');
-            $table->integer('end_year');
+            $table->date('start_year');
+            $table->date('end_year')->nullable();
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
