@@ -26,4 +26,18 @@ class ExperienceController extends Controller
 
         return Redirect::to('/profile');
     }
+
+
+    public function destroy($id)
+    {
+        $userId = Auth::id();
+        $experience = Experience::find($id);
+
+        if ($experience && $experience->user_id == $userId) {
+            $experience->delete();
+            return redirect()->route('profile.edit')->with('success', 'Experience record deleted successfully.');
+        }
+
+        return redirect()->route('profile.edit')->with('error', 'Experience record not found or not owned by the user.');
+    }
 }

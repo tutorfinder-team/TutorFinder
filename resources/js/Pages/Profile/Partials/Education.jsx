@@ -2,6 +2,7 @@ import { BiEdit, BiTrash, BiBook } from "react-icons/bi";
 import CardLayout from "./CardLayout";
 import FormAddEducation from "../Forms/Education/FormAddEducation";
 import { formatDate, toCapital } from "@/utils/utils";
+import DeleteModal from "../Forms/DeleteModal";
 
 function Education({ data }) {
     return (
@@ -37,10 +38,7 @@ function Education({ data }) {
                                 </h2>
                             </div>
                             <div className="buttons flex gap-2">
-                                <BiTrash
-                                    className="text-red-500 duration-100 cursor-pointer"
-                                    size={21}
-                                />
+                                <DeleteModal routeDirect={`/profile/education/${education.id}`} />
                                 <BiEdit
                                     className="text-primary duration-100 cursor-pointer"
                                     size={21}
@@ -50,7 +48,7 @@ function Education({ data }) {
                     ))}
                 </div>
             ) : (
-                <h1 className="opacity-[0.5]"> No education added yet.</h1>
+                <h1 className="opacity-[0.5]"> No education added.</h1>
             )}
         </CardLayout>
     );

@@ -3,6 +3,7 @@ import CardLayout from "./CardLayout";
 import FormAddExperience from "../Forms/Experience/FormAddExperience";
 import dateFormat, { masks } from "dateformat";
 import { formatDate, toCapital } from "@/utils/utils";
+import DeleteModal from "../Forms/DeleteModal";
 
 function Experience({ data }) {
     return (
@@ -33,14 +34,19 @@ function Experience({ data }) {
                                 </h2>
                             </div>
                             <div className="buttons flex gap-2">
-                                <BiTrash className="text-red-500 duration-100 cursor-pointer" size={21}/>
-                                <BiEdit className="text-primary duration-100 cursor-pointer" size={21}/>
+                                <DeleteModal
+                                    routeDirect={`/profile/experience/${experience.id}`}
+                                />
+                                <BiEdit
+                                    className="text-primary duration-100 cursor-pointer"
+                                    size={21}
+                                />
                             </div>
                         </div>
                     ))}
                 </div>
             ) : (
-                <h1 className="opacity-[0.5]"> No experience added yet.</h1>
+                <h1 className="opacity-[0.5]"> No experience added.</h1>
             )}
         </CardLayout>
     );

@@ -17,14 +17,16 @@ class ProfileController extends Controller
         $experiences = $user->experiences;
         $educations = $user->educations;
         $certification = $user->certification;
-
+        $filePath = null;
+        if ($user->resume)
+            $filePath = asset('storage/'.$user->resume);
         return Inertia::render('Profile/Profile', [
             'mustVerifyEmail' => $request->user() instanceof MustVerifyEmail,
             'status' => session('status'),
             'experiences' => $experiences,
             'educations' => $educations,
             'certification' => $certification,
-            'resume' => $user->resume,
+            'resume' => $filePath
         ]);
     }
 }

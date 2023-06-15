@@ -3,6 +3,7 @@ import CardLayout from "./CardLayout";
 import { BiEdit, BiTrash } from "react-icons/bi";
 import FormAddCertification from "../Forms/Certification/FormAddCertification";
 import { formatDate, toCapital } from "@/utils/utils";
+import DeleteModal from "../Forms/DeleteModal";
 
 function Certification({ data }) {
     return (
@@ -50,9 +51,8 @@ function Certification({ data }) {
                                 )}
                             </div>
                             <div className="buttons flex gap-2">
-                                <BiTrash
-                                    className="text-red-500 duration-100 cursor-pointer"
-                                    size={21}
+                                <DeleteModal
+                                    routeDirect={`/profile/certification/${certification.id}`}
                                 />
                                 <BiEdit
                                     className="text-primary duration-100 cursor-pointer"
@@ -65,7 +65,7 @@ function Certification({ data }) {
             ) : (
                 <h1 className="opacity-[0.5]">
                     {" "}
-                    No certification uploaded yet.
+                    No certification uploaded.
                 </h1>
             )}
         </CardLayout>

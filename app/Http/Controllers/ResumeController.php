@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class ResumeController extends Controller
 {
@@ -24,9 +25,24 @@ class ResumeController extends Controller
 
         // Update the resume column for the user
         $user->update([
-            'resume' => $resumeName,
+            'resume' => $path,
         ]);
 
         return redirect()->route('profile.edit')->with('success', 'Resume uploaded successfully.');
+    }
+
+
+    public function destroy(Request $request)
+    {
+        $userId = Auth::id();
+        $user = User::find($userId);
+
+        if ($user->resume) {
+            Storage::disk('public')->delete($user->resume);
+            $user->update(['resume' => null]);
+            return redirect()->route('profile.edit')->with('success', 'Resume deleted successfully.');
+        }
+
+        return redirect()->route('profile.edit')->with('error', 'No resume found to delete.');
     }
 }
