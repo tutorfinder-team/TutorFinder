@@ -27,7 +27,6 @@ class ProviderController extends Controller
             'name' => $providerUser->getName(),
             'email' => $providerUser->getEmail(),
             'password' => bcrypt($providerUser->id),
-            'ROLE' => 'STUDENT',
             'picture' => $providerUser->getAvatar(),
             'provider_token' => $providerUser->token,
         ]);
