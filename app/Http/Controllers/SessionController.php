@@ -69,6 +69,7 @@ class SessionController extends Controller
                         'name' => $session->user->name,
                         'picture' => $session->user->picture,
                         'rating' => $session->user->rating,
+                        'email' => $session->user->email,
                     ],
                     'title' => $session->title,
                     'scheduled_time' => $session->scheduled_time->format('M d, Y'),

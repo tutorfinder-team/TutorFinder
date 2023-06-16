@@ -22,6 +22,8 @@ class SessionResource extends JsonResource
                 'name' => $this->user->name,
                 'picture' => $this->user->picture,
                 'rating' => $this->user->rating,
+                'phone_number' => $this->user->phone_number,
+                'email' => $this->user->email,
             ],
             'title' => $this->title,
             'scheduled_time' => $this->scheduled_time->format('M d, Y'),
