@@ -39,6 +39,7 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/profile', [ProfileController::class, 'show'])->name('profile.edit');
     Route::get('/profile/{username}', [ProfileController::class, 'guest'])->name('profile.guest');
+    Route::post('/become-a-teacher', [ProfileController::class, 'updateRole'])->name('profile.role');
     Route::put('/profile', [ProfileController::class, 'edit'])->name('profile.edit.info');
     Route::post('/profile/experience', [ExperienceController::class, 'store'])->name('experience.add');
     Route::delete('/profile/experience/{id}', [ExperienceController::class, 'destroy'])->name('experience.delete');

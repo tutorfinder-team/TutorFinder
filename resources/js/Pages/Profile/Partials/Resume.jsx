@@ -8,7 +8,6 @@ import DeleteModal from "../Forms/DeleteModal";
 
 function Resume({ data }) {
     const {canEdit} = usePage().props;
-    console.log(canEdit)
     return (
         <CardLayout
             cardName="Resume"

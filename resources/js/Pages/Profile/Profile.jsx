@@ -1,6 +1,6 @@
 import MainLayout from "@/Layouts/MainLayout";
 import { toCapital } from "@/utils/utils";
-import { Head } from "@inertiajs/react";
+import { Head, Link } from "@inertiajs/react";
 import Avatar from "../../Components/Avatar";
 import { CgClose } from "react-icons/cg";
 import Resume from "./Partials/Resume";
@@ -14,24 +14,34 @@ import { useCookies } from "react-cookie";
 
 export default function Profile({
     user,
+    canEdit,
     experiences,
     educations,
     certification,
     resume,
 }) {
     const [showAlert, setShowAlert] = useState(false);
+    const [percentage, setPercentage] = useState(0);
     const [cookies, setCookie] = useCookies(["showAlert"]);
 
-    
+    const profileCompeletionPercentage = () => {
+        let percentage = 0;
+        if (user.name) percentage += 25;
+        if (user.phone_number) percentage += 25;
+        if (user.birthdate) percentage += 25;
+        if (resume) percentage += 25;
+        return percentage;
+    };
 
     useEffect(() => {
+        setPercentage(profileCompeletionPercentage());
         if (cookies.showAlert === "false") {
             setShowAlert(false);
         } else setShowAlert(true);
     }, []);
     return (
         <MainLayout user={user}>
-            {user.ROLE === "STUDENT" && (
+            {canEdit && user.ROLE === "STUDENT" && (
                 <div
                     className={`fixed w-full py-2 px-10 bg-primary text-white flexible gap-2 ${
                         !showAlert && "invisible"
@@ -42,15 +52,26 @@ export default function Profile({
                         onClick={() => {
                             setShowAlert(false);
                             setCookie("showAlert", false, {
-                                maxAge: 500, // Expires after 8min
+                                maxAge: 800, // Expires after 10min
                                 sameSite: true,
                             });
                         }}
                     />
-                    <p>
-                        In order to <strong>post a session</strong>, you need to
-                        complete your profile
-                    </p>
+                    {percentage !== 100 ? (
+                        <p>
+                            In order to <strong>post a session</strong>, you
+                            need to complete your profile.{" "}
+                            <strong>
+                                Your profile is {percentage}% complete
+                            </strong>
+                            .
+                        </p>
+                    ) : (
+                        <p>
+                            Your profile is {percentage}% complete,{" "}
+                            <strong>Become a teacher now</strong>.
+                        </p>
+                    )}
                 </div>
             )}
             <Head title="Profile" />
@@ -65,9 +86,21 @@ export default function Profile({
                         {toCapital(user.name)}
                     </h2>
                     <h3 className="text-lg">{toCapital(user.email)}</h3>
-                    {user.rating && <Stars rating={user.rating} />}
+                    {percentage === 100 &&
+                    user.ROLE === "STUDENT" &&
+                    canEdit ? (
+                        <Link href="/become-a-teacher" method="post">
+                            <h3 className="text-primary font-semibold">
+                                Click here to become a teacher
+                            </h3>
+                        </Link>
+                    ) : (
+                        user.ROLE === "TEACHER" && (
+                            <Stars rating={user.rating} />
+                        )
+                    )}
                 </div>
-                <div className="pt-6">
+                <div className="pt-3">
                     <ProfileInfo user={user} />
                 </div>
                 <div className="pt-1">

@@ -39,8 +39,7 @@ class ProfileController extends Controller
     {
         $loggedUser = Auth::user();
         $user = User::where('username', $username)->first();
-
-        if ($user->id == $loggedUser->id) {
+        if (($user && $user->id == $loggedUser->id) || !$user) {
             return Redirect::to('/profile');
         }
         $experiences = $user->experiences;
@@ -77,6 +76,17 @@ class ProfileController extends Controller
             'birthdate' => $validatedData['birthdate'],
             'address' => $validatedData['address'],
             'skills' => $validatedData['skills'],
+        ]);
+
+        return Redirect::to('/profile')->with('status', 'Profile updated!');
+    }
+
+    public function updateRole(Request $request)
+    {
+        $user = $request->user();
+
+        $user->update([
+            'ROLE' => "TEACHER",
         ]);
 
         return Redirect::to('/profile')->with('status', 'Profile updated!');
