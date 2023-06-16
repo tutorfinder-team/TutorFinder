@@ -2,21 +2,24 @@ import Avatar from "@/Components/Avatar";
 import Avatars from "@/Components/Avatars";
 import Badge from "@/Components/Badge";
 import Card from "@/Components/Card";
+import InputLabel from "@/Components/InputLabel";
 import PrimaryButton from "@/Components/PrimaryButton";
 import SecondaryButton from "@/Components/SecondaryButton";
 import Stars from "@/Components/Stars";
 import { Link } from "@inertiajs/react";
-import { BiTime } from "react-icons/bi";
+import {
+    BiCalendar,
+    BiDollar,
+    BiPhone,
+    BiPhoneCall,
+    BiTime,
+} from "react-icons/bi";
 import { HiLocationMarker } from "react-icons/hi";
 import { MdPeople } from "react-icons/md";
-
-const randColor = () => {
-    const randomColor = "#" + Math.floor(Math.random() * 16777215).toString(16);
-
-    const colorWithOpacity = randomColor + "40";
-
-    return colorWithOpacity;
-};
+import SmallDetail from "./SmallDetail";
+import { randColor } from "@/utils/utils";
+import { BsMailbox } from "react-icons/bs";
+import { FiMail } from "react-icons/fi";
 
 const DetailsLayout = ({ session }) => {
     return (
@@ -38,77 +41,105 @@ const DetailsLayout = ({ session }) => {
                     <h1 className="text-xl font-semibold py-0.5">
                         {session.title}
                     </h1>
-                    <h1 className="font-semibold text-primary text-sm cursor-pointer">
-                        View Profile
-                    </h1>
-                </div>
-                <div>
-                    {/* <h3 className="text-lg">{toCapital(session.email)}</h3> */}
-                    
-                    {/* <h3 className="text-sm">{toCapital(session.phone)}</h3> */}
+                    <Link href={`/profile/${session.user.username}`}>
+                        <h1 className="font-semibold text-primary text-sm cursor-pointer">
+                            View Profile
+                        </h1>
+                    </Link>
                 </div>
             </div>
             {/* More info about the user/teacher such as phone number and email address... */}
+            <div className="mt-7">
+                <InputLabel
+                    value="Session details"
+                    className="font-semibold text-[1.05rem]"
+                />
+                <div className="my-4 grid lg:grid-cols-3 sm:grid-cols-2 xs:grid-cols-1 gap-5">
+                    <SmallDetail
+                        Icon={BiDollar}
+                        h1="Discuss with the teacher"
+                        h2="Price"
+                    />
+                    <SmallDetail
+                        Icon={BiPhone}
+                        h1={`${session.user.phone_number}`}
+                        h2="Phone Number"
+                    />
+                    <SmallDetail
+                        Icon={FiMail}
+                        h1={`${session.user.email}`}
+                        h2="Email"
+                    />
+                    <SmallDetail
+                        Icon={HiLocationMarker}
+                        h1={`${session.location}`}
+                        h2="Location"
+                    />
+                    <SmallDetail
+                        Icon={BiCalendar}
+                        h1={`${session.scheduled_time}`}
+                        h2="Scheduled Time"
+                    />
+                    <SmallDetail
+                        Icon={MdPeople}
+                        h1={
+                            "Limited to " +
+                            session.placesLimit +
+                            ` place${session.placesLimit > 1 ? "s" : ""}`
+                        }
+                        h2="Places"
+                    />
+                </div>
+            </div>
             {/* Skills */}
-            <div className="px-2 my-4">
-                <h1 className="text-transparent bg-clip-text bg-gradient-to-r to-emerald-600 from-sky-400  font-black text-m  px-8 mt-8 "> Skills and expertises</h1>
-                <div className="px-4 my-4 tags">
-                    
+            <div className="mt-7">
+                <InputLabel
+                    value="Skills that you'll learn"
+                    className="font-semibold text-[1.05rem]"
+                />
+                <div className="my-4 tags">
                     {JSON.parse(session.tags).skills.map((skill) => {
                         return (
-                            <Link href={`/?search=${skill}`}>
+                            <Link key={skill} href={`/?search=${skill}`}>
                                 <Badge
-                                key={skill}
-                                text={skill}
-                                className={`px-3`}
-                                style={{ backgroundColor: randColor() }}
-                            />
+                                    text={skill}
+                                    className={`px-3`}
+                                    style={{ backgroundColor: randColor() }}
+                                />
                             </Link>
                         );
                     })}
                 </div>
             </div>
             {/* description */}
-            <div className="px-2 my-4">
-                <h1 className="text-transparent bg-clip-text bg-gradient-to-r to-emerald-600 from-sky-400  font-black text-m bg-transparent px-8 mt-8 "> Description</h1>
-
+            <div className="mt-7">
+                <InputLabel
+                    value="Description"
+                    className="font-semibold text-[1.05rem]"
+                />
                 <Card className="p-4 my-4 description">
-                    <p className="opacity-[0.8] font-medium text-sm leading-relaxed">
+                    <p className="font-medium text-sm leading-relaxed">
                         {session.description}...
                     </p>
                 </Card>
             </div>
-        
+
             {/* Enrollements */}
-            <div className="px-4 mt-8 footer flexible justify-between">
+            <div className="mt-7 footer flexible justify-between">
                 <div className="subscribers flexible gap-2">
                     <h4 className="text-sm font-semibold leading-relaxed">
-                        {session.enrollments.length >= 1
-                            ? <div className="text-transparent bg-clip-text bg-gradient-to-r to-emerald-600 from-sky-400  font-black text-m  px-8 ">People Enrolled </div>
-                            : "No one enrolled"}{" "}
+                        {session.enrollments.length >= 1 ? (
+                            <div className="text-transparent bg-clip-text bg-gradient-to-r to-emerald-600 from-sky-400  font-black text-m  px-8 ">
+                                People Enrolled{" "}
+                            </div>
+                        ) : (
+                            "No one enrolled"
+                        )}{" "}
                     </h4>
                     <div className="flex -space-x-2.5">
                         <Avatars users={session.enrollments} />
                     </div>
                 </div>
-            </div>
-
-            {/* Responsibilities : */}
-                  {/* description */}
-            <div className="px-2 my-4">
-                <h1 className="text-transparent bg-clip-text bg-gradient-to-r to-emerald-600 from-sky-400  font-black text-m  px-8 mt-8 "> Responsibilities</h1>
-                <ul class="max-w-md space-y-1 text-white-500 list-disc list-inside mt-4 ml-8">
-                    <li>
-                        Responsibility number 1
-                    </li>
-                    <li>
-                        Maintaining number 2
-                    </li>
-                    <li>
-                        Staff augmentation
-                    </li>
-                </ul>
-
             </div>
         </div>
     );
