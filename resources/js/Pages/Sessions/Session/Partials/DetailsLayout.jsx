@@ -20,7 +20,7 @@ const randColor = () => {
 
 const DetailsLayout = ({ session }) => {
     return (
-        <div className="p-5 mt-12" key={session.id}>
+        <div className="p-5 mt-8 mr-5" key={session.id}>
             {/* Back button */}
             <div className="flex items-center gap-5">
                 <Avatar
@@ -41,6 +41,11 @@ const DetailsLayout = ({ session }) => {
                     <h1 className="font-semibold text-primary text-sm cursor-pointer">
                         View Profile
                     </h1>
+                </div>
+                <div>
+                    {/* <h3 className="text-lg">{toCapital(session.email)}</h3> */}
+                    
+                    {/* <h3 className="text-sm">{toCapital(session.phone)}</h3> */}
                 </div>
             </div>
             {/* More info about the user/teacher such as phone number and email address... */}

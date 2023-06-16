@@ -34,8 +34,8 @@ function Certification({ data }) {
                                     {formatDate(certification.issue_date)} -{" "}
                                     {certification.expiration_date
                                         ? formatDate(
-                                              certification.expiration_date
-                                          )
+                                            certification.expiration_date
+                                        )
                                         : "No Expiration"}
                                 </h2>
                                 {certification.link && (
