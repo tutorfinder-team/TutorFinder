@@ -89,7 +89,7 @@ export default function Profile({
                     {percentage === 100 &&
                     user.ROLE === "STUDENT" &&
                     canEdit ? (
-                        <Link href="/become-a-teacher" method="post">
+                        <Link href="/become-a-teacher" method="post" as="button">
                             <h3 className="text-primary font-semibold">
                                 Click here to become a teacher
                             </h3>
