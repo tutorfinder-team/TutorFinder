@@ -4,18 +4,11 @@ import Badge from "@/Components/Badge";
 import Card from "@/Components/Card";
 import PrimaryButton from "@/Components/PrimaryButton";
 import Stars from "@/Components/Stars";
+import { randColor } from "@/utils/utils";
 import { Link } from "@inertiajs/react";
 import { BiTime } from "react-icons/bi";
 import { HiLocationMarker } from "react-icons/hi";
 import { MdPeople } from "react-icons/md";
-
-const randColor = () => {
-    const randomColor = "#" + Math.floor(Math.random() * 16777215).toString(16);
-
-    const colorWithOpacity = randomColor + "40";
-
-    return colorWithOpacity;
-};
 
 const SessionCard = ({ session }) => {
     return (

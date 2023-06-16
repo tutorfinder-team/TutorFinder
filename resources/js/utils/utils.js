@@ -7,3 +7,11 @@ export const formatDate = (date) => {
     const d = new Date(date).toDateString();
     return `${d.slice(4, 7)} ${d.slice(8, 10)}, ${d.slice(11, 15)}`;
 }
+
+export const randColor = () => {
+    const randomColor = "#" + Math.floor(Math.random() * 16777215).toString(16);
+
+    const colorWithOpacity = randomColor + "40";
+
+    return colorWithOpacity;
+};

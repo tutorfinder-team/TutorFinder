@@ -3,13 +3,16 @@ import CardLayout from "./CardLayout";
 import { BiEdit, BiTrash } from "react-icons/bi";
 import FormAddCertification from "../Forms/Certification/FormAddCertification";
 import { formatDate, toCapital } from "@/utils/utils";
+import DeleteModal from "../Forms/DeleteModal";
+import { usePage } from "@inertiajs/react";
 
 function Certification({ data }) {
+    const {canEdit} = usePage().props;
     return (
         <CardLayout
             cardName="certification"
             Icon={TbCertificate}
-            FormModal={FormAddCertification}
+            FormModal={canEdit && FormAddCertification}
         >
             {data.length > 0 ? (
                 <div className="flex flex-col gap-2">
@@ -49,23 +52,23 @@ function Certification({ data }) {
                                     </a>
                                 )}
                             </div>
+                            {canEdit &&
                             <div className="buttons flex gap-2">
-                                <BiTrash
-                                    className="text-red-500 duration-100 cursor-pointer"
-                                    size={21}
+                                <DeleteModal
+                                    routeDirect={`/profile/certification/${certification.id}`}
                                 />
                                 <BiEdit
                                     className="text-primary duration-100 cursor-pointer"
                                     size={21}
                                 />
-                            </div>
+                            </div>}
                         </div>
                     ))}
                 </div>
             ) : (
                 <h1 className="opacity-[0.5]">
                     {" "}
-                    No certification uploaded yet.
+                    No certification uploaded.
                 </h1>
             )}
         </CardLayout>

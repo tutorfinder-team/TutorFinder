@@ -7,7 +7,7 @@ import DetailsLayout from './Partials/DetailsLayout';
 const SessionDetails = ({ auth, session }) => {
     session = session.data;
     return (
-      <MainLayout user={auth.user}>
+      <MainLayout>
         <Head title="Session Details" />
         <div className="container">
           <DetailsLayout session={session} />

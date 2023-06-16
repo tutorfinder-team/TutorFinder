@@ -7,10 +7,11 @@ import InputError from "@/Components/InputError";
 import PrimaryButton from "@/Components/PrimaryButton";
 import { BiPlus } from "react-icons/bi";
 import { useForm, usePage } from "@inertiajs/react";
+import { TbReplace } from "react-icons/tb";
+import { VscReplace } from "react-icons/vsc";
 
 export default function FormAddResume() {
-    const user = usePage().props.auth.user;
-    console.log(user)
+    const { resume } = usePage().props;
     const [addingResume, setAddingResume] = useState(false);
     const { data, setData, post, progress, errors, reset, processing } = useForm({
         resume: "",
@@ -28,7 +29,6 @@ export default function FormAddResume() {
     const addResume = (e) => {
         e.preventDefault();
 
-        console.log(data);
         post(route("resume.add"), {
             preserveScroll: true,
             onSuccess: () => closeModal(),
@@ -39,7 +39,7 @@ export default function FormAddResume() {
     return (
         <>
             <SecondaryButton className="py-3" onClick={openAddResume}>
-                <BiPlus size={21} />
+                {resume ? <TbReplace size={21}/> : <BiPlus size={21} />}
             </SecondaryButton>
 
             <Modal show={addingResume} onClose={closeModal}>

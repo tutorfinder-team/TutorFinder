@@ -6,7 +6,7 @@ import { Head } from "@inertiajs/react";
 
 export default function Edit({ auth, mustVerifyEmail, status }) {
     return (
-        <MainLayout user={auth.user}>
+        <MainLayout>
             <Head title="Profile Settings" />
 
             <div className="py-12">

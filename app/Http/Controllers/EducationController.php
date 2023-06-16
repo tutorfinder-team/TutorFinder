@@ -26,4 +26,17 @@ class EducationController extends Controller
 
         return Redirect::to('/profile');
     }
+
+    public function destroy($id)
+    {
+        $userId = Auth::id();
+        $education = Education::find($id);
+
+        if ($education && $education->user_id == $userId) {
+            $education->delete();
+            return redirect()->route('profile.edit')->with('success', 'Education record deleted successfully.');
+        }
+
+        return redirect()->route('profile.edit')->with('error', 'Education record not found or not owned by the user.');
+    }
 }

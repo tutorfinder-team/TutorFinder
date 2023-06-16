@@ -26,4 +26,17 @@ class CertificationController extends Controller
 
         return Redirect::to('/profile');
     }
+
+    public function destroy($id)
+    {
+        $userId = Auth::id();
+        $certification = Certification::find($id);
+
+        if ($certification && $certification->user_id == $userId) {
+            $certification->delete();
+            return redirect()->route('profile.edit')->with('success', 'Certification record deleted successfully.');
+        }
+
+        return redirect()->route('profile.edit')->with('error', 'Certification record not found or not owned by the user.');
+    }
 }

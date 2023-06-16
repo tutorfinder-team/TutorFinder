@@ -1,27 +1,81 @@
-import Card from "@/Components/Card";
 import MainLayout from "@/Layouts/MainLayout";
 import { toCapital } from "@/utils/utils";
-import { Head } from "@inertiajs/react";
+import { Head, Link } from "@inertiajs/react";
 import Avatar from "../../Components/Avatar";
-import { BiPlus, BiTrophy } from "react-icons/bi";
-import { CgPen } from "react-icons/cg";
-import SecondaryButton from "@/Components/SecondaryButton";
+import { CgClose } from "react-icons/cg";
 import Resume from "./Partials/Resume";
 import Experience from "./Partials/Experience";
 import Education from "./Partials/Education";
 import Certification from "./Partials/Certification";
+import ProfileInfo from "./Partials/ProfileInfo";
+import Stars from "@/Components/Stars";
+import { useEffect, useState } from "react";
+import { useCookies } from "react-cookie";
 
 export default function Profile({
-    auth: { user },
+    user,
+    canEdit,
     experiences,
     educations,
     certification,
-    resume
+    resume,
 }) {
+    const [showAlert, setShowAlert] = useState(false);
+    const [percentage, setPercentage] = useState(0);
+    const [cookies, setCookie] = useCookies(["showAlert"]);
+
+    const profileCompeletionPercentage = () => {
+        let percentage = 0;
+        if (user.name) percentage += 25;
+        if (user.phone_number) percentage += 25;
+        if (user.birthdate) percentage += 25;
+        if (resume) percentage += 25;
+        return percentage;
+    };
+
+    useEffect(() => {
+        setPercentage(profileCompeletionPercentage());
+        if (cookies.showAlert === "false") {
+            setShowAlert(false);
+        } else setShowAlert(true);
+    }, []);
     return (
         <MainLayout user={user}>
+            {canEdit && user.ROLE === "STUDENT" && (
+                <div
+                    className={`fixed w-full py-2 px-10 bg-primary text-white flexible gap-2 ${
+                        !showAlert && "invisible"
+                    }`}
+                >
+                    <CgClose
+                        className="cursor-pointer"
+                        onClick={() => {
+                            setShowAlert(false);
+                            setCookie("showAlert", false, {
+                                maxAge: 800, // Expires after 10min
+                                sameSite: true,
+                            });
+                        }}
+                    />
+                    {percentage !== 100 ? (
+                        <p>
+                            In order to <strong>post a session</strong>, you
+                            need to complete your profile.{" "}
+                            <strong>
+                                Your profile is {percentage}% complete
+                            </strong>
+                            .
+                        </p>
+                    ) : (
+                        <p>
+                            Your profile is {percentage}% complete,{" "}
+                            <strong>Become a teacher now</strong>.
+                        </p>
+                    )}
+                </div>
+            )}
             <Head title="Profile" />
-            <div className="max-w-7xl mx-auto py-12 sm:px-6 lg:px-8 space-y-6">
+            <div className="max-w-7xl mx-auto py-16 sm:px-6 lg:px-8 space-y-6">
                 <div className="flexible gap-3 flex-col">
                     <Avatar
                         name={user.name}
@@ -32,11 +86,27 @@ export default function Profile({
                         {toCapital(user.name)}
                     </h2>
                     <h3 className="text-lg">{toCapital(user.email)}</h3>
+                    {percentage === 100 &&
+                    user.ROLE === "STUDENT" &&
+                    canEdit ? (
+                        <Link href="/become-a-teacher" method="post" as="button">
+                            <h3 className="text-primary font-semibold">
+                                Click here to become a teacher
+                            </h3>
+                        </Link>
+                    ) : (
+                        user.ROLE === "TEACHER" && (
+                            <Stars rating={user.rating} />
+                        )
+                    )}
                 </div>
-                <div className="py-6">
+                <div className="pt-3">
+                    <ProfileInfo user={user} />
+                </div>
+                <div className="pt-1">
                     <div className="cards grid grid-cols-2 gap-x-6 gap-y-3">
                         <div className="self-start">
-                            <Resume data={resume}/>
+                            <Resume data={resume} />
                         </div>
                         <div className="self-start">
                             <Experience data={experiences} />
