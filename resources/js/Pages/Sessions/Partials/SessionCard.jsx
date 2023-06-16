@@ -60,9 +60,8 @@ const SessionCard = ({ session }) => {
             <div className="px-4 my-4 tags">
                 {JSON.parse(session.tags).skills.map((skill) => {
                     return (
-                        <Link href={`/?search=${skill}`}>
+                        <Link key={skill} href={`/?search=${skill}`}>
                             <Badge
-                                key={skill}
                                 text={skill}
                                 className={`px-3`}
                                 style={{ backgroundColor: randColor() }}
