@@ -1,24 +1,35 @@
 import SecondaryButton from "@/Components/SecondaryButton";
 import InputLabel from "@/Components/InputLabel";
 import Modal from "@/Components/Modal";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import TextInput from "@/Components/TextInput";
 import InputError from "@/Components/InputError";
 import PrimaryButton from "@/Components/PrimaryButton";
 import { BiEdit, BiPlus } from "react-icons/bi";
 import { useForm, usePage } from "@inertiajs/react";
-import { json } from "react-router-dom";
 
 export default function FormEditProfile() {
     const user = usePage().props.auth.user;
     const [editingProfile, setEditingProfile] = useState(false);
     const { data, setData, put, processing, reset, errors } = useForm({
-        name: user.name || "",
-        phone_number: user.phone_number || "",
-        birthdate: user.birthdate || "",
-        address: user.address || "",
-        skills: user.skills || "",
+        name: "",
+        phone_number: "",
+        birthdate: "",
+        address: "",
+        skills: "",
     });
+
+    useEffect(() => {
+        if (user) {
+            setData({
+                name: user.name,
+                phone_number: user.phone_number,
+                birthdate: user.birthdate,
+                address: user.address,
+                skills: user.skills,
+            });
+        }
+    }, [user]);
 
     const openEditProfile = () => {
         setEditingProfile(true);
@@ -45,7 +56,11 @@ export default function FormEditProfile() {
             </SecondaryButton>
 
             <Modal show={editingProfile} onClose={closeModal}>
-                <form onSubmit={editProfile} className="p-6" encType="multipart/form-data">
+                <form
+                    onSubmit={editProfile}
+                    className="p-6"
+                    encType="multipart/form-data"
+                >
                     <h2 className="text-lg font-medium text-darker dark:text-gray-100">
                         Edit Your Profile
                     </h2>
@@ -136,7 +151,7 @@ export default function FormEditProfile() {
                                 id="birthdate"
                                 type="date"
                                 name="birthdate"
-                                value={data.birthdate.split('T')[0]}
+                                value={data.birthdate.split("T")[0]}
                                 onChange={(e) =>
                                     setData("birthdate", e.target.value)
                                 }

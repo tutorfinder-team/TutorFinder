@@ -6,14 +6,14 @@ import { Document, Page } from "react-pdf";
 import { Link, usePage } from "@inertiajs/react";
 import DeleteModal from "../Forms/DeleteModal";
 
-function Resume({ data }) {
+function Resume({ data, percentage}) {
     const {canEdit} = usePage().props;
     return (
         <CardLayout
             cardName="Resume"
             Icon={FiFilePlus}
+            cardProps={!data && {percentage, percentageToAdd: 25}}
             FormModal={canEdit && FormAddResume}
-            replaceIcon
         >
             <>
                 {data ? (

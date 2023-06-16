@@ -18,6 +18,7 @@ class Enrollment extends Model
     protected $fillable = [
         'session_id',
         'user_id',
+        'note',
         'enrollment_date',
     ];
 

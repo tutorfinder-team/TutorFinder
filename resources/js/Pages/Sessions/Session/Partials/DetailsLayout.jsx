@@ -17,14 +17,17 @@ import {
 import { HiLocationMarker } from "react-icons/hi";
 import { MdPeople } from "react-icons/md";
 import SmallDetail from "./SmallDetail";
-import { randColor } from "@/utils/utils";
+import { randColor, truncate } from "@/utils/utils";
 import { BsMailbox } from "react-icons/bs";
 import { FiMail } from "react-icons/fi";
 import TextArea from "@/Components/TextArea";
 
 const DetailsLayout = ({ session }) => {
     return (
-        <div className="p-5 mt-8 mr-5 flex flex-col lg:flex-row gap-5" key={session.id}>
+        <div
+            className="p-5 mt-8 mr-5 flex flex-col lg:flex-row gap-5"
+            key={session.id}
+        >
             {/* Back button */}
             <div className="left-content">
                 <div className="flex items-center gap-5">
@@ -64,7 +67,7 @@ const DetailsLayout = ({ session }) => {
                         />
                         <SmallDetail
                             Icon={FiMail}
-                            h1={`${session.user.email}`}
+                            h1={`${truncate(session.user.email, 20)}`}
                             h2="Email"
                         />
                         <SmallDetail
@@ -157,10 +160,14 @@ const DetailsLayout = ({ session }) => {
                     </span>
                     <div className="mt-4">
                         <InputLabel value="Note" className="ml-0 font-bold" />
-                        <InputLabel value="Write anything you would like to inform or ask the tutor about, after you enroll." className="ml-0 text-sm opacity-60" />
-                        <TextArea className="mt-3 text-sm" placeholder="Write your note here...">
-
-                        </TextArea>
+                        <InputLabel
+                            value="Write anything you would like to inform or ask the tutor about, after you enroll."
+                            className="ml-0 text-sm opacity-60"
+                        />
+                        <TextArea
+                            className="mt-3 text-sm"
+                            placeholder="Write your note here..."
+                        ></TextArea>
                     </div>
                     <div className="mt-4 flexible justify-end gap-2">
                         <PrimaryButton>Enroll</PrimaryButton>

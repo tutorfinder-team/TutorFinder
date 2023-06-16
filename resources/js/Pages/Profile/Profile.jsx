@@ -38,7 +38,7 @@ export default function Profile({
         if (cookies.showAlert === "false") {
             setShowAlert(false);
         } else setShowAlert(true);
-    }, []);
+    }, [user, cookies.showAlert, resume]);
     return (
         <MainLayout user={user}>
             {canEdit && user.ROLE === "STUDENT" && (
@@ -89,7 +89,11 @@ export default function Profile({
                     {percentage === 100 &&
                     user.ROLE === "STUDENT" &&
                     canEdit ? (
-                        <Link href="/become-a-teacher" method="post" as="button">
+                        <Link
+                            href="/become-a-teacher"
+                            method="post"
+                            as="button"
+                        >
                             <h3 className="text-primary font-semibold">
                                 Click here to become a teacher
                             </h3>
@@ -101,12 +105,12 @@ export default function Profile({
                     )}
                 </div>
                 <div className="pt-3">
-                    <ProfileInfo user={user} />
+                    <ProfileInfo user={user} percentage={percentage} />
                 </div>
                 <div className="pt-1">
                     <div className="cards grid grid-cols-2 gap-x-6 gap-y-3">
                         <div className="self-start">
-                            <Resume data={resume} />
+                            <Resume data={resume} percentage={percentage} />
                         </div>
                         <div className="self-start">
                             <Experience data={experiences} />

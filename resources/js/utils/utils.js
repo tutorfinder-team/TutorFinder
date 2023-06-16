@@ -19,3 +19,8 @@ export const randColor = () => {
 export const isObjectEmpty = (objectName) => {
     return Object.keys(objectName).length === 0;
 };
+
+export function truncate(str, maxlength) {
+    return (str.length > maxlength) ?
+      str.slice(0, maxlength - 1) + '…' : str;
+  }

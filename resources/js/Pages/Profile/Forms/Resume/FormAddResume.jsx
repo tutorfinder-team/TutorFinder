@@ -13,9 +13,10 @@ import { VscReplace } from "react-icons/vsc";
 export default function FormAddResume() {
     const { resume } = usePage().props;
     const [addingResume, setAddingResume] = useState(false);
-    const { data, setData, post, progress, errors, reset, processing } = useForm({
-        resume: "",
-    });
+    const { data, setData, post, progress, errors, reset, processing } =
+        useForm({
+            resume: "",
+        });
 
     const openAddResume = () => {
         setAddingResume(true);
@@ -33,13 +34,15 @@ export default function FormAddResume() {
             preserveScroll: true,
             onSuccess: () => closeModal(),
             onError: () => {},
-            onFinish: () => reset(),
+            onFinish: () => {
+                reset();
+            },
         });
     };
     return (
         <>
             <SecondaryButton className="py-3" onClick={openAddResume}>
-                {resume ? <TbReplace size={21}/> : <BiPlus size={21} />}
+                {resume ? <TbReplace size={21} /> : <BiPlus size={21} />}
             </SecondaryButton>
 
             <Modal show={addingResume} onClose={closeModal}>
@@ -75,12 +78,13 @@ export default function FormAddResume() {
                             className="mt-1 block w-3/4"
                             placeholder="Resume"
                         />
-                        <InputError
-                            message={errors.resume}
-                            className="mt-2"
-                        />
+                        <InputError message={errors.resume} className="mt-2" />
                         {progress && (
-                            <progress value={progress.percentage} className="mt-2 rounded-lg text-primary" max="100">
+                            <progress
+                                value={progress.percentage}
+                                className="mt-2 rounded-lg text-primary"
+                                max="100"
+                            >
                                 {progress.percentage}%
                             </progress>
                         )}
@@ -91,7 +95,9 @@ export default function FormAddResume() {
                             Cancel
                         </SecondaryButton>
 
-                        <PrimaryButton className="ml-3" disabled={processing}>Submit</PrimaryButton>
+                        <PrimaryButton className="ml-3" disabled={processing}>
+                            Submit
+                        </PrimaryButton>
                     </div>
                 </form>
             </Modal>

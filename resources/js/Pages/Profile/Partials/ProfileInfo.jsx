@@ -7,11 +7,15 @@ import { formatDate, isObjectEmpty, randColor } from "@/utils/utils";
 import { Link, usePage } from "@inertiajs/react";
 import FormEditProfile from "../Forms/Profile/FormEditProfile";
 
-export default function ProfileInfo({ user }) {
+export default function ProfileInfo({ user, percentage }) {
     const { canEdit } = usePage().props;
     return (
         <CardLayout
             cardName="Profile Info"
+            cardProps={
+                (!user.birthdate ||
+                !user.phone_number) && { percentage, percentageToAdd: 50 }
+            }
             Icon={BiUser}
             FormModal={canEdit && FormEditProfile}
         >
