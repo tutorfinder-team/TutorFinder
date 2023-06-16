@@ -3,14 +3,18 @@ import { BiUser } from "react-icons/bi";
 import CardLayout from "./CardLayout";
 import InputLabel from "@/Components/InputLabel";
 import Badge from "@/Components/Badge";
-import { formatDate, randColor } from "@/utils/utils";
+import { formatDate, isObjectEmpty, randColor } from "@/utils/utils";
 import { Link, usePage } from "@inertiajs/react";
 import FormEditProfile from "../Forms/Profile/FormEditProfile";
 
 export default function ProfileInfo({ user }) {
-    const {canEdit} = usePage().props;
+    const { canEdit } = usePage().props;
     return (
-        <CardLayout cardName="Profile Info" Icon={BiUser} FormModal={canEdit && FormEditProfile}>
+        <CardLayout
+            cardName="Profile Info"
+            Icon={BiUser}
+            FormModal={canEdit && FormEditProfile}
+        >
             <div className="grid grid-cols-4 gap-4">
                 <div>
                     <InputLabel className="opacity-[0.5]" value="Username" />
@@ -48,7 +52,10 @@ export default function ProfileInfo({ user }) {
                 )}
                 {user.phone_number && (
                     <div>
-                        <InputLabel className="opacity-[0.5]" value="Phone Number" />
+                        <InputLabel
+                            className="opacity-[0.5]"
+                            value="Phone Number"
+                        />
                         <h1 className="ml-1 text-lg font-semibold">
                             {user.phone_number}
                         </h1>
@@ -69,7 +76,7 @@ export default function ProfileInfo({ user }) {
                     <div>
                         <InputLabel className="opacity-[0.5]" value="Skills" />
                         {user.skills.split(",").map((skill) => {
-                            skill = skill.trim()
+                            skill = skill.trim();
                             return (
                                 <Link key={skill} href={`/?search=${skill}`}>
                                     <Badge

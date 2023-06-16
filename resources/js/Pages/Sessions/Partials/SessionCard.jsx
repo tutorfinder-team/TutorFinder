@@ -46,7 +46,7 @@ const SessionCard = ({ session }) => {
                             icon={MdPeople}
                             size={16}
                             text={
-                                "Limited to " + session.placesLimit + " places"
+                                "Limited to " + session.placesLimit + ` place${session.placesLimit > 1 ? 's' : ''}`
                             }
                         />
                     </div>
