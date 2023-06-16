@@ -5,7 +5,7 @@ import { Head } from "@inertiajs/react";
 
 export default function Home({ auth, sessions, count }) {
     return (
-        <MainLayout user={auth.user}>
+        <MainLayout>
             <Head title="Home" />
             <div className="container">
                 <Sessions sessions={sessions} count={count} />

@@ -3,13 +3,15 @@ import CardLayout from "./CardLayout";
 import FormAddEducation from "../Forms/Education/FormAddEducation";
 import { formatDate, toCapital } from "@/utils/utils";
 import DeleteModal from "../Forms/DeleteModal";
+import { usePage } from "@inertiajs/react";
 
 function Education({ data }) {
+    const {canEdit} = usePage().props;
     return (
         <CardLayout
             cardName="Education"
             Icon={BiBook}
-            FormModal={FormAddEducation}
+            FormModal={canEdit && FormAddEducation}
         >
             {data.length > 0 ? (
                 <div className="flex flex-col gap-2">
@@ -37,13 +39,14 @@ function Education({ data }) {
                                     {formatDate(education.end_year) || "Present"}
                                 </h2>
                             </div>
+                            {canEdit &&
                             <div className="buttons flex gap-2">
                                 <DeleteModal routeDirect={`/profile/education/${education.id}`} />
                                 <BiEdit
                                     className="text-primary duration-100 cursor-pointer"
                                     size={21}
                                 />
-                            </div>
+                            </div>}
                         </div>
                     ))}
                 </div>

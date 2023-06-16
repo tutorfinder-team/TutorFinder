@@ -38,6 +38,8 @@ Route::middleware('auth')->group(function () {
     Route::delete('/session/{id}', [SessionController::class, 'destroy'])->name('session.destroy');
 
     Route::get('/profile', [ProfileController::class, 'show'])->name('profile.edit');
+    Route::get('/profile/{username}', [ProfileController::class, 'guest'])->name('profile.guest');
+    Route::put('/profile', [ProfileController::class, 'edit'])->name('profile.edit.info');
     Route::post('/profile/experience', [ExperienceController::class, 'store'])->name('experience.add');
     Route::delete('/profile/experience/{id}', [ExperienceController::class, 'destroy'])->name('experience.delete');
     Route::post('/profile/education', [EducationController::class, 'store'])->name('education.add');

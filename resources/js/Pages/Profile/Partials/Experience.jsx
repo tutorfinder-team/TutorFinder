@@ -4,13 +4,15 @@ import FormAddExperience from "../Forms/Experience/FormAddExperience";
 import dateFormat, { masks } from "dateformat";
 import { formatDate, toCapital } from "@/utils/utils";
 import DeleteModal from "../Forms/DeleteModal";
+import { usePage } from "@inertiajs/react";
 
 function Experience({ data }) {
+    const {canEdit} = usePage().props;
     return (
         <CardLayout
             cardName="Experience"
             Icon={BiTrophy}
-            FormModal={FormAddExperience}
+            FormModal={canEdit && FormAddExperience}
         >
             {data.length > 0 ? (
                 <div className="flex flex-col gap-2">
@@ -27,12 +29,15 @@ function Experience({ data }) {
                                     At{" "}
                                     <span className="font-semibold">
                                         {toCapital(experience.company)}
-                                    </span>{" "}
-                                    · {formatDate(experience.start_date)} -{" "}
+                                    </span>
+                                </h2>
+                                <h2 className="text-sm">
+                                {formatDate(experience.start_date)} -{" "}
                                     {formatDate(experience.end_date) ||
                                         "Present"}
                                 </h2>
                             </div>
+                            {canEdit &&
                             <div className="buttons flex gap-2">
                                 <DeleteModal
                                     routeDirect={`/profile/experience/${experience.id}`}
@@ -41,7 +46,7 @@ function Experience({ data }) {
                                     className="text-primary duration-100 cursor-pointer"
                                     size={21}
                                 />
-                            </div>
+                            </div>}
                         </div>
                     ))}
                 </div>

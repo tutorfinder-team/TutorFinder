@@ -4,13 +4,13 @@ import CardLayout from "./CardLayout";
 import InputLabel from "@/Components/InputLabel";
 import Badge from "@/Components/Badge";
 import { formatDate, randColor } from "@/utils/utils";
-import { Link } from "@inertiajs/react";
+import { Link, usePage } from "@inertiajs/react";
+import FormEditProfile from "../Forms/Profile/FormEditProfile";
 
 export default function ProfileInfo({ user }) {
-    console.log(user);
-    let skills = "laravel , php, css, html, javascript, react, vue, nodejs";
+    const {canEdit} = usePage().props;
     return (
-        <CardLayout cardName="Profile Info" Icon={BiUser} FormModal={false}>
+        <CardLayout cardName="Profile Info" Icon={BiUser} FormModal={canEdit && FormEditProfile}>
             <div className="grid grid-cols-4 gap-4">
                 <div>
                     <InputLabel className="opacity-[0.5]" value="Username" />
@@ -48,7 +48,7 @@ export default function ProfileInfo({ user }) {
                 )}
                 {user.phone_number && (
                     <div>
-                        <InputLabel className="opacity-[0.5]" value="Phone" />
+                        <InputLabel className="opacity-[0.5]" value="Phone Number" />
                         <h1 className="ml-1 text-lg font-semibold">
                             {user.phone_number}
                         </h1>
@@ -61,14 +61,15 @@ export default function ProfileInfo({ user }) {
                             value="Birthdate"
                         />
                         <h1 className="ml-1 text-lg font-semibold">
-                            {user.birthdate}
+                            {formatDate(user.birthdate)}
                         </h1>
                     </div>
                 )}
-                {skills && (
+                {user.skills && (
                     <div>
                         <InputLabel className="opacity-[0.5]" value="Skills" />
-                        {skills.split(",").map((skill) => {
+                        {user.skills.split(",").map((skill) => {
+                            skill = skill.trim()
                             return (
                                 <Link key={skill} href={`/?search=${skill}`}>
                                     <Badge
