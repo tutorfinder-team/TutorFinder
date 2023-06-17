@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CertificationController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\EducationController;
 use App\Http\Controllers\ExperienceController;
 use App\Http\Controllers\ProfileController;
@@ -32,6 +33,8 @@ Route::get('/auth/{provider}/callback', [ProviderController::class, 'callback'])
 Route::get('/', [SessionController::class, 'index'])->name('sessions.index');
 
 Route::middleware('auth')->group(function () {
+
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
     Route::get('/session/{id}', [SessionController::class, 'show'])->name('session.show');
     Route::post('/session', [SessionController::class, 'store'])->name('session.store');

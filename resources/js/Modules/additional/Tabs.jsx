@@ -65,10 +65,10 @@ function List({ contents }) {
 						<li>Posted at {content.createdAt.split("T")[0]}</li>
 					</ul>
 
-					<Link
+					{/* <Link
 						to={`/session/${content._id}`}
 						className='absolute inset-0 rounded-md'
-					/>
+					/> */}
 				</li>
 			))}
 		</ul>

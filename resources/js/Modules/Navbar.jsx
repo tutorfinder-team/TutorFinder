@@ -48,7 +48,7 @@ export default function Navbar({ user }) {
                             <div className="redirect flexible gap-4 text-[0.95rem]">
                                 <div className="nav-links">
                                     <Link href="/" className={`ml-4 p-2 font-semibold hoverEffect`}>Home</Link>
-                                    <Link href="/sessions" className={`ml-4 p-2 font-semibold hoverEffect`}>My Sessions</Link>
+                                    <Link href="/dashboard" className={`ml-4 p-2 font-semibold hoverEffect`}>Dashboard</Link>
                                 </div>
                                 <Pipe />
                                 {!user ? (
