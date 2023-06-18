@@ -39,6 +39,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/session/{id}', [SessionController::class, 'show'])->name('session.show');
     Route::post('/session', [SessionController::class, 'store'])->name('session.store');
     Route::delete('/session/{id}', [SessionController::class, 'destroy'])->name('session.destroy');
+    
+    Route::post('/session/{id}', [EnrollmentController::class, 'store'])->name('enrollment.store');
+
 
     Route::get('/profile', [ProfileController::class, 'show'])->name('profile.edit');
     Route::get('/profile/{username}', [ProfileController::class, 'guest'])->name('profile.guest');

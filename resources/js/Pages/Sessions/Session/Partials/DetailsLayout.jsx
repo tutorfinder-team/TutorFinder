@@ -12,7 +12,7 @@ import {
     BiDollar,
     BiPhone,
     BiPhoneCall,
-    BiTime,
+    BiTime
 } from "react-icons/bi";
 import { HiLocationMarker } from "react-icons/hi";
 import { MdPeople } from "react-icons/md";
@@ -21,8 +21,27 @@ import { randColor, truncate } from "@/utils/utils";
 import { BsMailbox } from "react-icons/bs";
 import { FiMail } from "react-icons/fi";
 import TextArea from "@/Components/TextArea";
+import { useNavigate } from 'react-router-dom';
+
 
 const DetailsLayout = ({ session }) => {
+    // const navigate = useNavigate();
+    const handleSubmit = e => {
+        // navigate(-1);
+        e.preventDefault();
+
+
+        post("/session/{id}", data).then(response => {
+            // Handle the response from the server
+            if (response.ok) {
+                // Enrollment successful, show success message or redirect
+                console.log("Enrollment successful");
+            } else {
+                // Enrollment failed, handle errors
+                console.log("Enrollment failed", response.errors);
+            }
+        });
+    };
     return (
         <div
             className="p-5 mt-8 mr-5 flex flex-col lg:flex-row gap-5"
@@ -103,7 +122,7 @@ const DetailsLayout = ({ session }) => {
                         className="font-semibold text-[1.05rem]"
                     />
                     <div className="my-4 tags">
-                        {JSON.parse(session.tags).skills.map((skill) => {
+                        {JSON.parse(session.tags).skills.map(skill => {
                             return (
                                 <Link key={skill} href={`/?search=${skill}`}>
                                     <Badge
@@ -151,27 +170,37 @@ const DetailsLayout = ({ session }) => {
                     </div>
                 </div>
                 <div className="mt-8">
-                    <span className="flex flex-col">
-                        <InputLabel
-                            value="Enroll in this session"
-                            className="ml-0 font-semibold "
-                        />
-                        <div className="w-20 mt-2 rounded-lg h-[2px] bg-primary"></div>
-                    </span>
-                    <div className="mt-4">
-                        <InputLabel value="Note" className="ml-0 font-bold" />
-                        <InputLabel
-                            value="Write anything you would like to inform or ask the tutor about, after you enroll."
-                            className="ml-0 text-sm opacity-60"
-                        />
-                        <TextArea
-                            className="mt-3 text-sm"
-                            placeholder="Write your note here..."
-                        ></TextArea>
-                    </div>
-                    <div className="mt-4 flexible justify-end gap-2">
-                        <PrimaryButton>Enroll</PrimaryButton>
-                    </div>
+                    <form
+                        onSubmit={handleSubmit}
+                        action="{{ route('enrollment.store') }}"
+                        method="POST"
+                    >
+                        <span className="flex flex-col">
+                            <InputLabel
+                                value="Enroll in this session"
+                                className="ml-0 font-semibold "
+                            />
+                            <div className="w-20 mt-2 rounded-lg h-[2px] bg-primary"></div>
+                        </span>
+                        <div className="mt-4">
+                            <InputLabel
+                                value="Note"
+                                className="ml-0 font-bold"
+                            />
+                            <InputLabel
+                                value="Write anything you would like to inform or ask the tutor about, after you enroll."
+                                className="ml-0 text-sm opacity-60"
+                            />
+                            <TextArea
+                                className="mt-3 text-sm"
+                                placeholder="Write your note here..."
+                                name="note"
+                            ></TextArea>
+                        </div>
+                        <Link href={`/session/${session.id}`}  className="mt-4 flexible justify-end gap-2">            
+                                <PrimaryButton type="submit">Enroll</PrimaryButton>
+                        </Link>
+                    </form>
                 </div>
             </div>
         </div>
