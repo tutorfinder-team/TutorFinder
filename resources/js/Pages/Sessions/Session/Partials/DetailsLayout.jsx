@@ -16,6 +16,7 @@ import TextArea from "@/Components/TextArea";
 
 const DetailsLayout = ({ session }) => {
     const isEnrolled = usePage().props.isEnrolled;
+    const user = usePage().props.auth.user;
     const { data, setData, post, processing, reset } = useForm({
         note: "",
     });
@@ -155,7 +156,20 @@ const DetailsLayout = ({ session }) => {
                         </div>
                     </div>
                 </div>
-                {!isEnrolled ? (
+                {user.id === session.user.id ? (
+                    <div className="mt-8">
+                        <span className="flex flex-col">
+                            <InputLabel
+                                value="You own this session"
+                                className="ml-0 font-semibold "
+                            />
+                            <div className="w-20 mt-2 rounded-lg h-[2px] bg-primary"></div>
+                        </span>
+                        <div className="mt-5 flexible-center">
+                            <PrimaryButton>View in dashboard</PrimaryButton>
+                        </div>
+                    </div>
+                ) : !isEnrolled ? (
                     <div className="mt-8">
                         <span className="flex flex-col">
                             <InputLabel

@@ -19,7 +19,7 @@ class AllSessionsCollection extends ResourceCollection
         return $this->collection->map(function ($item) {
             return [
                 'id' => $item->id,
-                'price' => $item->Price,
+                'is_active' => $item->is_active,
                 'user' => [
                     'id' => $item->user->id,
                     'username' => $item->user->username,
@@ -37,6 +37,8 @@ class AllSessionsCollection extends ResourceCollection
                 'enrollments' => $item->enrollments->map(function ($enrollment) {
                     return [
                         'id' => $enrollment->user->id,
+                        'date' => $enrollment->enrollment_date->format('M d, Y'),
+                        'note' => $enrollment->note,
                         'username' => $enrollment->user->username,
                         'picture' => $enrollment->user->picture,
                     ];
