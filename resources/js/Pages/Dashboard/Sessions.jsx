@@ -7,6 +7,8 @@ import DeleteModal from "../Profile/Forms/DeleteModal";
 import { BsPeople, BsPeopleFill } from "react-icons/bs";
 import DoneModal from "./Partials/Components/DoneModal";
 import Badge from "@/Components/Badge";
+import ListModal from "./Partials/Components/ListModal";
+import ActivityCard from "./Partials/Components/ActivityCard";
 
 export default function Dashboard() {
     const user = usePage().props.auth.user;
@@ -77,9 +79,16 @@ export default function Dashboard() {
                                             />
                                         </p>
                                     )}
-                                    <p>
-                                        <BsPeopleFill size={21} className="" />
-                                    </p>
+                                    <ListModal>
+                                        <ActivityCard
+                                            modal={1}
+                                            session={s}
+                                            more={
+                                                s.is_active == 0 &&
+                                                "Didn't rate yet"
+                                            }
+                                        />
+                                    </ListModal>
                                     <DeleteModal
                                         routeDirect={`/session/${s.id}`}
                                     />
@@ -125,10 +134,14 @@ export default function Dashboard() {
                                 </th>
                                 {/* Actions */}
                                 <td className="px-6 py-4">
-                                    <p className="opacity-[0.5]">
-                                        You can leave a feedback after the
-                                        session is done.
-                                    </p>
+                                    {e.session.is_active == 1 ? (
+                                        <p className="opacity-[0.5]">
+                                            You can leave a feedback after the
+                                            session is done.
+                                        </p>
+                                    ) : (
+                                        <p></p>
+                                    )}
                                 </td>
                             </tr>
                         ))}

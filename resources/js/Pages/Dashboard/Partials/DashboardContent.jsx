@@ -31,7 +31,7 @@ export default function DashboardContent() {
                             className="h-40"
                         >
                             <p className="text-2xl font-semibold">
-                                {sessions[0].scheduled_time}
+                                {sessions[0].is_active === 1 ? sessions[0].scheduled_time : '-'}
                             </p>
                         </Widget>
                         <Widget
@@ -41,7 +41,7 @@ export default function DashboardContent() {
                             className="h-40"
                         >
                             <p className="text-2xl font-semibold">
-                                {sessions[0].enrollments.length}
+                                {sessions[0].is_active === 1 ? sessions[0].enrollments.length : '-'}
                             </p>
                         </Widget>
                         <Widget
@@ -64,9 +64,9 @@ export default function DashboardContent() {
                             className="h-40"
                         >
                             <p className="text-2xl font-semibold">
-                                {formatDate(
+                                {enrollments[0].session.is_active === 1 ? formatDate(
                                     enrollments[0].session.scheduled_time
-                                )}
+                                ): '-'}
                             </p>
                         </Widget>
                         <Widget
@@ -79,8 +79,8 @@ export default function DashboardContent() {
                                 {
                                     enrollments.filter(
                                         (e) =>
-                                            new Date(e.session.scheduled_time) >
-                                            new Date()
+                                            e.session.is_active && (new Date(e.session.scheduled_time) >
+                                            new Date())
                                     ).length
                                 }
                             </p>

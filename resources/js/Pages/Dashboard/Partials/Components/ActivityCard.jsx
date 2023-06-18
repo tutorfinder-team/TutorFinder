@@ -4,11 +4,18 @@ import InputLabel from "@/Components/InputLabel";
 import { Link, usePage } from "@inertiajs/react";
 import React from "react";
 
-export default function ActivityCard({ session }) {
+export default function ActivityCard({
+    modal = 0,
+    session,
+    grid = "grid-cols-2",
+    more,
+}) {
     const user = usePage().props.auth.user;
     return (
-        <div className="mt-4 grid grid-cols-2 gap-x-4">
-            {session && session.enrollments.length > 0 ? (
+        <div className={`mt-4 grid ${grid} gap-x-4`}>
+            {session &&
+            (session.is_active || (modal && !session.is_active)) &&
+            session.enrollments.length > 0 ? (
                 <>
                     {session.enrollments.map((e) => (
                         <Card className="mb-2 self-start">
@@ -40,6 +47,11 @@ export default function ActivityCard({ session }) {
                                             NOTE
                                         </span>{" "}
                                         {e.note ? e.note : "No note provided"}
+                                    </p>
+                                )}
+                                {more && (
+                                    <p className="mt-2 text-sm uppercase text-primary font-bold">
+                                        {more}
                                     </p>
                                 )}
                             </div>
