@@ -9,6 +9,7 @@ use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\ProviderController;
 use App\Http\Controllers\ResumeController;
 use App\Http\Controllers\SessionController;
+use App\Http\Controllers\EnrollementController;
 use App\Models\Experience;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -39,8 +40,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/session/{id}', [SessionController::class, 'show'])->name('session.show');
     Route::post('/session', [SessionController::class, 'store'])->name('session.store');
     Route::delete('/session/{id}', [SessionController::class, 'destroy'])->name('session.destroy');
-    
-    Route::post('/session/{id}', [EnrollmentController::class, 'store'])->name('enrollment.store');
+
+    Route::post('/session-enroll/{id}', [EnrollementController::class, 'store'])->name('enrollment.store');
 
 
     Route::get('/profile', [ProfileController::class, 'show'])->name('profile.edit');

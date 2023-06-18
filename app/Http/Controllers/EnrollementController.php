@@ -2,28 +2,25 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Enrollment;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 
 class EnrollementController extends Controller
 {
 
 
-    public function store(Request $request)
+    public function store($sessionId, Request $request)
     {
-        $request->validate([
-            'note' => 'nullable|string',
-        ]);
-
         $enrollment = new Enrollment();
-        $enrollment->enrollment_date = now(); // Set the enrollment date to the current date
+        $enrollment->enrollment_date = now();
         $enrollment->note = $request->input('note');
-        $enrollment->user_id = auth()->user()->id; // Assuming you have authentication in place
-        // $enrollment->session_id = $sessionId; // Replace $sessionId with the actual session ID
+        $enrollment->user_id = auth()->user()->id;
+        $enrollment->session_id = $sessionId;
 
         $enrollment->save();
 
-        // Redirect the user to a success page or any other desired page
-        return Redirect::to('/session/{id}');
+        return Redirect::to('/');
     }
 
 }

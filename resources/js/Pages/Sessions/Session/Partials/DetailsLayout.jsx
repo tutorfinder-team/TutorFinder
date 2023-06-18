@@ -4,42 +4,32 @@ import Badge from "@/Components/Badge";
 import Card from "@/Components/Card";
 import InputLabel from "@/Components/InputLabel";
 import PrimaryButton from "@/Components/PrimaryButton";
-import SecondaryButton from "@/Components/SecondaryButton";
 import Stars from "@/Components/Stars";
-import { Link } from "@inertiajs/react";
+import { Link, useForm } from "@inertiajs/react";
 import {
     BiCalendar,
     BiDollar,
     BiPhone,
-    BiPhoneCall,
-    BiTime
 } from "react-icons/bi";
 import { HiLocationMarker } from "react-icons/hi";
 import { MdPeople } from "react-icons/md";
 import SmallDetail from "./SmallDetail";
 import { randColor, truncate } from "@/utils/utils";
-import { BsMailbox } from "react-icons/bs";
 import { FiMail } from "react-icons/fi";
 import TextArea from "@/Components/TextArea";
-import { useNavigate } from 'react-router-dom';
-
 
 const DetailsLayout = ({ session }) => {
-    // const navigate = useNavigate();
-    const handleSubmit = e => {
-        // navigate(-1);
+    const { data, setData, post, processing, reset } = useForm({
+        note: "",
+    });
+
+    const enroll = (e) => {
         e.preventDefault();
-
-
-        post("/session/{id}", data).then(response => {
-            // Handle the response from the server
-            if (response.ok) {
-                // Enrollment successful, show success message or redirect
-                console.log("Enrollment successful");
-            } else {
-                // Enrollment failed, handle errors
-                console.log("Enrollment failed", response.errors);
-            }
+        post(`/session-enroll/${session.id}`, {
+            preserveScroll: true,
+            onSuccess: () => {},
+            onError: () => {},
+            onFinish: () => reset(),
         });
     };
     return (
@@ -122,7 +112,7 @@ const DetailsLayout = ({ session }) => {
                         className="font-semibold text-[1.05rem]"
                     />
                     <div className="my-4 tags">
-                        {JSON.parse(session.tags).skills.map(skill => {
+                        {JSON.parse(session.tags).skills.map((skill) => {
                             return (
                                 <Link key={skill} href={`/?search=${skill}`}>
                                     <Badge
@@ -170,37 +160,35 @@ const DetailsLayout = ({ session }) => {
                     </div>
                 </div>
                 <div className="mt-8">
-                    <form
-                        onSubmit={handleSubmit}
-                        action="{{ route('enrollment.store') }}"
-                        method="POST"
-                    >
-                        <span className="flex flex-col">
-                            <InputLabel
-                                value="Enroll in this session"
-                                className="ml-0 font-semibold "
-                            />
-                            <div className="w-20 mt-2 rounded-lg h-[2px] bg-primary"></div>
-                        </span>
-                        <div className="mt-4">
-                            <InputLabel
-                                value="Note"
-                                className="ml-0 font-bold"
-                            />
-                            <InputLabel
-                                value="Write anything you would like to inform or ask the tutor about, after you enroll."
-                                className="ml-0 text-sm opacity-60"
-                            />
+                    <span className="flex flex-col">
+                        <InputLabel
+                            value="Enroll in this session"
+                            className="ml-0 font-semibold "
+                        />
+                        <div className="w-20 mt-2 rounded-lg h-[2px] bg-primary"></div>
+                    </span>
+                    <div className="mt-4">
+                        <InputLabel value="Note" className="ml-0 font-bold" />
+                        <InputLabel
+                            value="Write anything you would like to inform or ask the tutor about, after you enroll."
+                            className="ml-0 text-sm opacity-60"
+                        />
+                        <form onSubmit={enroll}>
                             <TextArea
                                 className="mt-3 text-sm"
                                 placeholder="Write your note here..."
                                 name="note"
-                            ></TextArea>
-                        </div>
-                        <Link href={`/session/${session.id}`}  className="mt-4 flexible justify-end gap-2">            
-                                <PrimaryButton type="submit">Enroll</PrimaryButton>
-                        </Link>
-                    </form>
+                                onChange={(e) =>
+                                        setData("note", e.target.value)
+                                }
+                            >{data.note}</TextArea>
+                            <div className="flexible justify-end mt-2">
+                                <PrimaryButton type="submit" disabled={processing}>
+                                    Enroll
+                                </PrimaryButton>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>

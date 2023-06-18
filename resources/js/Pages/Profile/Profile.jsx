@@ -38,7 +38,7 @@ export default function Profile({
         if (cookies.showAlert === "false") {
             setShowAlert(false);
         } else setShowAlert(true);
-    }, [user, cookies.showAlert, resume]);
+    }, [user, showAlert, resume]);
     return (
         <MainLayout user={user}>
             {canEdit && user.ROLE === "STUDENT" && (
