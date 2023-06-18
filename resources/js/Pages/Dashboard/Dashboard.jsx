@@ -2,17 +2,14 @@ import MainLayout from "@/Layouts/MainLayout";
 import Tabs from "@/Modules/additional/Tabs";
 import { Head, usePage } from "@inertiajs/react";
 import SideBar from "./Partials/Components/SideBar";
-import MainContent from "./Partials/Components/MainContent";
+import DashboardContent from "./Partials/DashboardContent";
+import DashboardLayout from "./Partials/Components/DashboardLayout";
 
 export default function Dashboard() {
-    const user = usePage().props.auth.user;
     return (
-        <MainLayout>
+        <DashboardLayout>
             <Head title="Dashboard" />
-            <div className="">
-                <SideBar />
-                <MainContent></MainContent>
-            </div>
-        </MainLayout>
+            <DashboardContent></DashboardContent>
+        </DashboardLayout>
     );
 }

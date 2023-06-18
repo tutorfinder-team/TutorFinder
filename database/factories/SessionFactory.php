@@ -24,7 +24,6 @@ class SessionFactory extends Factory
         return [
             'user_id' => User::factory(),
             'title' => $this->faker->sentence(4),
-            'price' => $this->faker->randomFloat(2, 0, 5),
             'scheduled_time' => $this->faker->dateTime(),
             'description' => $this->faker->text,
             'skills_taught' => '{"skills" : ["java", "php", "javascript"]}',

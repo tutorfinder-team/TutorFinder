@@ -3,7 +3,7 @@ import React from "react";
 
 export default function Paginator({ data, count }) {
     return (
-        data.links.length > 3 && (
+        data && data.link && data.links.length > 3 && (
             <div className="flexible-center flex-col gap-2">
                 <span className="text-slate-700/70 font-normal text-sm dark:text-slate-100/70">
                     Showing {data.data.length} out of {count}

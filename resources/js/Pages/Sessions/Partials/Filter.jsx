@@ -1,5 +1,6 @@
 import Card from "@/Components/Card";
 import Radio from "@/Components/Radio";
+import RadioOption from "@/Components/RadioOption";
 import { router, usePage } from "@inertiajs/react";
 
 export default function Filter({ filterType, heading, fields, icon: Icon }) {
@@ -28,7 +29,7 @@ export default function Filter({ filterType, heading, fields, icon: Icon }) {
             <div className="fields flex flex-col">
                 <form action="" method="get" onChange={handleChange}>
                     {values.map((field) => (
-                        <Radio
+                        <RadioOption
                             name={fields.name}
                             id={field.key}
                             key={field.key}

@@ -6,9 +6,8 @@ const Avatars = ({ users }) => {
     return (
         <>
             {usersToShow.map((user) => (
-                <Link href={`/profile/${user.username}`}>
+                <Link href={`/profile/${user.username}`} key={user.id}>
                     <Avatar
-                        key={user.id}
                         className="w-8 h-8 border-2 border-white rounded-full dark:border-gray-800 object-cover cursor-pointer"
                         img={user.picture}
                         name={user.username}

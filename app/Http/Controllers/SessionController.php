@@ -10,6 +10,7 @@ use App\Http\Resources\AllSessionsCollection;
 use App\Http\Resources\SessionResource;
 use App\Models\Enrollment;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
 
 class SessionController extends Controller
 {
@@ -42,9 +43,9 @@ class SessionController extends Controller
         }
 
         if ($type === 'online') {
-            $query->where('location', '=', 'online');
-        } else {
-            $query->where('location', '!=', 'inperson');
+            $query->where('location', '=', 'Online');
+        } else if ($type === 'inperson') {
+            $query->where('location', '!=', 'Online');
         }
 
         return $query;
@@ -57,38 +58,39 @@ class SessionController extends Controller
         $search = request()->input('search');
         $sort = request()->input('sort');
         $type = request()->input('type');
-        $sessions = $this->getSessions($search, $sort, $type);
+        $query = $this->getSessions($search, $sort, $type);
+        // dd($query->toSql(), $query->getBindings());
+        $sessions = $query->paginate(10);
         return Inertia::render('Home', [
-            'sessions' => $sessions->paginate(5)
-            ->withQueryString()
-            ->through(function ($session) {
-                return [
-                    'id' => $session->id,
-                    'price' => $session->Price,
-                    'user' => [
-                        'id' => $session->user->id,
-                        'username' => $session->user->username,
-                        'name' => $session->user->name,
-                        'picture' => $session->user->picture,
-                        'rating' => $session->user->rating,
-                        'email' => $session->user->email,
-                    ],
-                    'title' => $session->title,
-                    'scheduled_time' => $session->scheduled_time->format('M d, Y'),
-                    'description' => Str::limit($session->description, 200),
-                    'tags' => $session->skills_taught,
-                    'location' => $session->location,
-                    'placesLimit' => $session->places_limit,
-                    'createdAt' => $session->created_at->format(' M D Y'),
-                    'enrollments' => $session->enrollments->map(function ($enrollment) {
-                        return [
-                            'id' => $enrollment->user->id,
-                            'username' => $enrollment->user->username,
-                            'picture' => $enrollment->user->picture,
-                        ];
-                    }),
-                ];
-            }),
+            'sessions' => $sessions
+                ->withQueryString()
+                ->through(function ($session) {
+                    return [
+                        'id' => $session->id,
+                        'user' => [
+                            'id' => $session->user->id,
+                            'username' => $session->user->username,
+                            'name' => $session->user->name,
+                            'picture' => $session->user->picture,
+                            'rating' => $session->user->rating,
+                            'email' => $session->user->email,
+                        ],
+                        'title' => $session->title,
+                        'scheduled_time' => $session->scheduled_time->format('M d, Y'),
+                        'description' => Str::limit($session->description, 200),
+                        'tags' => $session->skills_taught,
+                        'location' => $session->location,
+                        'placesLimit' => $session->places_limit,
+                        'createdAt' => $session->created_at->format(' M D Y'),
+                        'enrollments' => $session->enrollments->map(function ($enrollment) {
+                            return [
+                                'id' => $enrollment->user->id,
+                                'username' => $enrollment->user->username,
+                                'picture' => $enrollment->user->picture,
+                            ];
+                        }),
+                    ];
+                }),
             'count' => $sessions->count(),
             'search' => $search,
             'sort' => $sort,
@@ -119,7 +121,7 @@ class SessionController extends Controller
      */
     public function create()
     {
-        //
+        return Inertia::render('Dashboard/Partials/CreateSession');
     }
 
     /**
@@ -127,7 +129,28 @@ class SessionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'scheduled_time' => 'required|date|after:now',
+            'title' => 'required|max:100',
+            'description' => 'required',
+            'skills_taught' => 'required|regex:/^(\w+, ?)*\w+$/',
+            'location' => 'required|string',
+            'places_limit' => 'required|integer|min:1',
+        ]);
+
+        // Split and trim the skills_taught string
+        $skillsArray = array_map('trim', explode(',', $validatedData['skills_taught']));
+
+        // Convert the skills array to JSON format
+        $skillsJson = json_encode(['skills' => $skillsArray]);
+
+        // Update the skills_taught field with the JSON format
+        $validatedData['skills_taught'] = $skillsJson;
+
+        // Set user_id to the authenticated user's ID
+        $validatedData['user_id'] = Auth::id();
+        $session = Session::create($validatedData);
+        return Redirect::to('/dashboard');
     }
 
 

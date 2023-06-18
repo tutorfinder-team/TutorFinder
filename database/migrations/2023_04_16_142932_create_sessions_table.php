@@ -19,8 +19,7 @@ return new class extends Migration
             $table->dateTime('scheduled_time');
             $table->text('description');
             $table->json('skills_taught');
-            $table->string('location');
-            $table->float('price');
+            $table->string('location')->default('online');
             $table->integer('places_limit');
             $table->unsignedBigInteger('user_id');
             $table->boolean('is_active')->default(true);

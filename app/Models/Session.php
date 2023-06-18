@@ -23,7 +23,7 @@ class Session extends Model
         'description',
         'skills_taught',
         'location',
-        'price',
+        'is_active',
         'places_limit',
     ];
 

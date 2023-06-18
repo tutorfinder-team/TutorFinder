@@ -36,6 +36,7 @@ Route::get('/', [SessionController::class, 'index'])->name('sessions.index');
 Route::middleware('auth')->group(function () {
 
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    Route::get('/dashboard/create', [SessionController::class, 'create'])->name('create.session');
 
     Route::get('/session/{id}', [SessionController::class, 'show'])->name('session.show');
     Route::post('/session', [SessionController::class, 'store'])->name('session.store');

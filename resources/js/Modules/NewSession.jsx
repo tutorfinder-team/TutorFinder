@@ -9,7 +9,7 @@ import { useState, useEffect } from "react";
 // import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import ButtonWait from "./parts/ButtonWait";
-import Radio from "./additional/Radio";
+import Radio from "../Components/Radio";
 import { reset } from "../features/auth/authSlice";
 import { reset as sessionReset } from "../features/session/sessionSlice";
 import { toast } from "react-toastify";
