@@ -6,11 +6,7 @@ import InputLabel from "@/Components/InputLabel";
 import PrimaryButton from "@/Components/PrimaryButton";
 import Stars from "@/Components/Stars";
 import { Link, useForm, usePage } from "@inertiajs/react";
-import {
-    BiCalendar,
-    BiDollar,
-    BiPhone,
-} from "react-icons/bi";
+import { BiCalendar, BiDollar, BiPhone } from "react-icons/bi";
 import { HiLocationMarker } from "react-icons/hi";
 import { MdPeople } from "react-icons/md";
 import SmallDetail from "./SmallDetail";
@@ -159,38 +155,61 @@ const DetailsLayout = ({ session }) => {
                         </div>
                     </div>
                 </div>
-                <div className="mt-8">
-                    <span className="flex flex-col">
-                        <InputLabel
-                            value="Enroll in this session"
-                            className="ml-0 font-semibold "
-                        />
-                        <div className="w-20 mt-2 rounded-lg h-[2px] bg-primary"></div>
-                    </span>
-                    <div className="mt-4">
-                        <InputLabel value="Note" className="ml-0 font-bold" />
-                        <InputLabel
-                            value="Write anything you would like to inform or ask the tutor about, after you enroll."
-                            className="ml-0 text-sm opacity-60"
-                        />
-                        <form onSubmit={enroll}>
-                            <TextArea
-                                className="mt-3 text-sm"
-                                placeholder="Write your note here..."
-                                name="note"
-                                onChange={(e) =>
+                {!isEnrolled ? (
+                    <div className="mt-8">
+                        <span className="flex flex-col">
+                            <InputLabel
+                                value="Enroll in this session"
+                                className="ml-0 font-semibold "
+                            />
+                            <div className="w-20 mt-2 rounded-lg h-[2px] bg-primary"></div>
+                        </span>
+                        <div className="mt-4">
+                            <InputLabel
+                                value="Note"
+                                className="ml-0 font-bold"
+                            />
+                            <InputLabel
+                                value="Write anything you would like to inform or ask the tutor about, after you enroll."
+                                className="ml-0 text-sm opacity-60"
+                            />
+                            <form onSubmit={enroll}>
+                                <TextArea
+                                    className="mt-3 text-sm"
+                                    placeholder="Write your note here..."
+                                    name="note"
+                                    onChange={(e) =>
                                         setData("note", e.target.value)
-                                }
-                            >{data.note}</TextArea>
-                            <div className="flexible justify-end mt-2">
-                                {console.log(isEnrolled)}
-                                <PrimaryButton type="submit" disabled={processing || isEnrolled}>
-                                    {isEnrolled ? 'Enrolled' : 'Enroll'}
-                                </PrimaryButton>
-                            </div>
-                        </form>
+                                    }
+                                >
+                                    {data.note}
+                                </TextArea>
+                                <div className="flexible justify-end mt-2">
+                                    {console.log(isEnrolled)}
+                                    <PrimaryButton
+                                        type="submit"
+                                        disabled={processing || isEnrolled}
+                                    >
+                                        {isEnrolled ? "Enrolled" : "Enroll"}
+                                    </PrimaryButton>
+                                </div>
+                            </form>
+                        </div>
                     </div>
-                </div>
+                ) : (
+                    <div className="mt-8">
+                        <span className="flex flex-col">
+                            <InputLabel
+                                value="You're enrolled in this session"
+                                className="ml-0 font-semibold "
+                            />
+                            <div className="w-20 mt-2 rounded-lg h-[2px] bg-primary"></div>
+                        </span>
+                        <div className="mt-5 flexible-center">
+                            <PrimaryButton>View in dashboard</PrimaryButton>
+                        </div>
+                    </div>
+                )}
             </div>
         </div>
     );
