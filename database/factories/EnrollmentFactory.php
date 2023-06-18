@@ -22,12 +22,9 @@ class EnrollmentFactory extends Factory
      */
     public function definition(): array
     {
-        $randomUser = User::inRandomOrder()->first();
-        $randomSession = Session::inRandomOrder()->first();
-
         return [
-            'session_id' => $randomSession->id,
-            'user_id' => $randomUser->id,
+            'session_id' => Session::factory(),
+            'user_id' => User::factory(),
             'enrollment_date' => $this->faker->date(),
         ];
     }

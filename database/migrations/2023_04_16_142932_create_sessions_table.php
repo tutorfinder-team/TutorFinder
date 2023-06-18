@@ -23,6 +23,7 @@ return new class extends Migration
             $table->float('price');
             $table->integer('places_limit');
             $table->unsignedBigInteger('user_id');
+            $table->boolean('is_active')->default(true);
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });

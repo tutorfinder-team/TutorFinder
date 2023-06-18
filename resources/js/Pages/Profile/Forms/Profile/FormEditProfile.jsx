@@ -151,7 +151,7 @@ export default function FormEditProfile() {
                                 id="birthdate"
                                 type="date"
                                 name="birthdate"
-                                value={data.birthdate.split("T")[0]}
+                                value={data.birthdate && data.birthdate.split("T")[0]}
                                 onChange={(e) =>
                                     setData("birthdate", e.target.value)
                                 }

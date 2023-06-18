@@ -5,7 +5,7 @@ import Card from "@/Components/Card";
 import InputLabel from "@/Components/InputLabel";
 import PrimaryButton from "@/Components/PrimaryButton";
 import Stars from "@/Components/Stars";
-import { Link, useForm } from "@inertiajs/react";
+import { Link, useForm, usePage } from "@inertiajs/react";
 import {
     BiCalendar,
     BiDollar,
@@ -19,6 +19,7 @@ import { FiMail } from "react-icons/fi";
 import TextArea from "@/Components/TextArea";
 
 const DetailsLayout = ({ session }) => {
+    const isEnrolled = usePage().props.isEnrolled;
     const { data, setData, post, processing, reset } = useForm({
         note: "",
     });
@@ -150,11 +151,10 @@ const DetailsLayout = ({ session }) => {
                     </span>
                     <div className="subscribers mt-5 flexible-center gap-2">
                         <h4 className="text-sm font-semibold leading-relaxed ">
-                            {session.enrollments.length >= 1
-                                ? "People enrolled :"
-                                : "No one enrolled"}{" "}
+                            {session.enrollments.length == 0 &&
+                                "No one enrolled"}{" "}
                         </h4>
-                        <div className="flex -space-x-2.5">
+                        <div className="flex -space-x-2">
                             <Avatars users={session.enrollments} />
                         </div>
                     </div>
@@ -183,8 +183,9 @@ const DetailsLayout = ({ session }) => {
                                 }
                             >{data.note}</TextArea>
                             <div className="flexible justify-end mt-2">
-                                <PrimaryButton type="submit" disabled={processing}>
-                                    Enroll
+                                {console.log(isEnrolled)}
+                                <PrimaryButton type="submit" disabled={processing || isEnrolled}>
+                                    {isEnrolled ? 'Enrolled' : 'Enroll'}
                                 </PrimaryButton>
                             </div>
                         </form>

@@ -8,6 +8,8 @@ use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Resources\AllSessionsCollection;
 use App\Http\Resources\SessionResource;
+use App\Models\Enrollment;
+use Illuminate\Support\Facades\Auth;
 
 class SessionController extends Controller
 {
@@ -100,8 +102,15 @@ class SessionController extends Controller
     public function show($id)
     {
         $session = Session::find($id);
+        $isEnrolled = Enrollment::where('user_id', Auth::id())->where('session_id', $id)->first();
+        if ($isEnrolled) {
+            $isEnrolled = true;
+        } else {
+            $isEnrolled = false;
+        }
         return Inertia::render('Sessions/Session/SessionDetails', [
-            'session' => new SessionResource($session)
+            'session' => new SessionResource($session),
+            'isEnrolled' => $isEnrolled,
         ]);
     }
 
