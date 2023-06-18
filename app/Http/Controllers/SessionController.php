@@ -173,8 +173,29 @@ class SessionController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Session $session)
+    public function destroy($id)
     {
-        //
+        $userId = Auth::id();
+        $session = Session::find($id);
+
+        if ($session && $session->user_id == $userId) {
+            $session->delete();
+            return redirect()->back();
+        }
+
+        return redirect()->back()->with('error', 'Session record not found or not owned by the user.');
+    }
+
+    public function markAsDone($id)
+    {
+        $userId = Auth::id();
+        $session = Session::find($id);
+
+        if ($session && $session->user_id == $userId) {
+            $session->update(['is_active' => false]);
+            return redirect()->back();
+        }
+
+        return redirect()->back()->with('error', 'Session record not found or not owned by the user.');
     }
 }

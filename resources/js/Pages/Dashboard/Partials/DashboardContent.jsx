@@ -19,7 +19,6 @@ export default function DashboardContent() {
     const user = usePage().props.auth.user;
     const sessions = usePage().props.sessions?.data;
     const enrollments = usePage().props.enrollments?.data;
-    console.log(enrollments);
     return (
         <div>
             <div className="grid grid-cols-3 gap-4 mb-4">

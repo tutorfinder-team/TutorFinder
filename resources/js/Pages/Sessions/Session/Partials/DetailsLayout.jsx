@@ -165,9 +165,9 @@ const DetailsLayout = ({ session }) => {
                             />
                             <div className="w-20 mt-2 rounded-lg h-[2px] bg-primary"></div>
                         </span>
-                        <div className="mt-5 flexible-center">
+                        <Link href="/dashboard" className="mt-5 flexible-center">
                             <PrimaryButton>View in dashboard</PrimaryButton>
-                        </div>
+                        </Link>
                     </div>
                 ) : !isEnrolled ? (
                     <div className="mt-8">
@@ -219,9 +219,9 @@ const DetailsLayout = ({ session }) => {
                             />
                             <div className="w-20 mt-2 rounded-lg h-[2px] bg-primary"></div>
                         </span>
-                        <div className="mt-5 flexible-center">
+                        <Link href="/dashboard" className="mt-5 flexible-center">
                             <PrimaryButton>View in dashboard</PrimaryButton>
-                        </div>
+                        </Link>
                     </div>
                 )}
             </div>

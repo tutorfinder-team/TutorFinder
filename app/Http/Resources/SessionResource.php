@@ -35,7 +35,7 @@ class SessionResource extends JsonResource
             'enrollments' => $this->enrollments->map(function ($enrollment) {
                 return [
                     'id' => $enrollment->user->id,
-                    'date' => $enrollment->enrollment_date->format('M d, Y'),
+                    'date' => $enrollment->created_at->format('M d, Y'),
                     'note' => $enrollment->note,
                     'username' => $enrollment->user->username,
                     'picture' => $enrollment->user->picture,

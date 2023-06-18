@@ -37,7 +37,7 @@ class AllSessionsCollection extends ResourceCollection
                 'enrollments' => $item->enrollments->map(function ($enrollment) {
                     return [
                         'id' => $enrollment->user->id,
-                        'date' => $enrollment->enrollment_date->format('M d, Y'),
+                        'date' => $enrollment->created_at->format('M d, H:i'),
                         'note' => $enrollment->note,
                         'username' => $enrollment->user->username,
                         'picture' => $enrollment->user->picture,

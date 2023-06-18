@@ -41,13 +41,6 @@ export default function SideBar() {
                         route="/dashboard/sessions"
                         Icon={BiCollection}
                     />
-                    {user.ROLE === "TEACHER" && (
-                        <ListItem
-                            name="Enrollements"
-                            route="/dashboard/enrollements"
-                            Icon={BsPeople}
-                        />
-                    )}
                 </ul>
                 <div className="px-5 py-6">
                     {user.ROLE === "TEACHER" ? (

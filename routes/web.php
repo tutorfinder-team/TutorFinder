@@ -36,18 +36,18 @@ Route::get('/', [SessionController::class, 'index'])->name('sessions.index');
 Route::middleware('auth')->group(function () {
 
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-    Route::get('/dashboard/create', [SessionController::class, 'create'])->name('create.session');
+    Route::get('/dashboard/create', [SessionController::class, 'create'])->name('create.session')->middleware('teacher');
+    Route::get('/dashboard/sessions', [DashboardController::class, 'sessions'])->name('dashboard.session');
 
     Route::get('/session/{id}', [SessionController::class, 'show'])->name('session.show');
-    Route::post('/session', [SessionController::class, 'store'])->name('session.store');
-    Route::delete('/session/{id}', [SessionController::class, 'destroy'])->name('session.destroy');
+    Route::post('/session', [SessionController::class, 'store'])->name('session.store')->middleware('teacher');
+    Route::patch('/session/{id}/done', [SessionController::class, 'markAsDone'])->name('session.done')->middleware('teacher');
+    Route::delete('/session/{id}', [SessionController::class, 'destroy'])->name('delete.session')->middleware('teacher');
 
     Route::post('/session-enroll/{id}', [EnrollementController::class, 'store'])->name('enrollment.store');
 
-
     Route::get('/profile', [ProfileController::class, 'show'])->name('profile.edit');
     Route::get('/profile/{username}', [ProfileController::class, 'guest'])->name('profile.guest');
-    Route::post('/become-a-teacher', [ProfileController::class, 'updateRole'])->name('profile.role');
     Route::put('/profile', [ProfileController::class, 'edit'])->name('profile.edit.info');
     Route::post('/profile/experience', [ExperienceController::class, 'store'])->name('experience.add');
     Route::delete('/profile/experience/{id}', [ExperienceController::class, 'destroy'])->name('experience.delete');
@@ -57,6 +57,8 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile/certification/{id}', [CertificationController::class, 'destroy'])->name('certification.delete');
     Route::post('/profile/resume', [ResumeController::class, 'upload'])->name('resume.add');
     Route::delete('/resume', [ResumeController::class, 'destroy'])->name('resume.delete');
+
+    Route::post('/become-a-teacher', [ProfileController::class, 'updateRole'])->name('profile.role');
 
     Route::get('/settings', [SettingsController::class, 'edit'])->name('settings.edit');
     Route::patch('/settings', [SettingsController::class, 'update'])->name('settings.update');
