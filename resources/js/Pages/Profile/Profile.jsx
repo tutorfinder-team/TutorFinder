@@ -1,6 +1,6 @@
 import MainLayout from "@/Layouts/MainLayout";
 import { toCapital } from "@/utils/utils";
-import { Head, Link } from "@inertiajs/react";
+import { Head, Link, usePage } from "@inertiajs/react";
 import Avatar from "../../Components/Avatar";
 import { CgClose } from "react-icons/cg";
 import Resume from "./Partials/Resume";
@@ -126,13 +126,17 @@ export default function Profile({
                         </div>
                     </div>
                 </div>
-                <InputLabel
-                    value="Feedbacks"
-                    className="font-semibold text-[1.05rem]"
-                />
-                <div className="flexible flex-wrap gap-x-4">
-                    <FeedbacksCard feedbacks={feedbacks} />
-                </div>
+                {user.ROLE === "TEACHER" && (
+                    <div>
+                        <InputLabel
+                            value="Feedbacks"
+                            className="font-semibold text-[1.05rem]"
+                        />
+                        <div className="flexible flex-wrap gap-x-4">
+                            <FeedbacksCard feedbacks={feedbacks} />
+                        </div>
+                    </div>
+                )}
             </div>
         </MainLayout>
     );

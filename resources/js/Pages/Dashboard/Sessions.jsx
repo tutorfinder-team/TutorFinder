@@ -63,7 +63,7 @@ export default function Dashboard() {
                                 </th>
                                 <th scope="row" className="px-6 py-4">
                                     <Badge
-                                        text={s.is_active ? "Active" : "Done"}
+                                        text={s.is_active ? "LIVE" : "DONE"}
                                         className={
                                             s.is_active
                                                 ? "bg-green-500 text-white"

@@ -16,6 +16,7 @@ class SessionResource extends JsonResource
     {
         return [
             'id' => $this->id,
+            'is_active' => $this->is_active,
             'user' => [
                 'id' => $this->user->id,
                 'username' => $this->user->username,

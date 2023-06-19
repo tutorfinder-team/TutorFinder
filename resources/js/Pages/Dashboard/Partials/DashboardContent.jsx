@@ -19,10 +19,11 @@ export default function DashboardContent() {
     const user = usePage().props.auth.user;
     const sessions = usePage().props.sessions?.data;
     const enrollments = usePage().props.enrollments?.data;
+    console.log(enrollments);
     return (
         <div>
             <div className="grid grid-cols-3 gap-4 mb-4">
-                {user.ROLE === "TEACHER" && sessions ? (
+                {user.ROLE === "TEACHER" && sessions && (
                     <>
                         <Widget
                             Icon={BsCalendar}
@@ -55,7 +56,8 @@ export default function DashboardContent() {
                             </p>
                         </Widget>
                     </>
-                ) : (
+                ) }
+                {user.ROLE === "STUDENT" && enrollments && (
                     <>
                         <Widget
                             Icon={BsCalendar}
@@ -64,7 +66,7 @@ export default function DashboardContent() {
                             className="h-40"
                         >
                             <p className="text-2xl font-semibold">
-                                {enrollments[0].session.is_active === 1 ? formatDate(
+                                {enrollments[0].session.is_active ? formatDate(
                                     enrollments[0].session.scheduled_time
                                 ): '-'}
                             </p>

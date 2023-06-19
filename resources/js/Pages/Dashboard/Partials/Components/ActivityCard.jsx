@@ -11,7 +11,6 @@ export default function ActivityCard({
     more,
 }) {
     const user = usePage().props.auth.user;
-    console.log(session);
     return (
         <div className={`mt-4 grid ${grid} gap-x-4`}>
             {session &&

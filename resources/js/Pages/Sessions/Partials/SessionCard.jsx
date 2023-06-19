@@ -25,6 +25,14 @@ const SessionCard = ({ session }) => {
                             {session.user.username}
                         </h3>
                         <Stars rating={session.user.rating} />
+                            <Badge
+                                text={session.is_active ? "LIVE" : "DONE"}
+                                className={
+                                    session.is_active
+                                        ? "bg-green-500 text-white"
+                                        : "bg-slate-500 text-white"
+                                }
+                            />
                     </span>
                     <h1 className="text-xl font-semibold py-0.5">
                         {session.title}
@@ -46,7 +54,9 @@ const SessionCard = ({ session }) => {
                             icon={MdPeople}
                             size={16}
                             text={
-                                "Limited to " + session.placesLimit + ` place${session.placesLimit > 1 ? 's' : ''}`
+                                "Limited to " +
+                                session.placesLimit +
+                                ` place${session.placesLimit > 1 ? "s" : ""}`
                             }
                         />
                     </div>

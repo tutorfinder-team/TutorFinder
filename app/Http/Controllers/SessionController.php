@@ -7,6 +7,7 @@ use App\Models\Session;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Resources\AllSessionsCollection;
+use App\Http\Resources\AllSessionsCollectionPagination;
 use App\Http\Resources\SessionResource;
 use App\Models\Enrollment;
 use Illuminate\Support\Facades\Auth;
@@ -14,16 +15,54 @@ use Illuminate\Support\Facades\Redirect;
 
 class SessionController extends Controller
 {
+    public function refineData($data)
+    {
+        return $data->through(function ($item) {
+            return [
+                'id' => $item->id,
+                'is_active' => $item->is_active,
+                'user' => [
+                    'id' => $item->user->id,
+                    'username' => $item->user->username,
+                    'name' => $item->user->name,
+                    'picture' => $item->user->picture,
+                    'rating' => $item->user->rating,
+                ],
+                'feedbacks' => $item->feedbacks,
+                'title' => $item->title,
+                'scheduled_time' => $item->scheduled_time->format('M d, Y'),
+                'description' => Str::limit($item->description, 200),
+                'tags' => $item->skills_taught,
+                'location' => $item->location,
+                'placesLimit' => $item->places_limit,
+                'createdAt' => $item->created_at->format(' M D Y'),
+                'enrollments' => $item->enrollments->map(function ($enrollment) {
+                    return [
+                        'id' => $enrollment->user->id,
+                        'date' => $enrollment->created_at->format('M d, H:i'),
+                        'note' => $enrollment->note,
+                        'username' => $enrollment->user->username,
+                        'picture' => $enrollment->user->picture,
+                    ];
+                }),
+            ];
+        });
+    }
     public function getSessions($search, $sort, $type)
     {
         $query = Session::query();
+
+        $query->orderBy('is_active', 'desc');
 
         if ($search) {
             $query->where(function ($query) use ($search) {
                 $query->where('title', 'like', '%' . $search . '%')
                     ->orWhere('description', 'like', '%' . $search . '%')
                     ->orWhere('skills_taught', 'like', '%' . $search . '%')
-                    ->orWhere('location', 'like', '%' . $search . '%');
+                    ->orWhere('location', 'like', '%' . $search . '%')
+                    ->orWhereHas('user', function ($query) use ($search) {
+                        $query->where('username', 'like', '%' . $search . '%');
+                    });
             });
         }
 
@@ -62,35 +101,7 @@ class SessionController extends Controller
         // dd($query->toSql(), $query->getBindings());
         $sessions = $query->paginate(10);
         return Inertia::render('Home', [
-            'sessions' => $sessions
-                ->withQueryString()
-                ->through(function ($session) {
-                    return [
-                        'id' => $session->id,
-                        'user' => [
-                            'id' => $session->user->id,
-                            'username' => $session->user->username,
-                            'name' => $session->user->name,
-                            'picture' => $session->user->picture,
-                            'rating' => $session->user->rating,
-                            'email' => $session->user->email,
-                        ],
-                        'title' => $session->title,
-                        'scheduled_time' => $session->scheduled_time->format('M d, Y'),
-                        'description' => Str::limit($session->description, 200),
-                        'tags' => $session->skills_taught,
-                        'location' => $session->location,
-                        'placesLimit' => $session->places_limit,
-                        'createdAt' => $session->created_at->format(' M D Y'),
-                        'enrollments' => $session->enrollments->map(function ($enrollment) {
-                            return [
-                                'id' => $enrollment->user->id,
-                                'username' => $enrollment->user->username,
-                                'picture' => $enrollment->user->picture,
-                            ];
-                        }),
-                    ];
-                }),
+            'sessions' => $this->refineData($sessions->withQueryString()),
             'count' => $sessions->count(),
             'search' => $search,
             'sort' => $sort,
@@ -151,23 +162,6 @@ class SessionController extends Controller
         $validatedData['user_id'] = Auth::id();
         $session = Session::create($validatedData);
         return Redirect::to('/dashboard');
-    }
-
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Session $session)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Session $session)
-    {
-        //
     }
 
     /**

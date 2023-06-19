@@ -1,6 +1,7 @@
 import Card from "@/Components/Card";
 import PrimaryButton from "@/Components/PrimaryButton";
 import SessionCard from "./SessionCard";
+import { usePage } from "@inertiajs/react";
 
 export default function SessionsFeed({ sessions }) {
     return (

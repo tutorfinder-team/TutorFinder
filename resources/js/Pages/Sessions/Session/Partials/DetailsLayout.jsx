@@ -21,7 +21,7 @@ const DetailsLayout = ({ session }) => {
     const { data, setData, post, processing, reset } = useForm({
         note: "",
     });
-
+    console.log(session.is_active, isEnrolled);
     const enroll = (e) => {
         e.preventDefault();
         post(`/session-enroll/${session.id}`, {
@@ -142,7 +142,10 @@ const DetailsLayout = ({ session }) => {
                         value="Feedbacks"
                         className="font-semibold text-[1.05rem]"
                     />
-                    <FeedbacksCard feedbacks={session.feedbacks} className="my-4"/>
+                    <FeedbacksCard
+                        feedbacks={session.feedbacks}
+                        className="my-4"
+                    />
                 </div>
             </div>
             <div className="right-content">
@@ -174,9 +177,22 @@ const DetailsLayout = ({ session }) => {
                             />
                             <div className="w-20 mt-2 rounded-lg h-[2px] bg-primary"></div>
                         </span>
-                        <Link href="/dashboard" className="mt-5 flexible-center">
+                        <Link
+                            href="/dashboard/sessions"
+                            className="mt-5 flexible-center"
+                        >
                             <PrimaryButton>View in dashboard</PrimaryButton>
                         </Link>
+                    </div>
+                ) : !session.is_active && !isEnrolled ? (
+                    <div className="mt-8">
+                        <span className="flex flex-col">
+                            <InputLabel
+                                value="This session is done, you can't enroll in it"
+                                className="ml-0 font-semibold "
+                            />
+                            <div className="w-20 mt-2 rounded-lg h-[2px] bg-primary"></div>
+                        </span>
                     </div>
                 ) : !isEnrolled ? (
                     <div className="mt-8">
@@ -228,7 +244,10 @@ const DetailsLayout = ({ session }) => {
                             />
                             <div className="w-20 mt-2 rounded-lg h-[2px] bg-primary"></div>
                         </span>
-                        <Link href="/dashboard" className="mt-5 flexible-center">
+                        <Link
+                            href="/dashboard/sessions"
+                            className="mt-5 flexible-center"
+                        >
                             <PrimaryButton>View in dashboard</PrimaryButton>
                         </Link>
                     </div>

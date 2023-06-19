@@ -26,6 +26,7 @@ class EnrollmentCollection extends ResourceCollection
                 'createdAt' => $item->created_at,
                 'session' => [
                     'id' => $item->session->id,
+                    'is_active' => $item->session->is_active,
                     'user' => [
                         'id' => $item->session->user->id,
                         'username' => $item->session->user->username,
