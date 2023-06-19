@@ -19,7 +19,6 @@ export default function DashboardContent() {
     const user = usePage().props.auth.user;
     const sessions = usePage().props.sessions?.data;
     const enrollments = usePage().props.enrollments?.data;
-    console.log(enrollments);
     return (
         <div>
             <div className="grid grid-cols-3 gap-4 mb-4">
@@ -32,7 +31,9 @@ export default function DashboardContent() {
                             className="h-40"
                         >
                             <p className="text-2xl font-semibold">
-                                {sessions[0].is_active === 1 ? sessions[0].scheduled_time : '-'}
+                                {sessions[0].is_active === 1
+                                    ? sessions[0].scheduled_time
+                                    : "-"}
                             </p>
                         </Widget>
                         <Widget
@@ -42,7 +43,9 @@ export default function DashboardContent() {
                             className="h-40"
                         >
                             <p className="text-2xl font-semibold">
-                                {sessions[0].is_active === 1 ? sessions[0].enrollments.length : '-'}
+                                {sessions[0].is_active === 1
+                                    ? sessions[0].enrollments.length
+                                    : "-"}
                             </p>
                         </Widget>
                         <Widget
@@ -56,7 +59,7 @@ export default function DashboardContent() {
                             </p>
                         </Widget>
                     </>
-                ) }
+                )}
                 {user.ROLE === "STUDENT" && enrollments && (
                     <>
                         <Widget
@@ -66,9 +69,12 @@ export default function DashboardContent() {
                             className="h-40"
                         >
                             <p className="text-2xl font-semibold">
-                                {enrollments[0].session.is_active ? formatDate(
-                                    enrollments[0].session.scheduled_time
-                                ): '-'}
+                                {enrollments.length > 0 &&
+                                enrollments[0].session.is_active
+                                    ? formatDate(
+                                          enrollments[0].session.scheduled_time
+                                      )
+                                    : "-"}
                             </p>
                         </Widget>
                         <Widget
@@ -81,8 +87,9 @@ export default function DashboardContent() {
                                 {
                                     enrollments.filter(
                                         (e) =>
-                                            e.session.is_active && (new Date(e.session.scheduled_time) >
-                                            new Date())
+                                            e.session.is_active &&
+                                            new Date(e.session.scheduled_time) >
+                                                new Date()
                                     ).length
                                 }
                             </p>
@@ -106,10 +113,28 @@ export default function DashboardContent() {
                 className="mb-4"
             >
                 {user.ROLE === "TEACHER" && (
-                    <ActivityCard session={sessions[0]} />
+                    <>
+                        {sessions.length > 0 ? (
+                            <ActivityCard session={sessions[0]} />
+                        ) : (
+                            <InputLabel
+                                value="No activity"
+                                className="ml-0 text-sm opacity-60"
+                            />
+                        )}
+                    </>
                 )}
                 {user.ROLE === "STUDENT" && (
-                    <ActivityCard session={enrollments[0].session} />
+                    <>
+                        {enrollments.length > 0 ? (
+                            <ActivityCard session={enrollments[0].session} />
+                        ) : (
+                            <InputLabel
+                                value="No activity"
+                                className="ml-0 text-sm opacity-60"
+                            />
+                        )}
+                    </>
                 )}
             </Widget>
         </div>

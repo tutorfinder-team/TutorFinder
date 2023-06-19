@@ -49,10 +49,9 @@ export default function ActivityCard({
                                         {e.note ? e.note : "No note provided"}
                                     </p>
                                 )}
-                                {more && (
+                                {!session.is_active && more && (
                                     <p className="mt-2 text-sm uppercase text-primary font-bold">
-                                        { session.is_active == 0 &&
-                                            session.feedbacks.filter(f => f.user_id == e.id).length === 0 ?
+                                        { (session.feedbacks.filter(f => f.user_id == e.id).length === 0) ?
                                                 "Didn't rate yet" : "rated"}
                                     </p>
                                 )}
