@@ -11,7 +11,7 @@ export default function Table({title, subtitle, columns, children }) {
                 <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-darker dark:text-gray-400">
                     <tr>
                         {columns.map((column) => column && (
-                          <th scope="col" className="px-6 py-3">
+                          <th scope="col" className="px-6 py-3" key={column}>
                             {column || ''}
                         </th>
                         ))}

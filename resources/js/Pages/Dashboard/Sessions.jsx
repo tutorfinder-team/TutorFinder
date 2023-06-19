@@ -17,7 +17,6 @@ export default function Dashboard() {
     const user = usePage().props.auth.user;
     const sessions = usePage().props.sessions?.data;
     const enrollments = usePage().props.enrollments?.data;
-    console.log(enrollments);
     const findFeedback = (data, id) => {
         return data.filter((f) => f.user_id === id);
     };

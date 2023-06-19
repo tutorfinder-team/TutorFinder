@@ -37,6 +37,7 @@ export default function Navbar({ user }) {
         },
     ];
 
+    const currentRoute = route().current();
     return (
         <>
             <Gradient />
@@ -47,8 +48,8 @@ export default function Navbar({ user }) {
                             <Logo className="w-[10rem]" />
                             <div className="redirect flexible gap-4 text-[0.95rem]">
                                 <div className="nav-links">
-                                    <Link href="/" className={`ml-4 p-2 font-semibold hoverEffect`}>Home</Link>
-                                    <Link href="/dashboard" className={`ml-4 p-2 font-semibold hoverEffect`}>Dashboard</Link>
+                                    <Link href="/" className={`ml-4 p-2 font-semibold hoverEffect ${currentRoute === 'sessions.index' && 'text-primary'}`}>Home</Link>
+                                    {user && <Link href="/dashboard" className={`ml-4 p-2 font-semibold hoverEffect ${currentRoute === 'dashboard' && 'text-primary'}`}>Dashboard</Link>}
                                 </div>
                                 <Pipe />
                                 {!user ? (

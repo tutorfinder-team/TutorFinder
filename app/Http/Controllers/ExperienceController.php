@@ -17,7 +17,7 @@ class ExperienceController extends Controller
             'company' => 'required|string|max:255',
             'start_date' => 'required|date',
             'end_date' => 'nullable|date|after:start_date',
-            'description' => 'nullable|string',
+            'description' => 'required|string',
         ]);
 
         // Set user_id to the authenticated user's ID

@@ -11,7 +11,7 @@ export default function FeedbacksCard({ feedbacks, grid = "grid grid-cols-2 gap-
             {feedbacks.length > 0 && (
                 <>
                     {feedbacks.map((f) => (
-                        <Card className="mb-2 self-start">
+                        <Card className="mb-2 self-start" key={f.id}>
                             <div>
                                 <div className="flexible gap-3">
                                     <Avatar

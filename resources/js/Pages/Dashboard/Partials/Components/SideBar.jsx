@@ -3,16 +3,18 @@ import PrimaryButton from "@/Components/PrimaryButton";
 import { Link, usePage } from "@inertiajs/react";
 import React from "react";
 import { BiCollection, BiPlus } from "react-icons/bi";
-import { BsPeople } from "react-icons/bs";
 import { GoDashboard } from "react-icons/go";
-import { SiSessionize } from "react-icons/si";
 
-function ListItem({ name, route, Icon }) {
+function ListItem({ name, route, Icon, isActive }) {
     return (
         <li className="text-lg font-semibold py-5 px-5">
             <Link
                 href={route}
-                className="flex items-center duration-150 text-gray-900 rounded-xl dark:text-white bg-slate-500/5 hover:bg-slate-500/10 dark:hover:bg-slate-200/10 dark:bg-slate-200/5 py-3 px-4"
+                className={`flex items-center duration-150 text-gray-900 rounded-xl dark:text-white ${
+                    isActive
+                        ? "bg-primary"
+                        : "bg-slate-500/5 dark:bg-slate-200/5 hover:bg-slate-500/10 dark:hover:bg-slate-200/10"
+                } py-3 px-4`}
             >
                 <Icon size={23} />
                 <span className="ml-3">{name}</span>
@@ -23,6 +25,8 @@ function ListItem({ name, route, Icon }) {
 
 export default function SideBar() {
     const user = usePage().props.auth.user;
+    const currentRoute = route().current();
+    console.log(currentRoute);
     return (
         <aside
             id="default-sidebar"
@@ -34,18 +38,26 @@ export default function SideBar() {
                     <ListItem
                         name="Dashboard"
                         route="/dashboard"
+                        isActive={currentRoute === "dashboard"}
                         Icon={GoDashboard}
                     />
                     <ListItem
                         name="Sessions"
                         route="/dashboard/sessions"
+                        isActive={currentRoute === "dashboard.session"}
                         Icon={BiCollection}
                     />
                 </ul>
                 <div className="px-5 py-6">
                     {user.ROLE === "TEACHER" ? (
                         <Link href="/dashboard/create">
-                            <PrimaryButton className="w-full flexible-center gap-2">
+                            <PrimaryButton
+                                className="w-full flexible-center gap-2"
+                                style={{
+                                    padding: ".85rem",
+                                    borderRadius: ".75rem",
+                                }}
+                            >
                                 <BiPlus size={20} />
                                 Create New Session
                             </PrimaryButton>
