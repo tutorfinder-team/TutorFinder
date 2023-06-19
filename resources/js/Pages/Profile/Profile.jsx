@@ -11,6 +11,8 @@ import ProfileInfo from "./Partials/ProfileInfo";
 import Stars from "@/Components/Stars";
 import { useEffect, useState } from "react";
 import { useCookies } from "react-cookie";
+import FeedbacksCard from "../Sessions/Session/Partials/FeedbacksCard";
+import InputLabel from "@/Components/InputLabel";
 
 export default function Profile({
     user,
@@ -19,6 +21,7 @@ export default function Profile({
     educations,
     certification,
     resume,
+    feedbacks,
 }) {
     const [showAlert, setShowAlert] = useState(false);
     const [percentage, setPercentage] = useState(0);
@@ -122,6 +125,13 @@ export default function Profile({
                             <Certification data={certification} />
                         </div>
                     </div>
+                </div>
+                <InputLabel
+                    value="Feedbacks"
+                    className="font-semibold text-[1.05rem]"
+                />
+                <div className="flexible flex-wrap gap-x-4">
+                    <FeedbacksCard feedbacks={feedbacks} />
                 </div>
             </div>
         </MainLayout>

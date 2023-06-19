@@ -6,9 +6,11 @@ use App\Http\Resources\AllSessionsCollection;
 use App\Http\Resources\EnrollmentCollection;
 use App\Http\Resources\SessionResource;
 use App\Models\Enrollment;
+use App\Models\Feedback;
 use App\Models\Session;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
 
 class DashboardController extends Controller
@@ -53,4 +55,5 @@ class DashboardController extends Controller
             ]);
         }
     }
+
 }

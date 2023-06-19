@@ -10,12 +10,15 @@ use App\Http\Controllers\ProviderController;
 use App\Http\Controllers\ResumeController;
 use App\Http\Controllers\SessionController;
 use App\Http\Controllers\EnrollementController;
+use App\Http\Controllers\FeedbackController;
 use App\Models\Experience;
+use App\Models\Feedback;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
 use Laravel\Socialite\Facades\Socialite;
+use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 /*
 |--------------------------------------------------------------------------
@@ -38,6 +41,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::get('/dashboard/create', [SessionController::class, 'create'])->name('create.session')->middleware('teacher');
     Route::get('/dashboard/sessions', [DashboardController::class, 'sessions'])->name('dashboard.session');
+    Route::post('/session/{id}/feedback', [FeedbackController::class, 'store'])->name('session.store.feedback');
 
     Route::get('/session/{id}', [SessionController::class, 'show'])->name('session.show');
     Route::post('/session', [SessionController::class, 'store'])->name('session.store')->middleware('teacher');

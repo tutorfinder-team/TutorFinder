@@ -9,11 +9,18 @@ import DoneModal from "./Partials/Components/DoneModal";
 import Badge from "@/Components/Badge";
 import ListModal from "./Partials/Components/ListModal";
 import ActivityCard from "./Partials/Components/ActivityCard";
+import FeedbackModal from "./Partials/Components/FeedbackModal";
+import { Rating } from "flowbite-react";
+import Stars from "@/Components/Stars";
 
 export default function Dashboard() {
     const user = usePage().props.auth.user;
     const sessions = usePage().props.sessions?.data;
     const enrollments = usePage().props.enrollments?.data;
+    console.log(enrollments);
+    const findFeedback = (data, id) => {
+        return data.filter(f => f.user_id === id)
+    }
     return (
         <DashboardLayout>
             <Head title="Sessions" />
@@ -139,9 +146,11 @@ export default function Dashboard() {
                                             You can leave a feedback after the
                                             session is done.
                                         </p>
-                                    ) : (
-                                        <p></p>
-                                    )}
+                                    ) : !findFeedback(e.session.feedbacks, e.user.id)[0] ? (
+                                        <FeedbackModal routeDirect={`/session/${e.session.id}/feedback`}/>
+                                    ) : <>
+                                        <Stars rating={findFeedback(e.session.feedbacks, e.user.id)[0].rating}/>
+                                    </>}
                                 </td>
                             </tr>
                         ))}

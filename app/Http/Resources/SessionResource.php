@@ -25,6 +25,17 @@ class SessionResource extends JsonResource
                 'phone_number' => $this->user->phone_number,
                 'email' => $this->user->email,
             ],
+            'feedbacks' => $this->feedbacks->map(function ($feedback) {
+                return [
+                    'id' => $feedback->id,
+                    'createdAt' => $feedback->created_at->format('M d, Y'),
+                    'review' => $feedback->review,
+                    'rating' => $feedback->rating,
+                    'userId' => $feedback->user->id,
+                    'username' => $feedback->user->username,
+                    'picture' => $feedback->user->picture,
+                ];
+            }),
             'title' => $this->title,
             'scheduled_time' => $this->scheduled_time->format('M d, Y'),
             'description' => $this->description,

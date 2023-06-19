@@ -13,6 +13,7 @@ import SmallDetail from "./SmallDetail";
 import { randColor, truncate } from "@/utils/utils";
 import { FiMail } from "react-icons/fi";
 import TextArea from "@/Components/TextArea";
+import FeedbacksCard from "./FeedbacksCard";
 
 const DetailsLayout = ({ session }) => {
     const isEnrolled = usePage().props.isEnrolled;
@@ -134,6 +135,14 @@ const DetailsLayout = ({ session }) => {
                             {session.description}...
                         </p>
                     </Card>
+                </div>
+                {/* feedbakcs */}
+                <div className="mt-7">
+                    <InputLabel
+                        value="Feedbacks"
+                        className="font-semibold text-[1.05rem]"
+                    />
+                    <FeedbacksCard feedbacks={session.feedbacks} className="my-4"/>
                 </div>
             </div>
             <div className="right-content">

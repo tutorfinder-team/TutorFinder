@@ -27,6 +27,7 @@ class AllSessionsCollection extends ResourceCollection
                     'picture' => $item->user->picture,
                     'rating' => $item->user->rating,
                 ],
+                'feedbacks' => $item->feedbacks,
                 'title' => $item->title,
                 'scheduled_time' => $item->scheduled_time->format('M d, Y'),
                 'description' => Str::limit($item->description, 200),

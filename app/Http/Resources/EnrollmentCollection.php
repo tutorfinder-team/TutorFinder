@@ -17,6 +17,10 @@ class EnrollmentCollection extends ResourceCollection
         return $this->collection->map(function ($item) {
             return [
                 'id' => $item->id,
+                'user' => [
+                    'id' => $item->user->id,
+                    'username' => $item->user->username,
+                ],
                 'date' => $item->enrollment_date->format('M d, Y'),
                 'note' => $item->note,
                 'createdAt' => $item->created_at,
@@ -31,6 +35,7 @@ class EnrollmentCollection extends ResourceCollection
                         'phone_number' => $item->session->user->phone_number,
                         'email' => $item->session->user->email,
                     ],
+                    'feedbacks' => $item->session->feedbacks,
                     'title' => $item->session->title,
                     'scheduled_time' => $item->session->scheduled_time,
                     'description' => $item->session->description,
