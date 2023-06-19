@@ -4,10 +4,10 @@ import InputLabel from "@/Components/InputLabel";
 import Stars from "@/Components/Stars";
 import { usePage, Link } from "@inertiajs/react";
 
-export default function FeedbacksCard({ feedbacks, className }) {
+export default function FeedbacksCard({ feedbacks, grid = "grid grid-cols-2 gap-x-4 ", className }) {
     const user = usePage().props.auth.user;
     return (
-        <div className={"grid grid-cols-2 gap-x-4 " + className}>
+        <div className={grid + className}>
             {feedbacks.length > 0 && (
                 <>
                     {feedbacks.map((f) => (

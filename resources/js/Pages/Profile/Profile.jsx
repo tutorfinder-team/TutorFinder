@@ -132,8 +132,8 @@ export default function Profile({
                             value="Feedbacks"
                             className="font-semibold text-[1.05rem]"
                         />
-                        <div className="flexible flex-wrap gap-x-4">
-                            <FeedbacksCard feedbacks={feedbacks} />
+                        <div className="my-4">
+                            <FeedbacksCard grid="grid grid-cols-4 gap-x-4 " feedbacks={feedbacks} />
                         </div>
                     </div>
                 )}
