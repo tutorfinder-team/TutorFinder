@@ -19,8 +19,8 @@ export default function Dashboard() {
     const enrollments = usePage().props.enrollments?.data;
     console.log(enrollments);
     const findFeedback = (data, id) => {
-        return data.filter(f => f.user_id === id)
-    }
+        return data.filter((f) => f.user_id === id);
+    };
     return (
         <DashboardLayout>
             <Head title="Sessions" />
@@ -90,10 +90,7 @@ export default function Dashboard() {
                                         <ActivityCard
                                             modal={1}
                                             session={s}
-                                            more={
-                                                s.is_active == 0 &&
-                                                "Didn't rate yet"
-                                            }
+                                            more={1}
                                         />
                                     </ListModal>
                                     <DeleteModal
@@ -146,11 +143,25 @@ export default function Dashboard() {
                                             You can leave a feedback after the
                                             session is done.
                                         </p>
-                                    ) : !findFeedback(e.session.feedbacks, e.user.id)[0] ? (
-                                        <FeedbackModal routeDirect={`/session/${e.session.id}/feedback`}/>
-                                    ) : <>
-                                        <Stars rating={findFeedback(e.session.feedbacks, e.user.id)[0].rating}/>
-                                    </>}
+                                    ) : !findFeedback(
+                                          e.session.feedbacks,
+                                          e.user.id
+                                      )[0] ? (
+                                        <FeedbackModal
+                                            routeDirect={`/session/${e.session.id}/feedback`}
+                                        />
+                                    ) : (
+                                        <>
+                                            <Stars
+                                                rating={
+                                                    findFeedback(
+                                                        e.session.feedbacks,
+                                                        e.user.id
+                                                    )[0].rating
+                                                }
+                                            />
+                                        </>
+                                    )}
                                 </td>
                             </tr>
                         ))}

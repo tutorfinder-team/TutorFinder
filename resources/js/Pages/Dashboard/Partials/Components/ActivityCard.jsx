@@ -11,6 +11,7 @@ export default function ActivityCard({
     more,
 }) {
     const user = usePage().props.auth.user;
+    console.log(session);
     return (
         <div className={`mt-4 grid ${grid} gap-x-4`}>
             {session &&
@@ -36,7 +37,7 @@ export default function ActivityCard({
                                         </Link>
                                         <InputLabel
                                             value={`Joined the session in ${e.date}`}
-                                            className="-ml-0 text-sm opacity-60"
+                                            className="-ml-0.5 text-sm opacity-60"
                                         />
                                     </div>
                                 </div>
@@ -51,7 +52,9 @@ export default function ActivityCard({
                                 )}
                                 {more && (
                                     <p className="mt-2 text-sm uppercase text-primary font-bold">
-                                        {more}
+                                        { session.is_active == 0 &&
+                                            session.feedbacks.filter(f => f.user_id == e.id).length === 0 ?
+                                                "Didn't rate yet" : "rated"}
                                     </p>
                                 )}
                             </div>
