@@ -58,6 +58,8 @@ class ProfileController extends Controller
         $experiences = $user->experiences;
         $educations = $user->educations;
         $certification = $user->certification;
+        $sessions = $user->sessions;
+        $feedbacks = $sessions->flatMap->feedbacks;
         $filePath = null;
         if ($user->resume)
             $filePath = asset('storage/' . $user->resume);
@@ -67,6 +69,17 @@ class ProfileController extends Controller
             'educations' => $educations,
             'certification' => $certification,
             'resume' => $filePath,
+            'feedbacks' => $feedbacks->map(function ($feedback) {
+                return [
+                    'id' => $feedback->id,
+                    'createdAt' => $feedback->created_at->format('M d, Y'),
+                    'review' => $feedback->review,
+                    'rating' => $feedback->rating,
+                    'userId' => $feedback->user->id,
+                    'username' => $feedback->user->username,
+                    'picture' => $feedback->user->picture,
+                ];
+            }),
             'canEdit' => $user->id == $loggedUser->id
         ]);
     }

@@ -30,6 +30,6 @@ class FeedbackController extends Controller
         $averageRating = $feedbacks->avg('rating');
         $user->rating = $averageRating;
         $user->save();
-        return Redirect::to('/dashboard');
+        return redirect()->back();
     }
 }

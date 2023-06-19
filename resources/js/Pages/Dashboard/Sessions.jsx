@@ -45,7 +45,7 @@ export default function Dashboard() {
                                     className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
                                 >
                                     <Link
-                                        href={`/sessions/${s.id}`}
+                                        href={`/session/${s.id}`}
                                         className="flexible gap-2"
                                     >
                                         <BiLink />
@@ -123,7 +123,7 @@ export default function Dashboard() {
                                     className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
                                 >
                                     <Link
-                                        href={`/sessions/${e.session.id}`}
+                                        href={`/session/${e.session.id}`}
                                         className="flexible gap-2"
                                     >
                                         <BiLink />
