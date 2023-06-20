@@ -6,7 +6,6 @@ import { usePage, Link } from "@inertiajs/react";
 
 export default function FeedbacksCard({ feedbacks, grid = "grid grid-cols-2 gap-x-4 ", className }) {
     const user = usePage().props.auth.user;
-    console.log(feedbacks)
     return (
         <div className={grid + className}>
             {feedbacks.length > 0 && (

@@ -16,9 +16,9 @@ import Stars from "@/Components/Stars";
 export default function Dashboard() {
     const user = usePage().props.auth.user;
     const sessions = usePage().props.sessions?.data;
-    const enrollments = usePage().props.enrollments?.data;
+    const enrollments = usePage().props.enrollments?.data || [];
     const findFeedback = (data, id) => {
-        return data.filter((f) => f.user_id === id);
+        return data.filter((f) => f.userId === id);
     };
     return (
         <DashboardLayout>

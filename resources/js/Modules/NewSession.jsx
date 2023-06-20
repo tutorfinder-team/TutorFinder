@@ -79,7 +79,6 @@ export default function NewSession() {
 				tags: sessionData.tags.split(","),
 			};
 			dispatch(createSession(sessionCreated));
-			console.log(sessionData);
 		}
 	}
 	return (

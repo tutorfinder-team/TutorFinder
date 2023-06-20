@@ -36,7 +36,18 @@ class EnrollmentCollection extends ResourceCollection
                         'phone_number' => $item->session->user->phone_number,
                         'email' => $item->session->user->email,
                     ],
-                    'feedbacks' => $item->session->feedbacks,
+                    'feedbacks' => $item->session->feedbacks->map(function ($feedback) {
+                        return [
+                            'id' => $feedback->id,
+                            'createdAt' => $feedback->created_at->format('M d, Y'),
+                            'review' => $feedback->review,
+                            'rating' => $feedback->rating,
+                            'userId' => $feedback->user->id,
+                            'username' => $feedback->user->username,
+                            'fullname' => $feedback->user->name,
+                            'picture' => $feedback->user->picture,
+                        ];
+                    }),
                     'title' => $item->session->title,
                     'scheduled_time' => $item->session->scheduled_time,
                     'description' => $item->session->description,

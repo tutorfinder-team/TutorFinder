@@ -87,7 +87,7 @@ export default function ActivityCard({
                                 {!session.is_active && more && (
                                     <p className="mt-2 text-sm uppercase text-primary font-bold">
                                         {session.feedbacks.filter(
-                                            (f) => f.user_id == e.id
+                                            (f) => f.userId == e.id
                                         ).length === 0
                                             ? "Didn't rate yet"
                                             : "rated"}

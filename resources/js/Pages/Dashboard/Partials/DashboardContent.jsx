@@ -31,7 +31,7 @@ export default function DashboardContent() {
                             className="h-40"
                         >
                             <p className="text-2xl font-semibold">
-                                {sessions[0].is_active === 1
+                                {sessions.length > 0 && sessions[0].is_active === 1
                                     ? sessions[0].scheduled_time
                                     : "-"}
                             </p>
@@ -43,7 +43,7 @@ export default function DashboardContent() {
                             className="h-40"
                         >
                             <p className="text-2xl font-semibold">
-                                {sessions[0].is_active === 1
+                                {sessions.length > 0 && sessions[0].is_active === 1
                                     ? sessions[0].enrollments.length
                                     : "-"}
                             </p>

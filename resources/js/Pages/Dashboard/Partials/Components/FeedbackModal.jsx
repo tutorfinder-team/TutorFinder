@@ -33,7 +33,6 @@ export default function FeedbackModal({
         value: data.rating,
         onChange: newValue => {
             setData("rating", (newValue));
-            console.log(typeof newValue)
         }
       }
 

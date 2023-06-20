@@ -42,7 +42,6 @@ export default function Profile({
             setShowAlert(false);
         } else setShowAlert(true);
     }, [user, showAlert, resume]);
-    console.log(user)
     return (
         <MainLayout user={user}>
             {canEdit && user.ROLE === "STUDENT" && (

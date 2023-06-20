@@ -34,7 +34,7 @@ class SessionResource extends JsonResource
                     'rating' => $feedback->rating,
                     'userId' => $feedback->user->id,
                     'username' => $feedback->user->username,
-                    'fullname' => $feedback->user->fullname,
+                    'fullname' => $feedback->user->name,
                     'picture' => $feedback->user->picture,
                 ];
             }),

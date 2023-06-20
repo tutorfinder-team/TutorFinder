@@ -43,7 +43,7 @@ const DetailsLayout = ({ session }) => {
             <div className="left-content">
                 <div className="flex items-center gap-5">
                     <Avatar
-                        name={session.user.name}
+                        name={session.user.fullname}
                         img={session.user.picture}
                         className="w-20 h-20 rounded-xl"
                     />

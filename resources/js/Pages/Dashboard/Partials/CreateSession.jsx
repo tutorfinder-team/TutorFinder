@@ -32,7 +32,6 @@ export default function CreateSession() {
 
     const createSession = (e) => {
         e.preventDefault();
-        console.log(data)
         post(route("session.store"), {
             preserveScroll: true,
             onSuccess: () => {},

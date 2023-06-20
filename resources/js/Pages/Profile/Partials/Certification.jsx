@@ -10,7 +10,7 @@ function Certification({ data }) {
     const {canEdit} = usePage().props;
     return (
         <CardLayout
-            cardName="certification"
+            cardName="Certification"
             Icon={TbCertificate}
             FormModal={canEdit && FormAddCertification}
         >

@@ -47,6 +47,7 @@ class DashboardController extends Controller
                 ->orderBy('created_at', 'DESC')->get();
             return Inertia::render('Dashboard/Sessions', [
                 'sessions' => new AllSessionsCollection($sessions),
+                'enrollments' => new EnrollmentCollection($enrollments),
             ]);
         }
         if ($user->ROLE === 'STUDENT') {
