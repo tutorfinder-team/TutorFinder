@@ -54,7 +54,6 @@ class SessionController extends Controller
     {
         $query = Session::query();
 
-        $query->orderBy('is_active', 'desc');
 
         if ($search) {
             $query->where(function ($query) use ($search) {
@@ -88,6 +87,8 @@ class SessionController extends Controller
         } else if ($type === 'inperson') {
             $query->where('location', '!=', 'Online');
         }
+
+        $query->orderBy('is_active', 'desc');
 
         return $query;
     }
