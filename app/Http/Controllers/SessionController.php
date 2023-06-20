@@ -28,7 +28,18 @@ class SessionController extends Controller
                     'picture' => $item->user->picture,
                     'rating' => $item->user->rating,
                 ],
-                'feedbacks' => $item->feedbacks,
+                'feedbacks' => $item->feedbacks->map(function ($feedback) {
+                    return [
+                        'id' => $feedback->id,
+                        'createdAt' => $feedback->created_at->format('M d, Y'),
+                        'review' => $feedback->review,
+                        'rating' => $feedback->rating,
+                        'userId' => $feedback->user->id,
+                        'username' => $feedback->user->username,
+                        'fullname' => $feedback->user->name,
+                        'picture' => $feedback->user->picture,
+                    ];
+                }),
                 'title' => $item->title,
                 'scheduled_time' => $item->scheduled_time->format('M d, Y'),
                 'description' => Str::limit($item->description, 200),

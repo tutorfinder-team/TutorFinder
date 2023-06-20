@@ -53,7 +53,7 @@ export default function ActivityCard({
             session.enrollments.length > 0 ? (
                 <>
                     {session.enrollments.map((e) => (
-                        <Card className="mb-2 self-start">
+                        <Card className="mb-2 self-start" key={e.id}>
                             <div>
                                 <div className="flexible gap-3">
                                     <Avatar
@@ -86,8 +86,8 @@ export default function ActivityCard({
                                 )}
                                 {!session.is_active && more && (
                                     <p className="mt-2 text-sm uppercase text-primary font-bold">
-                                        {session.feedbacks.filter(
-                                            (f) => f.userId == e.id
+                                        {feedbacks.filter(
+                                            (f) => f.user_id == e.id
                                         ).length === 0
                                             ? "Didn't rate yet"
                                             : "rated"}
