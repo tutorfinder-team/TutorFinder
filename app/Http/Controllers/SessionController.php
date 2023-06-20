@@ -24,7 +24,7 @@ class SessionController extends Controller
                 'user' => [
                     'id' => $item->user->id,
                     'username' => $item->user->username,
-                    'name' => $item->user->name,
+                    'fullname' => $item->user->name,
                     'picture' => $item->user->picture,
                     'rating' => $item->user->rating,
                 ],
@@ -35,13 +35,15 @@ class SessionController extends Controller
                 'tags' => $item->skills_taught,
                 'location' => $item->location,
                 'placesLimit' => $item->places_limit,
-                'createdAt' => $item->created_at->format(' M D Y'),
+                'createdAt' => $item->created_at->format('M d, H:i'),
+                'updatedAt' => $item->updated_at->format('M d, H:i'),
                 'enrollments' => $item->enrollments->map(function ($enrollment) {
                     return [
                         'id' => $enrollment->user->id,
                         'date' => $enrollment->created_at->format('M d, H:i'),
                         'note' => $enrollment->note,
                         'username' => $enrollment->user->username,
+                        'fullname' => $enrollment->user->name,
                         'picture' => $enrollment->user->picture,
                     ];
                 }),

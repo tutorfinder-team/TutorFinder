@@ -11,8 +11,43 @@ export default function ActivityCard({
     more,
 }) {
     const user = usePage().props.auth.user;
+    const feedbacks = session.feedbacks;
+    const findFeedback = (data, id) => {
+        return data.filter((f) => f.userId === id);
+    };
     return (
         <div className={`mt-4 grid ${grid} gap-x-4`}>
+            {session.user.username !== user.username &&
+                findFeedback(feedbacks, user.id).length === 0 &&
+                !session.is_active && (
+                    <Card className="mb-2 self-start">
+                        <div>
+                            <div className="flexible gap-3">
+                                <Avatar
+                                    name={session.user.fullname}
+                                    img={session.user.picture}
+                                    className="w-12 rounded-full"
+                                />
+                                <div>
+                                    <Link
+                                        href={`/profile/${session.user.username}`}
+                                    >
+                                        <h1 className="font-semibold hover:text-primary duration-100">
+                                            {session.user.username}
+                                        </h1>
+                                    </Link>
+                                    <InputLabel
+                                        value={`Ended the session in ${session.updatedAt}`}
+                                        className="-ml-0.5 text-sm opacity-60"
+                                    />
+                                </div>
+                            </div>
+                            <p className="mt-2 text-yellow-400">
+                                Please leave a feedback
+                            </p>
+                        </div>
+                    </Card>
+                )}
             {session &&
             (session.is_active || (modal && !session.is_active)) &&
             session.enrollments.length > 0 ? (
@@ -22,7 +57,7 @@ export default function ActivityCard({
                             <div>
                                 <div className="flexible gap-3">
                                     <Avatar
-                                        name={e.username}
+                                        name={e.fullname}
                                         img={e.picture}
                                         className="w-12 rounded-full"
                                     />
@@ -51,8 +86,11 @@ export default function ActivityCard({
                                 )}
                                 {!session.is_active && more && (
                                     <p className="mt-2 text-sm uppercase text-primary font-bold">
-                                        { (session.feedbacks.filter(f => f.user_id == e.id).length === 0) ?
-                                                "Didn't rate yet" : "rated"}
+                                        {session.feedbacks.filter(
+                                            (f) => f.user_id == e.id
+                                        ).length === 0
+                                            ? "Didn't rate yet"
+                                            : "rated"}
                                     </p>
                                 )}
                             </div>
@@ -60,10 +98,16 @@ export default function ActivityCard({
                     ))}
                 </>
             ) : (
-                <InputLabel
-                    value="No activity"
-                    className="ml-0 text-sm opacity-60"
-                />
+                <>
+                    {!(session.user.username !== user.username &&
+                        findFeedback(feedbacks, user.id).length === 0 &&
+                        !session.is_active) && (
+                            <InputLabel
+                                value="No activity"
+                                className="ml-0 text-sm opacity-60"
+                            />
+                        )}
+                </>
             )}
         </div>
     );

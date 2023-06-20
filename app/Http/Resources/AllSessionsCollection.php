@@ -23,6 +23,7 @@ class AllSessionsCollection extends ResourceCollection
                 'user' => [
                     'id' => $item->user->id,
                     'username' => $item->user->username,
+                    'fullname' => $item->user->name,
                     'name' => $item->user->name,
                     'picture' => $item->user->picture,
                     'rating' => $item->user->rating,
@@ -35,12 +36,14 @@ class AllSessionsCollection extends ResourceCollection
                 'location' => $item->location,
                 'placesLimit' => $item->places_limit,
                 'createdAt' => $item->created_at->format(' M D Y'),
+                'updatedAt' => $item->updated_at->format('M d, H:i'),
                 'enrollments' => $item->enrollments->map(function ($enrollment) {
                     return [
                         'id' => $enrollment->user->id,
                         'date' => $enrollment->created_at->format('M d, H:i'),
                         'note' => $enrollment->note,
                         'username' => $enrollment->user->username,
+                        'fullname' => $enrollment->user->name,
                         'picture' => $enrollment->user->picture,
                     ];
                 }),

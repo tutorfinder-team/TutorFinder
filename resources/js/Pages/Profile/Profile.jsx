@@ -42,6 +42,7 @@ export default function Profile({
             setShowAlert(false);
         } else setShowAlert(true);
     }, [user, showAlert, resume]);
+    console.log(user)
     return (
         <MainLayout user={user}>
             {canEdit && user.ROLE === "STUDENT" && (
@@ -81,7 +82,7 @@ export default function Profile({
             <div className="max-w-7xl mx-auto py-16 sm:px-6 lg:px-8 space-y-6">
                 <div className="flexible gap-3 flex-col">
                     <Avatar
-                        name={user.name}
+                        name={user?.name || user?.fullname}
                         img={user.picture}
                         className="rounded-full h-40"
                     />

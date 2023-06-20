@@ -10,7 +10,7 @@ const Avatars = ({ users }) => {
                     <Avatar
                         className="w-8 h-8 border-2 border-white rounded-full dark:border-gray-800 object-cover cursor-pointer"
                         img={user.picture}
-                        name={user.username}
+                        name={user.fullname}
                     />
                 </Link>
             ))}

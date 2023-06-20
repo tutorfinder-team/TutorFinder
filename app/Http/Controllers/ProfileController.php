@@ -41,6 +41,7 @@ class ProfileController extends Controller
                     'rating' => $feedback->rating,
                     'userId' => $feedback->user->id,
                     'username' => $feedback->user->username,
+                    'fullname' => $feedback->user->name,
                     'picture' => $feedback->user->picture,
                 ];
             }),
@@ -77,6 +78,7 @@ class ProfileController extends Controller
                     'rating' => $feedback->rating,
                     'userId' => $feedback->user->id,
                     'username' => $feedback->user->username,
+                    'fullname' => $feedback->user->name,
                     'picture' => $feedback->user->picture,
                 ];
             }),

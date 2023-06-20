@@ -20,7 +20,7 @@ class SessionResource extends JsonResource
             'user' => [
                 'id' => $this->user->id,
                 'username' => $this->user->username,
-                'name' => $this->user->name,
+                'fullname' => $this->user->name,
                 'picture' => $this->user->picture,
                 'rating' => $this->user->rating,
                 'phone_number' => $this->user->phone_number,
@@ -34,6 +34,7 @@ class SessionResource extends JsonResource
                     'rating' => $feedback->rating,
                     'userId' => $feedback->user->id,
                     'username' => $feedback->user->username,
+                    'fullname' => $feedback->user->fullname,
                     'picture' => $feedback->user->picture,
                 ];
             }),
@@ -43,13 +44,15 @@ class SessionResource extends JsonResource
             'tags' => $this->skills_taught,
             'location' => $this->location,
             'placesLimit' => $this->places_limit,
-            'createdAt' => $this->created_at->format(' M D Y'),
+            'createdAt' => $this->created_at->format('M d, H:i'),
+            'updatedAt' => $this->updated_at->format('M d, H:i'),
             'enrollments' => $this->enrollments->map(function ($enrollment) {
                 return [
                     'id' => $enrollment->user->id,
                     'date' => $enrollment->created_at->format('M d, Y'),
                     'note' => $enrollment->note,
                     'username' => $enrollment->user->username,
+                    'fullname' => $enrollment->user->name,
                     'picture' => $enrollment->user->picture,
                 ];
             }),

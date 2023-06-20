@@ -30,7 +30,7 @@ class EnrollmentCollection extends ResourceCollection
                     'user' => [
                         'id' => $item->session->user->id,
                         'username' => $item->session->user->username,
-                        'name' => $item->session->user->name,
+                        'fullname' => $item->session->user->name,
                         'picture' => $item->session->user->picture,
                         'rating' => $item->session->user->rating,
                         'phone_number' => $item->session->user->phone_number,
@@ -44,12 +44,14 @@ class EnrollmentCollection extends ResourceCollection
                     'location' => $item->session->location,
                     'placesLimit' => $item->session->places_limit,
                     'createdAt' => $item->session->created_at,
+                    'updatedAt' => $item->updated_at->format('M d, H:i'),
                     'enrollments' => $item->session->enrollments->map(function ($enrollment) {
                         return [
                             'id' => $enrollment->user->id,
                             'date' => $enrollment->created_at->format('M d, H:i'),
                             'note' => $enrollment->note,
                             'username' => $enrollment->user->username,
+                            'fullname' => $enrollment->user->name,
                             'picture' => $enrollment->user->picture,
                         ];
                     }),

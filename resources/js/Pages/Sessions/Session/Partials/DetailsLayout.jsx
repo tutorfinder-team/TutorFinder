@@ -21,7 +21,10 @@ const DetailsLayout = ({ session }) => {
     const { data, setData, post, processing, reset } = useForm({
         note: "",
     });
-    console.log(session.is_active, isEnrolled);
+    const feedbacks = session.feedbacks;
+    const findFeedback = (data, id) => {
+        return data.filter((f) => f.userId === id);
+    };
     const enroll = (e) => {
         e.preventDefault();
         post(`/session-enroll/${session.id}`, {
@@ -224,7 +227,6 @@ const DetailsLayout = ({ session }) => {
                                     {data.note}
                                 </TextArea>
                                 <div className="flexible justify-end mt-2">
-                                    {console.log(isEnrolled)}
                                     <PrimaryButton
                                         type="submit"
                                         disabled={processing || isEnrolled}
@@ -248,7 +250,13 @@ const DetailsLayout = ({ session }) => {
                             href="/dashboard/sessions"
                             className="mt-5 flexible-center"
                         >
-                            <PrimaryButton>View in dashboard</PrimaryButton>
+                            <PrimaryButton>
+                                {session.user.username !== user.username &&
+                                findFeedback(feedbacks, user.id).length === 0 &&
+                                !session.is_active
+                                    ? "Give feedback"
+                                    : "View in dashboard"}
+                            </PrimaryButton>
                         </Link>
                     </div>
                 )}

@@ -12,7 +12,7 @@ function ListItem({ name, route, Icon, isActive }) {
                 href={route}
                 className={`flex items-center duration-150 text-gray-900 rounded-xl dark:text-white ${
                     isActive
-                        ? "bg-primary"
+                        ? "bg-primary text-white"
                         : "bg-slate-500/5 dark:bg-slate-200/5 hover:bg-slate-500/10 dark:hover:bg-slate-200/10"
                 } py-3 px-4`}
             >
@@ -26,7 +26,6 @@ function ListItem({ name, route, Icon, isActive }) {
 export default function SideBar() {
     const user = usePage().props.auth.user;
     const currentRoute = route().current();
-    console.log(currentRoute);
     return (
         <aside
             id="default-sidebar"
