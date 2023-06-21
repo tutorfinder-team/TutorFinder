@@ -31,7 +31,8 @@ export default function DashboardContent() {
                             className="h-40"
                         >
                             <p className="text-2xl font-semibold">
-                                {sessions.length > 0 && sessions[0].is_active === 1
+                                {sessions.length > 0 &&
+                                sessions[0].is_active === 1
                                     ? sessions[0].scheduled_time
                                     : "-"}
                             </p>
@@ -43,7 +44,8 @@ export default function DashboardContent() {
                             className="h-40"
                         >
                             <p className="text-2xl font-semibold">
-                                {sessions.length > 0 && sessions[0].is_active === 1
+                                {sessions.length > 0 &&
+                                sessions[0].is_active === 1
                                     ? sessions[0].enrollments.length
                                     : "-"}
                             </p>
@@ -114,8 +116,24 @@ export default function DashboardContent() {
             >
                 {user.ROLE === "TEACHER" && (
                     <>
+                        <InputLabel
+                            value="Your Sessions"
+                            className="ml-0 text-lg mt-4"
+                        />
                         {sessions.length > 0 ? (
                             <ActivityCard session={sessions[0]} />
+                        ) : (
+                            <InputLabel
+                                value="No activity"
+                                className="ml-0 text-sm opacity-60"
+                            />
+                        )}
+                        <InputLabel
+                            value="Your Enrollments"
+                            className="ml-0 text-lg mt-4"
+                        />
+                        {enrollments.length > 0 ? (
+                            <ActivityCard session={enrollments[0].session} />
                         ) : (
                             <InputLabel
                                 value="No activity"

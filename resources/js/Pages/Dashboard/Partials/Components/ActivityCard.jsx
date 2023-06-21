@@ -38,7 +38,7 @@ export default function ActivityCard({
                                     </Link>
                                     <InputLabel
                                         value={`Ended the session in ${session.updatedAt}`}
-                                        className="-ml-0.5 text-sm opacity-60"
+                                        className="-ml-1 text-sm opacity-60"
                                     />
                                 </div>
                             </div>
@@ -71,7 +71,7 @@ export default function ActivityCard({
                                         </Link>
                                         <InputLabel
                                             value={`Joined the session in ${e.date}`}
-                                            className="-ml-0.5 text-sm opacity-60"
+                                            className="-ml-1 text-sm opacity-60"
                                         />
                                     </div>
                                 </div>
